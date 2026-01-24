@@ -449,9 +449,23 @@ export default function Portfolio() {
       project: "FNAC",
       category: "Visual Communication & Media",
     },
+    {
+      src: "/images/fka-twigs-eleven-collection.webp",
+      alt: "The Eleven Collection, FKA twigs",
+      project: "The Eleven Collection",
+      category: "Visual Communication & Media",
+    },
   ]
 
   const videoPortfolioImages: { src: string; alt: string; project: string; category: string }[] = []
+
+  const elevenCollectionProject = {
+    name: "The Eleven Collection",
+    year: "2021",
+    description:
+      "Editorial content supporting 'The Eleven Collection,' a durational performance and digital collection by FKA twigs presented at Sotheby's. I coordinated directly with the agency representing FKA twigs to craft the communication strategy for this groundbreaking partnership between contemporary performance art and blockchain technology. This project showcased how NFTs can preserve and monetize ephemeral artistic moments, bridging the worlds of high art, digital ownership, and live performance.",
+    images: [{ src: "/images/fka-twigs-eleven-collection.webp", alt: "FKA twigs - The Eleven Collection" }],
+  }
 
   const brancaLisboaProject = {
     name: "Branca Lisboa",
@@ -937,11 +951,10 @@ export default function Portfolio() {
       return [
         originalFNAC,
         {
-          src: "/videos/fnac-usecase.mp4",
-          alt: "FNAC NFT Campaign Video",
+          src: "/images/dsc04217.jpg",
+          alt: "FNAC",
           project: "FNAC",
           category: "Visual Communication & Media",
-          isVideo: true,
         },
       ]
     }
@@ -1600,6 +1613,7 @@ export default function Portfolio() {
                   {(image as any).isVideo ? (
                     <div className="relative">
                       <video
+                        src={image.src || ""}
                         className={`w-full h-auto object-contain pointer-events-auto select-none max-w-[8rem] md:max-w-[16rem] transition-all duration-300 ease-out ${
                           isMobile
                             ? ""
@@ -1643,17 +1657,7 @@ export default function Portfolio() {
                         onTouchEnd={() => {
                           setIsInteractingWithVideo((prev) => ({ ...prev, [index]: false }))
                         }}
-                        onError={(e) => {
-                          // Hide video element if it fails to load
-                          const target = e.currentTarget as HTMLVideoElement
-                          target.style.display = "none"
-                        }}
-                      >
-                        <source src={image.src || ""} type="video/mp4" />
-                        <p className="text-sm text-gray-500 p-4">
-                          Video cannot be displayed. Your browser may not support this format.
-                        </p>
-                      </video>
+                      />
                       {!isVideoPlaying[index] && (
                         <div
                           className="absolute inset-0 flex items-center justify-center pointer-events-none"
