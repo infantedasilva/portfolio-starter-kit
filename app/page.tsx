@@ -1758,14 +1758,14 @@ export default function Portfolio() {
                           setLightboxImage({ src: image.src || "", alt: image.alt })
                         }
                       }}
-                      className={`w-full h-auto object-contain pointer-events-none select-none ${
+                      className={`w-full object-cover pointer-events-none select-none ${
                         clickedButton === "Visual Communication & Media" && !selectedProject
-                          ? "max-w-[10rem] md:max-w-[18rem]"
+                          ? "max-w-[10rem] md:max-w-[18rem] h-[15rem] md:h-[27rem]"
                           : selectedProject === "Graf" && index > 0
-                            ? "max-w-[14rem] md:max-w-[26rem]" // Corrected from original code's specific condition
+                            ? "max-w-[14rem] md:max-w-[26rem] h-auto" // Corrected from original code's specific condition
                             : selectedProject
-                              ? "max-w-[10rem] md:max-w-[18rem]"
-                              : "max-w-[10rem] md:max-w-[18rem]"
+                              ? "max-w-[10rem] md:max-w-[18rem] h-[15rem] md:h-[27rem]"
+                              : "max-w-[10rem] md:max-w-[18rem] h-auto"
                       } overflow-hidden transition-all duration-300 ease-out perspective-1000 relative shadow-none ${
                         isMobile
                           ? ""
