@@ -483,8 +483,13 @@ export default function Portfolio() {
     name: "The Eleven Collection",
     year: "2021",
     description:
-      "Editorial content supporting 'The Eleven Collection,' a durational performance and digital collection by FKA twigs presented at Sotheby's. I coordinated directly with the agency representing FKA twigs to craft the communication strategy for this groundbreaking partnership between contemporary performance art and blockchain technology. This project showcased how NFTs can preserve and monetize ephemeral artistic moments, bridging the worlds of high art, digital ownership, and live performance.",
-    images: [{ src: "/images/fka-twigs-eleven-collection.webp", alt: "FKA twigs - The Eleven Collection" }],
+      "This collaboration aimed to translate selected moments from FKA twigs' The Eleven performance at Sotheby's into collectible digital works. The project focused on authorship, performance, and digital ownership. I worked directly with the agency managing the partnership, producing visual assets to communicate the concept and mechanics of the release. I also authored the accompanying blog post explaining the collaboration and its cultural context.",
+    blogUrl: "https://bitteprotocol.substack.com/p/the-eleven-collection-by-fka-twigs",
+    images: [
+      { src: "/images/fka-twigs-eleven-collection.webp", alt: "FKA twigs - The Eleven Collection" },
+      { src: "/images/eleven-collection-interface.jpg", alt: "The Eleven Collection interface and visuals" },
+      { src: "/images/eleven-collection-performance.gif", alt: "FKA twigs performance from The Eleven Collection" },
+    ],
   }
 
   const brancaLisboaProject = {
@@ -981,7 +986,11 @@ export default function Portfolio() {
 
     if (selectedProject === "The Eleven Collection") {
       const originalElevenCollection = visualCommPortfolioImages.find((img) => img.project === "The Eleven Collection")
-      return [originalElevenCollection]
+      return [
+        originalElevenCollection,
+        { src: "/images/eleven-collection-interface.jpg", alt: "The Eleven Collection interface and visuals", project: "The Eleven Collection", category: "Visual Communication & Media" },
+        { src: "/images/eleven-collection-performance.gif", alt: "FKA twigs performance from The Eleven Collection", project: "The Eleven Collection", category: "Visual Communication & Media" },
+      ]
     }
 
     if (selectedProject === "Accepting NFTs Here") {
@@ -2002,7 +2011,26 @@ export default function Portfolio() {
             <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
               <h2 className="text-4xl font-bold text-gray-900 mb-2">{elevenCollectionProject.name}</h2>
               <p className="text-lg text-gray-600 mb-6">{elevenCollectionProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{elevenCollectionProject.description}</p>
+              <p className="text-base text-gray-700 leading-relaxed mb-6">{elevenCollectionProject.description}</p>
+              {elevenCollectionProject.blogUrl && (
+                <a
+                  href={elevenCollectionProject.blogUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                >
+                  Read the Full Story
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                  </svg>
+                </a>
+              )}
             </div>
           </div>
         )}
