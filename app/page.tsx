@@ -455,9 +455,23 @@ export default function Portfolio() {
       project: "The Eleven Collection",
       category: "Visual Communication & Media",
     },
+    {
+      src: "/images/accepting-nfts-here.jpg",
+      alt: "Accepting NFTs Here",
+      project: "Accepting NFTs Here",
+      category: "Visual Communication & Media",
+    },
   ]
 
   const videoPortfolioImages: { src: string; alt: string; project: string; category: string }[] = []
+
+  const acceptingNftsProject = {
+    name: "Accepting NFTs Here",
+    year: "2022",
+    description:
+      "Physical signage and point-of-sale materials enabling brick-and-mortar businesses to accept NFT payments through Mintbase. This initiative brought Web3 commerce into real-world retail environments, allowing customers to redeem digital collectibles for physical goods and services. The campaign demonstrated practical utility for NFTs beyond speculation, showcasing how blockchain technology can enhance traditional commerce experiences.",
+    images: [{ src: "/images/accepting-nfts-here.jpg", alt: "Accepting NFTs Here signage" }],
+  }
 
   const elevenCollectionProject = {
     name: "The Eleven Collection",
