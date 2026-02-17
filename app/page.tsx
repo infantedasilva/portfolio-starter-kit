@@ -1826,6 +1826,12 @@ export default function Portfolio() {
                             if (index === 3) {
                               handleProjectClick("FNAC")
                             }
+                            if (index === 4) {
+                              handleProjectClick("The Eleven Collection")
+                            }
+                            if (index === 5) {
+                              handleProjectClick("Accepting NFTs Here")
+                            }
                           }
                         }}
                         className="flex items-center gap-0 bg-white rounded-full transition-all duration-300 ease-out hover:gap-2 hover:pr-4 overflow-hidden shadow-lg border border-gray-200 group/button cursor-pointer"
