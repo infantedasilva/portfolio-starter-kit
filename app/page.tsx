@@ -469,8 +469,14 @@ export default function Portfolio() {
     name: "Accepting NFTs Here",
     year: "2022",
     description:
-      "Physical signage and point-of-sale materials enabling brick-and-mortar businesses to accept NFT payments through Mintbase. This initiative brought Web3 commerce into real-world retail environments, allowing customers to redeem digital collectibles for physical goods and services. The campaign demonstrated practical utility for NFTs beyond speculation, showcasing how blockchain technology can enhance traditional commerce experiences.",
-    images: [{ src: "/images/accepting-nfts-here.jpg", alt: "Accepting NFTs Here signage" }],
+      "The 'Accepting NFTs Here' project by Mintbase tested how NFTs could be used in real life in Lisbon. Local businesses like cafés, bars, and shops accepted NFTs as a way for customers to redeem real products, such as drinks, food, or other items. Instead of being only digital collectibles, the NFTs worked like vouchers. The project showed how blockchain and NFTs can be used in everyday situations and help connect digital ownership with physical places.",
+    blogUrl: "https://medium.com/mintbase/accepting-nfts-here-bringing-nfts-to-real-life-in-the-streets-of-lisbon-2de5e0892062",
+    images: [
+      { src: "/images/accepting-nfts-here.jpg", alt: "Accepting NFTs Here signage at restaurant" },
+      { src: "/images/accepting-nfts-table.jpg", alt: "Accepting NFTs Here sign on table" },
+      { src: "/images/accepting-nfts-dumplings.jpg", alt: "Accepting NFTs Here at dumplings restaurant" },
+      { src: "/images/accepting-nfts-map.jpg", alt: "Accepting NFTs Here map of Lisbon locations" },
+    ],
   }
 
   const elevenCollectionProject = {
@@ -970,6 +976,21 @@ export default function Portfolio() {
           project: "FNAC",
           category: "Visual Communication & Media",
         },
+      ]
+    }
+
+    if (selectedProject === "The Eleven Collection") {
+      const originalElevenCollection = visualCommPortfolioImages.find((img) => img.project === "The Eleven Collection")
+      return [originalElevenCollection]
+    }
+
+    if (selectedProject === "Accepting NFTs Here") {
+      const originalAcceptingNfts = visualCommPortfolioImages.find((img) => img.project === "Accepting NFTs Here")
+      return [
+        originalAcceptingNfts,
+        { src: "/images/accepting-nfts-table.jpg", alt: "Accepting NFTs Here sign on table", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
+        { src: "/images/accepting-nfts-dumplings.jpg", alt: "Accepting NFTs Here at dumplings restaurant", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
+        { src: "/images/accepting-nfts-map.jpg", alt: "Accepting NFTs Here map of Lisbon locations", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
       ]
     }
 
@@ -1966,6 +1987,45 @@ export default function Portfolio() {
                 perpetual royalties and promoting digital ownership. This initiative bridges legacy retail with the Web3
                 creator economy, modernizing cultural patronage.
               </p>
+            </div>
+          </div>
+        )}
+
+        {selectedProject === "The Eleven Collection" && (
+          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
+            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
+              <h2 className="text-4xl font-bold text-gray-900 mb-2">{elevenCollectionProject.name}</h2>
+              <p className="text-lg text-gray-600 mb-6">{elevenCollectionProject.year}</p>
+              <p className="text-base text-gray-700 leading-relaxed">{elevenCollectionProject.description}</p>
+            </div>
+          </div>
+        )}
+
+        {selectedProject === "Accepting NFTs Here" && (
+          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
+            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
+              <h2 className="text-4xl font-bold text-gray-900 mb-2">{acceptingNftsProject.name}</h2>
+              <p className="text-lg text-gray-600 mb-6">{acceptingNftsProject.year}</p>
+              <p className="text-base text-gray-700 leading-relaxed mb-6">{acceptingNftsProject.description}</p>
+              {acceptingNftsProject.blogUrl && (
+                <a
+                  href={acceptingNftsProject.blogUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                >
+                  Read the Full Story
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                  </svg>
+                </a>
+              )}
             </div>
           </div>
         )}
