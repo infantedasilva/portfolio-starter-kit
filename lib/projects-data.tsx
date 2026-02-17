@@ -5,6 +5,7 @@ export const projectsData: Record<
     year: string
     category: string
     description: string
+    blogUrl?: string
     images: Array<{
       src: string
       alt: string
@@ -215,6 +216,33 @@ export const projectsData: Record<
         isYouTube: true,
         isLarger: true,
       },
+    ],
+  },
+  "accepting-nfts-here": {
+    name: "Accepting NFTs Here",
+    year: "2022",
+    category: "Visual Communication & Media",
+    description:
+      "The 'Accepting NFTs Here' project by Mintbase tested how NFTs could be used in real life in Lisbon. Local businesses like cafés, bars, and shops accepted NFTs as a way for customers to redeem real products, such as drinks, food, or other items. Instead of being only digital collectibles, the NFTs worked like vouchers. The project showed how blockchain and NFTs can be used in everyday situations and help connect digital ownership with physical places.",
+    blogUrl: "https://medium.com/mintbase/accepting-nfts-here-bringing-nfts-to-real-life-in-the-streets-of-lisbon-2de5e0892062",
+    images: [
+      { src: "/images/accepting-nfts-here.jpg", alt: "Accepting NFTs Here signage at restaurant" },
+      { src: "/images/accepting-nfts-table.jpg", alt: "Accepting NFTs Here sign on table" },
+      { src: "/images/accepting-nfts-dumplings.jpg", alt: "Accepting NFTs Here at dumplings restaurant" },
+      { src: "/images/accepting-nfts-map.jpg", alt: "Accepting NFTs Here map of Lisbon locations" },
+    ],
+  },
+  "the-eleven-collection": {
+    name: "The Eleven Collection",
+    year: "2021",
+    category: "Visual Communication & Media",
+    description:
+      "This collaboration aimed to translate selected moments from FKA twigs' The Eleven performance at Sotheby's into collectible digital works. The project focused on authorship, performance, and digital ownership. I worked directly with the agency managing the partnership, producing visual assets to communicate the concept and mechanics of the release. I also authored the accompanying blog post explaining the collaboration and its cultural context.",
+    blogUrl: "https://bitteprotocol.substack.com/p/the-eleven-collection-by-fka-twigs",
+    images: [
+      { src: "/images/fka-twigs-eleven-collection.webp", alt: "FKA twigs - The Eleven Collection" },
+      { src: "/images/eleven-collection-interface.jpg", alt: "The Eleven Collection interface and visuals" },
+      { src: "/images/eleven-collection-performance.gif", alt: "FKA twigs performance from The Eleven Collection" },
     ],
   },
   mude: {
