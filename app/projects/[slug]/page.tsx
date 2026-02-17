@@ -37,19 +37,19 @@ export default function ProjectPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Image Carousel */}
-      <div className="relative w-full h-[60vh] bg-muted overflow-hidden">
-        <div className="relative w-full h-full flex items-center justify-center">
+      <div className="relative w-full h-[70vh] md:h-[80vh] bg-muted overflow-hidden">
+        <div className="relative w-full h-full flex items-center justify-center px-4 md:px-8">
           {project.images[currentImageIndex].isYouTube ? (
             <iframe
               src={project.images[currentImageIndex].src}
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain max-w-7xl"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
           ) : project.images[currentImageIndex].isVideo ? (
             <video
               src={project.images[currentImageIndex].src}
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain max-w-7xl"
               autoPlay
               muted
               loop
@@ -60,8 +60,9 @@ export default function ProjectPage() {
               src={project.images[currentImageIndex].src || "/placeholder.svg"}
               alt={project.images[currentImageIndex].alt}
               fill
-              className="object-contain"
-              quality={90}
+              className="object-contain px-4 md:px-8"
+              quality={95}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1400px"
             />
           )}
         </div>
