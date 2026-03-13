@@ -1578,7 +1578,7 @@ export default function Portfolio() {
 
           {/* Furniture button - Moved lower from top-[45%] to top-[50%] on desktop */}
           <button
-            className={`floating-button absolute top-[28%] right-[15%] md:top-[50%] md:right-auto md:left-[25%] pointer-events-auto cursor-pointer transition-all duration-300 ${
+            className={`floating-button absolute top-[28%] right-[15%] md:top-[50%] md:right-auto md:left-[30%] pointer-events-auto cursor-pointer transition-all duration-300 ${
               hoveredButton === "furniture" ? "animate-none scale-110" : "animate-float-2"
             } ${clickedButton ? "pointer-events-none" : ""}`}
             onMouseEnter={() => setHoveredButton("furniture")}
