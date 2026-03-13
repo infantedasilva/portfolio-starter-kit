@@ -1590,9 +1590,9 @@ export default function Portfolio() {
             </div>
           </button>
 
-          {/* Lighting button - Moved lower from top-[52%] to top-[57%] on desktop */}
+          {/* Lighting button - Right side, above Objects & Systems */}
           <button
-            className={`floating-button absolute top-[36%] right-[10%] md:top-[57%] md:right-auto md:left-[25%] pointer-events-auto cursor-pointer transition-all duration-300 ${
+            className={`floating-button absolute top-[36%] right-[10%] md:top-[48%] md:right-[6%] pointer-events-auto cursor-pointer transition-all duration-300 ${
               hoveredButton === "lighting" ? "animate-none scale-110" : "animate-float-3"
             } ${clickedButton ? "pointer-events-none" : ""}`}
             onMouseEnter={() => setHoveredButton("lighting")}
