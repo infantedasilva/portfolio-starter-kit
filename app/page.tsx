@@ -2009,7 +2009,7 @@ export default function Portfolio() {
                   href={elevenCollectionProject.blogUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-medium rounded-full border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300"
                 >
                   Read the Full Story
                   <svg
@@ -2038,7 +2038,7 @@ export default function Portfolio() {
                   href={acceptingNftsProject.blogUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-medium rounded-full border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300"
                 >
                   Read the Full Story
                   <svg
