@@ -11,6 +11,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://luisinfante.com"),
   title: "Creative Strategist & Designer | Building Stories, Products & Objects",
   description:
     "Portfolio of a Creative Strategist & Designer with expertise in furniture design, AI marketing, and digital storytelling.",
@@ -20,18 +21,24 @@ export const metadata: Metadata = {
     description:
       "Portfolio of Luis Infante, Creative Strategist & Designer based in Lisbon.",
     url: "https://luisinfante.com",
+    siteName: "Luis Infante Portfolio",
     type: "website",
+    locale: "en_US",
     images: [
       {
-        url: "https://luisinfante.com/og-image.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
+        alt: "Luis Infante — Creative Strategist & Designer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["https://luisinfante.com/og-image.png"],
+    title: "Luis Infante — Creative Strategist & Designer",
+    description:
+      "Portfolio of Luis Infante, Creative Strategist & Designer based in Lisbon.",
+    images: ["/og-image.png"],
   },
 }
 
