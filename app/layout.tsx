@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   description:
     "Portfolio of a Creative Strategist & Designer with expertise in furniture design, AI marketing, and digital storytelling.",
   generator: "v0.app",
+  icons: {
+    icon: "/favicon.ico",
+  },
   openGraph: {
     title: "Luis Infante — Creative Strategist & Designer",
     description:
