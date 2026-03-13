@@ -54,6 +54,7 @@ export default function ProjectPage() {
               muted
               loop
               playsInline
+              controls
             />
           ) : (
             <Image
