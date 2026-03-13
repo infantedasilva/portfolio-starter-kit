@@ -206,11 +206,6 @@ export const projectsData: Record<
       'Our team at Mintbase partnered with FNAC Portugal to integrate NEAR-based NFT technology into the "Novos Talentos" program. We enabled contest winners to tokenize their works as redeemable NFTs, ensuring perpetual royalties and promoting digital ownership. This initiative bridges legacy retail with the Web3 creator economy, modernizing cultural patronage.',
     images: [
       {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ssstwitter.com_1768334502446-PLAqNUD1tfjf7TMlmVrTbLZRldt3ze.mp4",
-        alt: "FNAC Mintbase Partnership Video",
-        isVideo: true,
-      },
-      {
         src: "https://www.youtube.com/embed/cczPEdCNcGU",
         alt: "FNAC Mintbase Partnership on YouTube",
         isYouTube: true,
