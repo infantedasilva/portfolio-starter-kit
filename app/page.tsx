@@ -1578,7 +1578,7 @@ export default function Portfolio() {
 
           {/* Furniture button - Moved lower from top-[45%] to top-[50%] on desktop */}
           <button
-            className={`floating-button absolute top-[28%] right-[15%] md:top-[50%] md:right-auto md:left-[12%] pointer-events-auto cursor-pointer transition-all duration-300 ${
+            className={`floating-button absolute top-[28%] right-[15%] md:top-[50%] md:right-auto md:left-[30%] pointer-events-auto cursor-pointer transition-all duration-300 ${
               hoveredButton === "furniture" ? "animate-none scale-110" : "animate-float-2"
             } ${clickedButton ? "pointer-events-none" : ""}`}
             onMouseEnter={() => setHoveredButton("furniture")}
@@ -1590,9 +1590,9 @@ export default function Portfolio() {
             </div>
           </button>
 
-          {/* Lighting button - Moved lower from top-[52%] to top-[57%] on desktop */}
+          {/* Lighting button - Right side, above Objects & Systems */}
           <button
-            className={`floating-button absolute top-[36%] right-[10%] md:top-[57%] md:right-auto md:left-[25%] pointer-events-auto cursor-pointer transition-all duration-300 ${
+            className={`floating-button absolute top-[36%] right-[10%] md:top-[38%] md:right-[25%] pointer-events-auto cursor-pointer transition-all duration-300 ${
               hoveredButton === "lighting" ? "animate-none scale-110" : "animate-float-3"
             } ${clickedButton ? "pointer-events-none" : ""}`}
             onMouseEnter={() => setHoveredButton("lighting")}
@@ -2490,7 +2490,7 @@ export default function Portfolio() {
             width={1920}
             height={1080}
             quality={95}
-            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+            className="w-auto max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
             onClick={(e) => e.stopPropagation()}
             sizes="95vw"
           />
