@@ -1125,8 +1125,6 @@ export default function Portfolio() {
         return productDesignPortfolioImages
       case "Visual Communication & Media": // Changed from "Material Experiments"
         return visualCommPortfolioImages
-      case "Video":
-        return videoPortfolioImages
       default:
         return []
     }
@@ -1568,19 +1566,6 @@ export default function Portfolio() {
           >
             <div className="bg-white border border-gray-200 rounded-full px-6 py-3 text-base font-medium text-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300">
               Visual Communication & Media
-            </div>
-          </button>
-
-          <button
-            className={`floating-button absolute bottom-[20%] right-[12%] pointer-events-auto cursor-pointer transition-all duration-300 ${
-              hoveredButton === "video" ? "animate-none scale-110" : "animate-float-6"
-            } ${clickedButton ? "pointer-events-none" : ""}`}
-            onMouseEnter={() => setHoveredButton("video")}
-            onMouseLeave={() => setHoveredButton(null)}
-            onClick={() => handleButtonClick("Video")}
-          >
-            <div className="bg-white border border-gray-200 rounded-full px-6 py-3 text-base font-medium text-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300">
-              Video Art
             </div>
           </button>
 
