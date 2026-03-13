@@ -2490,7 +2490,7 @@ export default function Portfolio() {
             width={1920}
             height={1080}
             quality={95}
-            className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+            className="w-auto max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
             onClick={(e) => e.stopPropagation()}
             sizes="95vw"
           />
