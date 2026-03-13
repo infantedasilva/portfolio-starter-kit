@@ -258,7 +258,7 @@ export default function Portfolio() {
 
   const calabashesProject = {
     name: "Calabashes",
-    year: "2021",
+    year: "2025",
     description:
       "Magic Objects Collection is an ongoing research into ordinary tools and vessels charged with ritual, symbolism, or myth. For centuries, calabashes have been used as vessels, instruments, and ritual symbols. This project appropriates that heritage by transforming them into suspended lights. Through artisanal reconfiguration, it seeks to preserve their presence while translating it into a contemporary design language. Materials: painted calabashes with glossy finish, repurposed climbing rope.",
     images: [
@@ -762,7 +762,7 @@ export default function Portfolio() {
 
     // Lighting projects (from furniturePortfolioImages)
     { name: "Glass Plates", year: "2020", category: "Lighting" },
-    { name: "Calabashes", year: "2021", category: "Lighting" },
+    { name: "Calabashes", year: "2025", category: "Lighting" },
     { name: "Occulo", year: "2024", category: "Lighting" },
 
     // Objects & Systems projects (from furniturePortfolioImages)

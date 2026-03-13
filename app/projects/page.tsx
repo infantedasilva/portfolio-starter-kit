@@ -19,7 +19,7 @@ export default function ProjectsIndex() {
     { name: "Onio", year: "2016", category: "Furniture Design", slug: "Onio" },
     { name: "Glass Plates", year: "2020", category: "Furniture Design", slug: "Glass Plates" },
     { name: "Graf", year: "2017", category: "Furniture Design", slug: "Graf" },
-    { name: "Calabashes", year: "2021", category: "Furniture Design", slug: "Calabashes" },
+    { name: "Calabashes", year: "2025", category: "Furniture Design", slug: "Calabashes" },
     { name: "Pool Guard", year: "2023", category: "Furniture Design", slug: "Pool Guard" },
     { name: "Pala Shelves", year: "2023", category: "Furniture Design", slug: "Pala Shelves" },
     { name: "Occulo", year: "2022", category: "Furniture Design", slug: "Occulo" },
