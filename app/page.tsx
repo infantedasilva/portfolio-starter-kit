@@ -449,9 +449,48 @@ export default function Portfolio() {
       project: "FNAC",
       category: "Visual Communication & Media",
     },
+    {
+      src: "/images/fka-twigs-eleven-collection.webp",
+      alt: "The Eleven Collection, FKA twigs",
+      project: "The Eleven Collection",
+      category: "Visual Communication & Media",
+    },
+    {
+      src: "/images/accepting-nfts-here.jpg",
+      alt: "Accepting NFTs Here",
+      project: "Accepting NFTs Here",
+      category: "Visual Communication & Media",
+    },
   ]
 
   const videoPortfolioImages: { src: string; alt: string; project: string; category: string }[] = []
+
+  const acceptingNftsProject = {
+    name: "Accepting NFTs Here",
+    year: "2022",
+    description:
+      "The 'Accepting NFTs Here' project by Mintbase tested how NFTs could be used in real life in Lisbon. Local businesses like cafés, bars, and shops accepted NFTs as a way for customers to redeem real products, such as drinks, food, or other items. Instead of being only digital collectibles, the NFTs worked like vouchers. The project showed how blockchain and NFTs can be used in everyday situations and help connect digital ownership with physical places.",
+    blogUrl: "https://medium.com/mintbase/accepting-nfts-here-bringing-nfts-to-real-life-in-the-streets-of-lisbon-2de5e0892062",
+    images: [
+      { src: "/images/accepting-nfts-here.jpg", alt: "Accepting NFTs Here signage at restaurant" },
+      { src: "/images/accepting-nfts-table.jpg", alt: "Accepting NFTs Here sign on table" },
+      { src: "/images/accepting-nfts-dumplings.jpg", alt: "Accepting NFTs Here at dumplings restaurant" },
+      { src: "/images/accepting-nfts-map.jpg", alt: "Accepting NFTs Here map of Lisbon locations" },
+    ],
+  }
+
+  const elevenCollectionProject = {
+    name: "The Eleven Collection",
+    year: "2021",
+    description:
+      "This collaboration aimed to translate selected moments from FKA twigs' The Eleven performance at Sotheby's into collectible digital works. The project focused on authorship, performance, and digital ownership. I worked directly with the agency managing the partnership, producing visual assets to communicate the concept and mechanics of the release. I also authored the accompanying blog post explaining the collaboration and its cultural context.",
+    blogUrl: "https://bitteprotocol.substack.com/p/the-eleven-collection-by-fka-twigs",
+    images: [
+      { src: "/images/fka-twigs-eleven-collection.webp", alt: "FKA twigs - The Eleven Collection" },
+      { src: "/images/eleven-collection-interface.jpg", alt: "The Eleven Collection interface and visuals" },
+      { src: "/images/eleven-collection-performance.gif", alt: "FKA twigs performance from The Eleven Collection" },
+    ],
+  }
 
   const brancaLisboaProject = {
     name: "Branca Lisboa",
@@ -937,12 +976,37 @@ export default function Portfolio() {
       return [
         originalFNAC,
         {
-          src: "/videos/fnac-usecase.mp4",
-          alt: "FNAC NFT Campaign Video",
+          src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ssstwitter.com_1768334502446-PLAqNUD1tfjf7TMlmVrTbLZRldt3ze.mp4",
+          alt: "FNAC Mintbase Partnership Video",
           project: "FNAC",
           category: "Visual Communication & Media",
           isVideo: true,
         },
+        {
+          src: "/images/dsc04217.jpg",
+          alt: "FNAC",
+          project: "FNAC",
+          category: "Visual Communication & Media",
+        },
+      ]
+    }
+
+    if (selectedProject === "The Eleven Collection") {
+      const originalElevenCollection = visualCommPortfolioImages.find((img) => img.project === "The Eleven Collection")
+      return [
+        originalElevenCollection,
+        { src: "/images/eleven-collection-interface.jpg", alt: "The Eleven Collection interface and visuals", project: "The Eleven Collection", category: "Visual Communication & Media" },
+        { src: "/images/eleven-collection-performance.gif", alt: "FKA twigs performance from The Eleven Collection", project: "The Eleven Collection", category: "Visual Communication & Media" },
+      ]
+    }
+
+    if (selectedProject === "Accepting NFTs Here") {
+      const originalAcceptingNfts = visualCommPortfolioImages.find((img) => img.project === "Accepting NFTs Here")
+      return [
+        originalAcceptingNfts,
+        { src: "/images/accepting-nfts-table.jpg", alt: "Accepting NFTs Here sign on table", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
+        { src: "/images/accepting-nfts-dumplings.jpg", alt: "Accepting NFTs Here at dumplings restaurant", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
+        { src: "/images/accepting-nfts-map.jpg", alt: "Accepting NFTs Here map of Lisbon locations", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
       ]
     }
 
@@ -1068,8 +1132,6 @@ export default function Portfolio() {
         return productDesignPortfolioImages
       case "Visual Communication & Media": // Changed from "Material Experiments"
         return visualCommPortfolioImages
-      case "Video":
-        return videoPortfolioImages
       default:
         return []
     }
@@ -1514,19 +1576,6 @@ export default function Portfolio() {
             </div>
           </button>
 
-          <button
-            className={`floating-button absolute bottom-[20%] right-[12%] pointer-events-auto cursor-pointer transition-all duration-300 ${
-              hoveredButton === "video" ? "animate-none scale-110" : "animate-float-6"
-            } ${clickedButton ? "pointer-events-none" : ""}`}
-            onMouseEnter={() => setHoveredButton("video")}
-            onMouseLeave={() => setHoveredButton(null)}
-            onClick={() => handleButtonClick("Video")}
-          >
-            <div className="bg-white border border-gray-200 rounded-full px-6 py-3 text-base font-medium text-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300">
-              Video Art
-            </div>
-          </button>
-
           {/* Furniture button - Moved lower from top-[45%] to top-[50%] on desktop */}
           <button
             className={`floating-button absolute top-[28%] right-[15%] md:top-[50%] md:right-auto md:left-[12%] pointer-events-auto cursor-pointer transition-all duration-300 ${
@@ -1600,6 +1649,7 @@ export default function Portfolio() {
                   {(image as any).isVideo ? (
                     <div className="relative">
                       <video
+                        src={image.src || ""}
                         className={`w-full h-auto object-contain pointer-events-auto select-none max-w-[8rem] md:max-w-[16rem] transition-all duration-300 ease-out ${
                           isMobile
                             ? ""
@@ -1643,17 +1693,7 @@ export default function Portfolio() {
                         onTouchEnd={() => {
                           setIsInteractingWithVideo((prev) => ({ ...prev, [index]: false }))
                         }}
-                        onError={(e) => {
-                          // Hide video element if it fails to load
-                          const target = e.currentTarget as HTMLVideoElement
-                          target.style.display = "none"
-                        }}
-                      >
-                        <source src={image.src || ""} type="video/mp4" />
-                        <p className="text-sm text-gray-500 p-4">
-                          Video cannot be displayed. Your browser may not support this format.
-                        </p>
-                      </video>
+                      />
                       {!isVideoPlaying[index] && (
                         <div
                           className="absolute inset-0 flex items-center justify-center pointer-events-none"
@@ -1786,6 +1826,12 @@ export default function Portfolio() {
                             }
                             if (index === 3) {
                               handleProjectClick("FNAC")
+                            }
+                            if (index === 4) {
+                              handleProjectClick("The Eleven Collection")
+                            }
+                            if (index === 5) {
+                              handleProjectClick("Accepting NFTs Here")
                             }
                           }
                         }}
@@ -1948,6 +1994,64 @@ export default function Portfolio() {
                 perpetual royalties and promoting digital ownership. This initiative bridges legacy retail with the Web3
                 creator economy, modernizing cultural patronage.
               </p>
+            </div>
+          </div>
+        )}
+
+        {selectedProject === "The Eleven Collection" && (
+          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
+            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
+              <h2 className="text-4xl font-bold text-gray-900 mb-2">{elevenCollectionProject.name}</h2>
+              <p className="text-lg text-gray-600 mb-6">{elevenCollectionProject.year}</p>
+              <p className="text-base text-gray-700 leading-relaxed mb-6">{elevenCollectionProject.description}</p>
+              {elevenCollectionProject.blogUrl && (
+                <a
+                  href={elevenCollectionProject.blogUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-medium rounded-full border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300"
+                >
+                  Read the Full Story
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                  </svg>
+                </a>
+              )}
+            </div>
+          </div>
+        )}
+
+        {selectedProject === "Accepting NFTs Here" && (
+          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
+            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
+              <h2 className="text-4xl font-bold text-gray-900 mb-2">{acceptingNftsProject.name}</h2>
+              <p className="text-lg text-gray-600 mb-6">{acceptingNftsProject.year}</p>
+              <p className="text-base text-gray-700 leading-relaxed mb-6">{acceptingNftsProject.description}</p>
+              {acceptingNftsProject.blogUrl && (
+                <a
+                  href={acceptingNftsProject.blogUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-medium rounded-full border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300"
+                >
+                  Read the Full Story
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                  </svg>
+                </a>
+              )}
             </div>
           </div>
         )}
