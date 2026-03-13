@@ -210,6 +210,22 @@
   }
 }
 
+@keyframes float-7 {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(0.5deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(-0.5deg);
+  }
+  75% {
+    transform: translateY(-12px) rotate(0.3deg);
+  }
+}
+
 .animate-float-1 {
   animation: float-1 6s ease-in-out infinite;
 }
@@ -232,6 +248,10 @@
 
 .animate-float-6 {
   animation: float-6 4.5s ease-in-out infinite;
+}
+
+.animate-float-7 {
+  animation: float-7 5.8s ease-in-out infinite;
 }
 
 .perspective-1000 {
