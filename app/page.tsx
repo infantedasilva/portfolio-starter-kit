@@ -1014,7 +1014,14 @@ export default function Portfolio() {
         originalAcceptingNfts,
         { src: "/images/accepting-nfts-table.jpg", alt: "Accepting NFTs Here sign on table", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
         { src: "/images/accepting-nfts-dumplings.jpg", alt: "Accepting NFTs Here at dumplings restaurant", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
-        { src: "/images/accepting-nfts-map.jpg", alt: "Accepting NFTs Here map of Lisbon locations", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
+        {
+          src: "https://www.openstreetmap.org/export/embed.html?bbox=-9.1700%2C38.7050%2C-9.1200%2C38.7300&layer=mapnik&marker=38.7169%2C-9.1399",
+          alt: "Interactive map of Lisbon NFT locations",
+          project: "Accepting NFTs Here",
+          category: "Visual Communication & Media",
+          isMap: true,
+          mapLink: "https://medium.com/mintbase/the-future-is-a-thing-of-the-past-tokenising-old-portuguese-products-in-lisbon-a6b365670842",
+        },
       ]
     }
 
@@ -1746,6 +1753,49 @@ export default function Portfolio() {
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                     />
+                  ) : (image as any).isMap ? (
+                    <div
+                      className="relative overflow-hidden rounded-sm shadow-md"
+                      style={{
+                        width: isMobile ? "9rem" : "18rem",
+                        height: isMobile ? "9rem" : "18rem",
+                        transform: `rotateY(${getRotation(imageRefs.current[index], mousePosition.x)}deg)`,
+                        transformStyle: "preserve-3d",
+                        transition: draggedImageRef.current === index ? "none" : "all 0.3s ease-out",
+                      }}
+                    >
+                      <iframe
+                        src={image.src || ""}
+                        title={image.alt}
+                        className="w-full h-full border-0 pointer-events-auto select-none"
+                        style={{ display: "block" }}
+                        loading="lazy"
+                        onMouseDown={(e) => e.stopPropagation()}
+                        onTouchStart={(e) => e.stopPropagation()}
+                      />
+                      {/* Clickable overlay label */}
+                      <a
+                        href={(image as any).mapLink || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-3 py-2 bg-white/90 backdrop-blur-sm border-t border-gray-100 hover:bg-white transition-colors duration-200 group"
+                        aria-label="Read the full story about Lisbon NFT locations on Medium"
+                        onMouseDown={(e) => e.stopPropagation()}
+                        onTouchStart={(e) => e.stopPropagation()}
+                      >
+                        <span className="text-xs font-medium text-gray-700 truncate">Lisbon NFT locations</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-3.5 w-3.5 text-gray-500 shrink-0 ml-1 group-hover:text-gray-900 transition-colors"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                          <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                        </svg>
+                      </a>
+                    </div>
                   ) : (
                     <img
                       src={image.src || "/placeholder.svg"}
@@ -1856,7 +1906,7 @@ export default function Portfolio() {
                       </button>
                     </div>
                   )}
-                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && (
+                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && (
                     <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
                       <button
                         onClick={(e) => {
@@ -2061,52 +2111,6 @@ export default function Portfolio() {
               <h2 className="text-4xl font-bold text-gray-900 mb-2">{acceptingNftsProject.name}</h2>
               <p className="text-lg text-gray-600 mb-6">{acceptingNftsProject.year}</p>
               <p className="text-base text-gray-700 leading-relaxed mb-6">{acceptingNftsProject.description}</p>
-              
-              {/* Square Map Component */}
-              <a
-                href="https://medium.com/mintbase/the-future-is-a-thing-of-the-past-tokenising-old-portuguese-products-in-lisbon-a6b365670842"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group block w-full aspect-square mb-6 rounded-lg overflow-hidden border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300 relative"
-                aria-label="View Lisbon NFT locations map - Read the full story on Medium"
-              >
-                <Image
-                  src="/images/accepting-nfts-map.jpg"
-                  alt="Map of Lisbon showing NFT accepting locations"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 384px) 100vw, 320px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <div className="flex items-center justify-between text-white">
-                    <span className="text-sm font-medium">Explore the Map</span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                      <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                    </svg>
-                  </div>
-                </div>
-                {/* Map pin indicator */}
-                <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 text-gray-700"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                  </svg>
-                </div>
-              </a>
-
               {acceptingNftsProject.blogUrl && (
                 <a
                   href={acceptingNftsProject.blogUrl}
@@ -2120,7 +2124,6 @@ export default function Portfolio() {
                     className="h-5 w-5"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    aria-hidden="true"
                   >
                     <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
                     <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
