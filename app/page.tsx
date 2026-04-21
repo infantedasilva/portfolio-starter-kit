@@ -977,6 +977,13 @@ export default function Portfolio() {
       return [
         originalFNAC,
         {
+          src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Fnac%20usecase-oo7QBLp55jYyCXmnei9Mt7z2VL2wrZ.mp4",
+          alt: "FNAC Use Case Video",
+          project: "FNAC",
+          category: "Visual Communication & Media",
+          isVideo: true,
+        },
+        {
           src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ssstwitter.com_1768334502446-PLAqNUD1tfjf7TMlmVrTbLZRldt3ze.mp4",
           alt: "FNAC Mintbase Partnership Video",
           project: "FNAC",
