@@ -560,6 +560,7 @@ export default function Portfolio() {
     year: "2024",
     description:
       "For the Non Fungible Conference, we partnered with A Vida Portuguesa to bring their iconic traditional products onto the blockchain. We helped tokenize a selection of items as redeemable NFTs, enabling visitors to purchase them on Mintbase and collect the physical goods onsite. Minting on their own smart contract ensured instant payments and perpetual royalties, highlighting how NFTs can support real-world commerce while preserving cultural heritage in a modern, accessible way.",
+    blogUrl: "https://medium.com/mintbase/the-future-is-a-thing-of-the-past-tokenising-old-portuguese-products-in-lisbon-a6b365670842",
     descriptionJSX: (
       <>
         For the Non Fungible Conference, we partnered with{" "}
@@ -1975,9 +1976,29 @@ export default function Portfolio() {
             <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
               <h2 className="text-4xl font-bold text-gray-900 mb-2">{aVidaPortuguesaProject.name}</h2>
               <p className="text-lg text-gray-600 mb-6">{aVidaPortuguesaProject.year}</p>
-              <div className="text-base text-gray-700 leading-relaxed">
+              <div className="text-base text-gray-700 leading-relaxed mb-6">
                 {aVidaPortuguesaProject.descriptionJSX || aVidaPortuguesaProject.description}
               </div>
+              {aVidaPortuguesaProject.blogUrl && (
+                <a
+                  href={aVidaPortuguesaProject.blogUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-medium rounded-full border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300"
+                >
+                  Read the full story
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                  </svg>
+                </a>
+              )}
             </div>
           </div>
         )}
