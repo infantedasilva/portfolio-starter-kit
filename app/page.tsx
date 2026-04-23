@@ -560,6 +560,7 @@ export default function Portfolio() {
     year: "2024",
     description:
       "For the Non Fungible Conference, we partnered with A Vida Portuguesa to bring their iconic traditional products onto the blockchain. We helped tokenize a selection of items as redeemable NFTs, enabling visitors to purchase them on Mintbase and collect the physical goods onsite. Minting on their own smart contract ensured instant payments and perpetual royalties, highlighting how NFTs can support real-world commerce while preserving cultural heritage in a modern, accessible way.",
+    blogUrl: "https://medium.com/mintbase/the-future-is-a-thing-of-the-past-tokenising-old-portuguese-products-in-lisbon-a6b365670842",
     descriptionJSX: (
       <>
         For the Non Fungible Conference, we partnered with{" "}
@@ -976,6 +977,13 @@ export default function Portfolio() {
       return [
         originalFNAC,
         {
+          src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Fnac%20usecase-oo7QBLp55jYyCXmnei9Mt7z2VL2wrZ.mp4",
+          alt: "FNAC Use Case Video",
+          project: "FNAC",
+          category: "Visual Communication & Media",
+          isVideo: true,
+        },
+        {
           src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ssstwitter.com_1768334502446-PLAqNUD1tfjf7TMlmVrTbLZRldt3ze.mp4",
           alt: "FNAC Mintbase Partnership Video",
           project: "FNAC",
@@ -1006,7 +1014,14 @@ export default function Portfolio() {
         originalAcceptingNfts,
         { src: "/images/accepting-nfts-table.jpg", alt: "Accepting NFTs Here sign on table", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
         { src: "/images/accepting-nfts-dumplings.jpg", alt: "Accepting NFTs Here at dumplings restaurant", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
-        { src: "/images/accepting-nfts-map.jpg", alt: "Accepting NFTs Here map of Lisbon locations", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
+        {
+          src: "https://www.openstreetmap.org/export/embed.html?bbox=-9.1700%2C38.7050%2C-9.1200%2C38.7300&layer=mapnik&marker=38.7169%2C-9.1399",
+          alt: "Interactive map of Lisbon NFT locations",
+          project: "Accepting NFTs Here",
+          category: "Visual Communication & Media",
+          isMap: true,
+          mapLink: "https://medium.com/mintbase/the-future-is-a-thing-of-the-past-tokenising-old-portuguese-products-in-lisbon-a6b365670842",
+        },
       ]
     }
 
@@ -1738,6 +1753,49 @@ export default function Portfolio() {
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                     />
+                  ) : (image as any).isMap ? (
+                    <div
+                      className="relative overflow-hidden rounded-sm shadow-md"
+                      style={{
+                        width: isMobile ? "9rem" : "18rem",
+                        height: isMobile ? "9rem" : "18rem",
+                        transform: `rotateY(${getRotation(imageRefs.current[index], mousePosition.x)}deg)`,
+                        transformStyle: "preserve-3d",
+                        transition: draggedImageRef.current === index ? "none" : "all 0.3s ease-out",
+                      }}
+                    >
+                      <iframe
+                        src={image.src || ""}
+                        title={image.alt}
+                        className="w-full h-full border-0 pointer-events-auto select-none"
+                        style={{ display: "block" }}
+                        loading="lazy"
+                        onMouseDown={(e) => e.stopPropagation()}
+                        onTouchStart={(e) => e.stopPropagation()}
+                      />
+                      {/* Clickable overlay label */}
+                      <a
+                        href={(image as any).mapLink || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-3 py-2 bg-white/90 backdrop-blur-sm border-t border-gray-100 hover:bg-white transition-colors duration-200 group"
+                        aria-label="Read the full story about Lisbon NFT locations on Medium"
+                        onMouseDown={(e) => e.stopPropagation()}
+                        onTouchStart={(e) => e.stopPropagation()}
+                      >
+                        <span className="text-xs font-medium text-gray-700 truncate">Lisbon NFT locations</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-3.5 w-3.5 text-gray-500 shrink-0 ml-1 group-hover:text-gray-900 transition-colors"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          aria-hidden="true"
+                        >
+                          <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                          <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                        </svg>
+                      </a>
+                    </div>
                   ) : (
                     <img
                       src={image.src || "/placeholder.svg"}
@@ -1848,7 +1906,7 @@ export default function Portfolio() {
                       </button>
                     </div>
                   )}
-                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && (
+                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && (
                     <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
                       <button
                         onClick={(e) => {
@@ -1975,9 +2033,29 @@ export default function Portfolio() {
             <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
               <h2 className="text-4xl font-bold text-gray-900 mb-2">{aVidaPortuguesaProject.name}</h2>
               <p className="text-lg text-gray-600 mb-6">{aVidaPortuguesaProject.year}</p>
-              <div className="text-base text-gray-700 leading-relaxed">
+              <div className="text-base text-gray-700 leading-relaxed mb-6">
                 {aVidaPortuguesaProject.descriptionJSX || aVidaPortuguesaProject.description}
               </div>
+              {aVidaPortuguesaProject.blogUrl && (
+                <a
+                  href={aVidaPortuguesaProject.blogUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-medium rounded-full border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300"
+                >
+                  Read the full story
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                  </svg>
+                </a>
+              )}
             </div>
           </div>
         )}
