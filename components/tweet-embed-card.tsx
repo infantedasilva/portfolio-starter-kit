@@ -83,6 +83,7 @@ export default function TweetEmbedCard() {
         width: "100%", 
         maxWidth: "300px",
         minHeight: "200px",
+        borderRadius: 0,
       }}
     >
       {/* Container for Twitter embed */}
@@ -91,6 +92,7 @@ export default function TweetEmbedCard() {
         className="twitter-embed-container"
         style={{ 
           width: "100%",
+          borderRadius: 0,
         }}
       >
         {/* Fallback link while loading */}
@@ -106,18 +108,30 @@ export default function TweetEmbedCard() {
         </div>
       </div>
 
-      {/* Custom styles to remove Twitter embed rounded corners */}
+      {/* Custom styles to remove all rounded corners from Twitter embed and container */}
       <style jsx global>{`
+        .twitter-embed-container {
+          border-radius: 0 !important;
+        }
         .twitter-embed-container .twitter-tweet {
           margin: 0 !important;
           width: 100% !important;
           max-width: 100% !important;
+          border-radius: 0 !important;
         }
         .twitter-embed-container .twitter-tweet iframe {
           border-radius: 0 !important;
         }
+        .twitter-embed-container iframe {
+          border-radius: 0 !important;
+        }
         .twitter-embed-container > div {
           margin: 0 !important;
+          border-radius: 0 !important;
+        }
+        /* Target all nested elements to ensure no rounding */
+        .twitter-embed-container * {
+          border-radius: 0 !important;
         }
       `}</style>
     </div>
