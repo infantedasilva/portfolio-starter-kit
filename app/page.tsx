@@ -1813,7 +1813,7 @@ export default function Portfolio() {
                         transition: draggedImageRef.current === index ? "none" : "all 0.3s ease-out",
                       }}
                     >
-                      <TweetEmbedCard tweetUrl={image.src || ""} />
+                      <TweetEmbedCard />
                     </div>
                   ) : (
                     <img
