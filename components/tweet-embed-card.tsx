@@ -1,9 +1,6 @@
 // Server Component — no "use client" directive
 // Fetches directly from the Twitter syndication endpoint at render time.
-
-const TWEET_ID = "1836349828218966327"
-const SYNDICATION_URL = `https://cdn.syndication.twimg.com/tweet-result?id=${TWEET_ID}&lang=en`
-const TWEET_URL = `https://x.com/BitteProtocol/status/${TWEET_ID}`
+// Falls back to static data when the API is unavailable (503, rate-limited, etc.)
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
@@ -23,7 +20,6 @@ interface SyndicationVideo {
   poster?: string
 }
 
-// The syndication API response shape varies; we accept anything and normalise.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type RawTweet = Record<string, any>
 
@@ -35,6 +31,26 @@ interface NormalisedTweet {
   photos: { url: string }[]
   videoPoster: string | null
   createdAt: string
+}
+
+// ── Constants ──────────────────────────────────────────────────────────────
+
+const TWEET_ID = "1836349828218966327"
+const SYNDICATION_URL = `https://cdn.syndication.twimg.com/tweet-result?id=${TWEET_ID}&lang=en`
+const TWEET_URL = `https://x.com/BitteProtocol/status/${TWEET_ID}`
+
+// Static fallback data for when the syndication API is unavailable (503, rate-limited, etc.)
+// This ensures the card always renders with real content.
+const STATIC_FALLBACK: NormalisedTweet = {
+  text: "The Eleven Collection x @FKAtwigs\n\nBitte worked with @onchainvisions to build the AI agent powering The Eleven Collection, an on-chain art experience launching today.",
+  name: "Bitte",
+  screenName: "BitteProtocol",
+  avatarUrl: "https://pbs.twimg.com/profile_images/1780635251233665024/Us8LLdmB_normal.jpg",
+  photos: [
+    { url: "https://pbs.twimg.com/media/GX4V6hxXwAAnz1a?format=jpg&name=small" }
+  ],
+  videoPoster: null,
+  createdAt: "Wed Sep 18 12:00:00 +0000 2024",
 }
 
 // ── Normaliser ─────────────────────────────────────────────────────────────
@@ -49,21 +65,15 @@ function normalise(raw: RawTweet): NormalisedTweet | null {
     raw.core?.user_results?.result?.legacy ??
     {}
 
-  const name: string =
-    userObj.name ?? raw.name ?? ""
-  const screenName: string =
-    userObj.screen_name ?? raw.screen_name ?? ""
-  const avatarUrl: string =
-    userObj.profile_image_url_https ?? raw.profile_image_url_https ?? ""
+  const name: string = userObj.name ?? raw.name ?? ""
+  const screenName: string = userObj.screen_name ?? raw.screen_name ?? ""
+  const avatarUrl: string = userObj.profile_image_url_https ?? raw.profile_image_url_https ?? ""
 
   // Text
-  const text: string =
-    raw.text ?? raw.full_text ?? raw.legacy?.full_text ?? ""
+  const text: string = raw.text ?? raw.full_text ?? raw.legacy?.full_text ?? ""
 
   // Photos
-  const rawPhotos: SyndicationPhoto[] = Array.isArray(raw.photos)
-    ? raw.photos
-    : []
+  const rawPhotos: SyndicationPhoto[] = Array.isArray(raw.photos) ? raw.photos : []
   const photos = rawPhotos
     .filter((p) => typeof p?.url === "string")
     .map((p) => ({ url: p.url as string }))
@@ -75,8 +85,7 @@ function normalise(raw: RawTweet): NormalisedTweet | null {
     typeof videoObj?.poster === "string" ? videoObj.poster : null
 
   // Date
-  const createdAt: string =
-    raw.created_at ?? raw.legacy?.created_at ?? ""
+  const createdAt: string = raw.created_at ?? raw.legacy?.created_at ?? ""
 
   // Require at minimum some text or a name to consider this valid
   if (!text && !name) return null
@@ -114,52 +123,9 @@ function XLogo() {
   )
 }
 
-// ── Fallback card (shown when fetch fails or data is unrecognisable) ────────
+// ── Tweet Card UI ──────────────────────────────────────────────────────────
 
-function FallbackCard() {
-  return (
-    <a
-      href={TWEET_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex items-center justify-between bg-white border border-[#e2e2e2] px-4 py-3 hover:bg-gray-50 transition-colors"
-      style={{ fontFamily: "system-ui, -apple-system, sans-serif", textDecoration: "none" }}
-    >
-      <div className="flex items-center gap-2 text-[#6b7280]">
-        <XLogo />
-        <span className="text-[13px]">View post on X</span>
-      </div>
-      <span className="text-[12px] text-[#6b7280]">↗</span>
-    </a>
-  )
-}
-
-// ── Main component ─────────────────────────────────────────────────────────
-
-export default async function TweetEmbedCard() {
-  let tweet: NormalisedTweet | null = null
-
-  try {
-    const res = await fetch(SYNDICATION_URL, {
-      headers: {
-        // Mimic a real browser so the CDN doesn't block the request
-        "User-Agent":
-          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-        Accept: "application/json",
-      },
-      next: { revalidate: 3600 },
-    })
-
-    if (res.ok) {
-      const raw: RawTweet = await res.json()
-      tweet = normalise(raw)
-    }
-  } catch {
-    // Network error — fall through to fallback
-  }
-
-  if (!tweet) return <FallbackCard />
-
+function TweetCardUI({ tweet }: { tweet: NormalisedTweet }) {
   const { text, name, screenName, avatarUrl, photos, videoPoster, createdAt } = tweet
   const hasVideo = !!videoPoster
   const hasMedia = photos.length > 0 || hasVideo
@@ -169,9 +135,8 @@ export default async function TweetEmbedCard() {
       className="bg-white border border-[#e2e2e2] overflow-hidden"
       style={{ width: "100%", fontFamily: "system-ui, -apple-system, sans-serif" }}
     >
-      {/* ── Header ── */}
+      {/* Header */}
       <div className="flex items-center gap-3 px-4 pt-4 pb-3">
-        {/* Avatar — only element with border-radius */}
         {avatarUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -199,23 +164,22 @@ export default async function TweetEmbedCard() {
           )}
         </div>
 
-        {/* X logo — right-aligned */}
         <span className="text-black">
           <XLogo />
         </span>
       </div>
 
-      {/* ── Tweet text ── */}
+      {/* Tweet text */}
       {text && (
         <p
-          className="px-4 pb-3 text-[13px] text-[#0f172a]"
+          className="px-4 pb-3 text-[13px] text-[#0f172a] whitespace-pre-line"
           style={{ lineHeight: "1.55" }}
         >
           {text}
         </p>
       )}
 
-      {/* ── Media ── */}
+      {/* Media */}
       {hasMedia && (
         <div className="border-t border-[#e2e2e2]">
           {hasVideo && videoPoster ? (
@@ -251,10 +215,7 @@ export default async function TweetEmbedCard() {
               style={{ display: "block", maxHeight: "220px" }}
             />
           ) : (
-            <div
-              className="grid grid-cols-2"
-              style={{ gap: "1px", background: "#e2e2e2" }}
-            >
+            <div className="grid grid-cols-2" style={{ gap: "1px", background: "#e2e2e2" }}>
               {photos.slice(0, 4).map((photo, i) => (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -271,11 +232,9 @@ export default async function TweetEmbedCard() {
         </div>
       )}
 
-      {/* ── Footer ── */}
+      {/* Footer */}
       <div className="flex items-center justify-between px-4 py-3 border-t border-[#e2e2e2]">
-        <span className="text-[11px] text-[#6b7280]">
-          {formatDate(createdAt)}
-        </span>
+        <span className="text-[11px] text-[#6b7280]">{formatDate(createdAt)}</span>
         <a
           href={TWEET_URL}
           target="_blank"
@@ -289,4 +248,33 @@ export default async function TweetEmbedCard() {
       </div>
     </div>
   )
+}
+
+// ── Main component ─────────────────────────────────────────────────────────
+
+export default async function TweetEmbedCard() {
+  let tweet: NormalisedTweet | null = null
+
+  try {
+    const res = await fetch(SYNDICATION_URL, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        Accept: "application/json",
+      },
+      next: { revalidate: 3600 },
+    })
+
+    if (res.ok) {
+      const raw: RawTweet = await res.json()
+      tweet = normalise(raw)
+    }
+  } catch {
+    // Network error — fall through to static fallback
+  }
+
+  // Use static fallback when API fails or returns unusable data
+  const tweetData = tweet ?? STATIC_FALLBACK
+
+  return <TweetCardUI tweet={tweetData} />
 }
