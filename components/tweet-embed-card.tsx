@@ -45,12 +45,12 @@ const STATIC_FALLBACK: NormalisedTweet = {
   text: "The Eleven Collection x @FKAtwigs\n\nBitte worked with @onchainvisions to build the AI agent powering The Eleven Collection, an on-chain art experience launching today.",
   name: "Bitte",
   screenName: "BitteProtocol",
-  avatarUrl: "https://pbs.twimg.com/profile_images/1780635251233665024/Us8LLdmB_normal.jpg",
+  avatarUrl: "https://pbs.twimg.com/profile_images/1780635251233665024/Us8LLdmB_400x400.jpg",
   photos: [
-    { url: "https://pbs.twimg.com/media/GX4V6hxXwAAnz1a?format=jpg&name=small" }
+    { url: "https://pbs.twimg.com/media/GX4V6hxXwAAnz1a?format=jpg&name=medium" }
   ],
   videoPoster: null,
-  createdAt: "Wed Sep 18 12:00:00 +0000 2024",
+  createdAt: "Sep 18, 2024",
 }
 
 // ── Normaliser ─────────────────────────────────────────────────────────────
@@ -183,14 +183,14 @@ function TweetCardUI({ tweet }: { tweet: NormalisedTweet }) {
       {hasMedia && (
         <div className="border-t border-[#e2e2e2]">
           {hasVideo && videoPoster ? (
-            <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
+            <div className="relative w-full aspect-video">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={videoPoster}
                 alt="Video thumbnail"
-                className="w-full h-full object-cover"
-                crossOrigin="anonymous"
-                style={{ display: "block" }}
+                className="w-full h-full object-cover block"
+                loading="eager"
+                style={{ borderRadius: 0 }}
               />
               <div className="absolute inset-0 flex items-center justify-center bg-black/20">
                 <div className="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center">
@@ -210,21 +210,21 @@ function TweetCardUI({ tweet }: { tweet: NormalisedTweet }) {
             <img
               src={photos[0].url}
               alt="Tweet media"
-              className="w-full object-cover"
-              crossOrigin="anonymous"
-              style={{ display: "block", maxHeight: "220px" }}
+              className="w-full object-cover block"
+              loading="eager"
+              style={{ borderRadius: 0 }}
             />
           ) : (
-            <div className="grid grid-cols-2" style={{ gap: "1px", background: "#e2e2e2" }}>
+            <div className="grid grid-cols-2 gap-px bg-[#e2e2e2]">
               {photos.slice(0, 4).map((photo, i) => (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   key={i}
                   src={photo.url}
                   alt={`Tweet media ${i + 1}`}
-                  className="w-full object-cover"
-                  crossOrigin="anonymous"
-                  style={{ display: "block", maxHeight: "120px" }}
+                  className="w-full h-[100px] object-cover block"
+                  loading="eager"
+                  style={{ borderRadius: 0 }}
                 />
               ))}
             </div>
