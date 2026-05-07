@@ -1005,6 +1005,14 @@ export default function Portfolio() {
         originalElevenCollection,
         { src: "/images/eleven-collection-interface.jpg", alt: "The Eleven Collection interface and visuals", project: "The Eleven Collection", category: "Visual Communication & Media" },
         { src: "/images/eleven-collection-performance.gif", alt: "FKA twigs performance from The Eleven Collection", project: "The Eleven Collection", category: "Visual Communication & Media" },
+        {
+          src: "https://x.com/BitteProtocol/status/1836349828218966327",
+          alt: "Bitte Protocol tweet about The Eleven Collection",
+          project: "The Eleven Collection",
+          category: "Visual Communication & Media",
+          isXEmbed: true,
+          tweetId: "1836349828218966327",
+        },
       ]
     }
 
@@ -1796,6 +1804,57 @@ export default function Portfolio() {
                         </svg>
                       </a>
                     </div>
+                  ) : (image as any).isXEmbed ? (
+                    <div
+                      className="relative overflow-hidden rounded-sm shadow-md bg-white"
+                      style={{
+                        width: isMobile ? "11rem" : "20rem",
+                        height: isMobile ? "11rem" : "20rem",
+                        transform: `rotateY(${getRotation(imageRefs.current[index], mousePosition.x)}deg)`,
+                        transformStyle: "preserve-3d",
+                        transition: draggedImageRef.current === index ? "none" : "all 0.3s ease-out",
+                      }}
+                    >
+                      {/* X/Twitter Card Design */}
+                      <a
+                        href={image.src || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-full h-full p-4 hover:bg-gray-50 transition-colors duration-200"
+                        onMouseDown={(e) => e.stopPropagation()}
+                        onTouchStart={(e) => e.stopPropagation()}
+                        aria-label="View post on X"
+                      >
+                        {/* Header with X logo and account */}
+                        <div className="flex items-center gap-2 mb-3">
+                          <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center shrink-0">
+                            <svg viewBox="0 0 24 24" className="w-4 h-4 text-white" fill="currentColor" aria-hidden="true">
+                              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                          </div>
+                          <div className="flex flex-col min-w-0">
+                            <span className="text-sm font-semibold text-gray-900 truncate">Bitte Protocol</span>
+                            <span className="text-xs text-gray-500 truncate">@BitteProtocol</span>
+                          </div>
+                        </div>
+                        
+                        {/* Post content preview */}
+                        <div className="text-sm text-gray-800 leading-relaxed line-clamp-4 mb-3">
+                          The Eleven Collection by FKA twigs is now live. A groundbreaking collaboration translating performance art into digital collectibles.
+                        </div>
+                        
+                        {/* Footer */}
+                        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                          <span className="text-xs text-gray-400">Sep 18, 2024</span>
+                          <div className="flex items-center gap-1 text-gray-400">
+                            <span className="text-xs">View on</span>
+                            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="currentColor" aria-hidden="true">
+                              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
                   ) : (
                     <img
                       src={image.src || "/placeholder.svg"}
@@ -1906,7 +1965,7 @@ export default function Portfolio() {
                       </button>
                     </div>
                   )}
-                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && (
+                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && !(image as any).isXEmbed && (
                     <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
                       <button
                         onClick={(e) => {
