@@ -111,8 +111,11 @@ export default function TweetEmbedCard({ tweetUrl }: TweetEmbedCardProps) {
     )
   }
 
+  // Debug: log the tweet structure
+  console.log("[v0] Tweet data:", tweet)
+
   // Error — minimal fallback that still links to the post
-  if (error || !tweet) {
+  if (error || !tweet || !tweet.user) {
     return (
       <a
         href={tweetUrl}
