@@ -1006,6 +1006,13 @@ export default function Portfolio() {
         originalElevenCollection,
         { src: "/images/eleven-collection-interface.jpg", alt: "The Eleven Collection interface and visuals", project: "The Eleven Collection", category: "Visual Communication & Media" },
         { src: "/images/eleven-collection-performance.gif", alt: "FKA twigs performance from The Eleven Collection", project: "The Eleven Collection", category: "Visual Communication & Media" },
+        {
+          src: "https://x.com/BitteProtocol/status/1836349828218966327",
+          alt: "Bitte Protocol post about The Eleven Collection on X",
+          project: "The Eleven Collection",
+          category: "Visual Communication & Media",
+          isXPost: true,
+        },
       ]
     }
 
@@ -1797,6 +1804,17 @@ export default function Portfolio() {
                         </svg>
                       </a>
                     </div>
+                  ) : (image as any).isXPost ? (
+                    <div
+                      style={{
+                        width: isMobile ? "13rem" : "20rem",
+                        transform: `rotateY(${getRotation(imageRefs.current[index], mousePosition.x)}deg)`,
+                        transformStyle: "preserve-3d",
+                        transition: draggedImageRef.current === index ? "none" : "all 0.3s ease-out",
+                      }}
+                    >
+                      <TweetEmbedCard tweetUrl={image.src || ""} />
+                    </div>
                   ) : (
                     <img
                       src={image.src || "/placeholder.svg"}
@@ -1907,7 +1925,7 @@ export default function Portfolio() {
                       </button>
                     </div>
                   )}
-                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && (
+                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && !(image as any).isXPost && (
                     <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
                       <button
                         onClick={(e) => {
@@ -2078,7 +2096,7 @@ export default function Portfolio() {
         )}
 
         {selectedProject === "The Eleven Collection" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm w-80">
+          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
             <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
               <h2 className="text-4xl font-bold text-gray-900 mb-2">{elevenCollectionProject.name}</h2>
               <p className="text-lg text-gray-600 mb-6">{elevenCollectionProject.year}</p>
@@ -2088,7 +2106,7 @@ export default function Portfolio() {
                   href={elevenCollectionProject.blogUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-medium rounded-full border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300 mb-6"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-medium rounded-full border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300"
                 >
                   Read the Full Story
                   <svg
@@ -2102,7 +2120,6 @@ export default function Portfolio() {
                   </svg>
                 </a>
               )}
-              <TweetEmbedCard tweetUrl="https://x.com/BitteProtocol/status/1836349828218966327" />
             </div>
           </div>
         )}
