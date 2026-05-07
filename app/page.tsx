@@ -5,6 +5,7 @@ import type React from "react"
 import { useState, useEffect, useRef, useCallback } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import TweetEmbedCard from "@/components/tweet-embed-card"
 
 const projectNameToSlug = (name: string) => {
   return name
@@ -1005,14 +1006,6 @@ export default function Portfolio() {
         originalElevenCollection,
         { src: "/images/eleven-collection-interface.jpg", alt: "The Eleven Collection interface and visuals", project: "The Eleven Collection", category: "Visual Communication & Media" },
         { src: "/images/eleven-collection-performance.gif", alt: "FKA twigs performance from The Eleven Collection", project: "The Eleven Collection", category: "Visual Communication & Media" },
-        {
-          src: "https://x.com/BitteProtocol/status/1836349828218966327",
-          alt: "Bitte Protocol tweet about The Eleven Collection",
-          project: "The Eleven Collection",
-          category: "Visual Communication & Media",
-          isXPost: true,
-          xPostId: "1836349828218966327",
-        },
       ]
     }
 
@@ -1804,78 +1797,6 @@ export default function Portfolio() {
                         </svg>
                       </a>
                     </div>
-                  ) : (image as any).isXPost ? (
-                    <div
-                      className="relative overflow-hidden rounded-lg shadow-lg bg-black"
-                      style={{
-                        width: isMobile ? "16rem" : "20rem",
-                        height: isMobile ? "16rem" : "20rem",
-                        transform: `rotateY(${getRotation(imageRefs.current[index], mousePosition.x)}deg)`,
-                        transformStyle: "preserve-3d",
-                        transition: draggedImageRef.current === index ? "none" : "all 0.3s ease-out",
-                      }}
-                    >
-                      {/* X Post Card */}
-                      <a
-                        href={image.src || "#"}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block w-full h-full relative group"
-                        onMouseDown={(e) => e.stopPropagation()}
-                        onTouchStart={(e) => e.stopPropagation()}
-                        aria-label="View post on X"
-                      >
-                        {/* Background gradient */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black" />
-                        
-                        {/* Content */}
-                        <div className="relative z-10 flex flex-col h-full p-4">
-                          {/* Header with X logo */}
-                          <div className="flex items-center gap-2 mb-3">
-                            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center">
-                              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
-                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                              </svg>
-                            </div>
-                            <div className="flex flex-col">
-                              <span className="text-white text-sm font-semibold">Bitte Protocol</span>
-                              <span className="text-gray-400 text-xs">@BitteProtocol</span>
-                            </div>
-                          </div>
-                          
-                          {/* Post preview text */}
-                          <p className="text-white/90 text-sm leading-relaxed flex-1 line-clamp-4">
-                            The Eleven Collection by FKA twigs - a groundbreaking collaboration bringing performance art to the blockchain.
-                          </p>
-                          
-                          {/* Media preview placeholder */}
-                          <div className="mt-3 rounded-lg overflow-hidden bg-gray-800/50 aspect-video flex items-center justify-center group-hover:bg-gray-700/50 transition-colors">
-                            <div className="flex flex-col items-center gap-2 text-gray-400 group-hover:text-white transition-colors">
-                              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                              </svg>
-                              <span className="text-xs">View on X</span>
-                            </div>
-                          </div>
-                          
-                          {/* Footer */}
-                          <div className="mt-3 flex items-center justify-between text-gray-500 text-xs">
-                            <span>Sep 18, 2024</span>
-                            <div className="flex items-center gap-1 group-hover:text-white transition-colors">
-                              <span>Open</span>
-                              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
-                                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                              </svg>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        {/* Hover overlay */}
-                        <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      </a>
-                    </div>
                   ) : (
                     <img
                       src={image.src || "/placeholder.svg"}
@@ -1986,7 +1907,7 @@ export default function Portfolio() {
                       </button>
                     </div>
                   )}
-                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && !(image as any).isXPost && (
+                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && (
                     <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
                       <button
                         onClick={(e) => {
@@ -2157,7 +2078,7 @@ export default function Portfolio() {
         )}
 
         {selectedProject === "The Eleven Collection" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
+          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm w-80">
             <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
               <h2 className="text-4xl font-bold text-gray-900 mb-2">{elevenCollectionProject.name}</h2>
               <p className="text-lg text-gray-600 mb-6">{elevenCollectionProject.year}</p>
@@ -2167,7 +2088,7 @@ export default function Portfolio() {
                   href={elevenCollectionProject.blogUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-medium rounded-full border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-medium rounded-full border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300 mb-6"
                 >
                   Read the Full Story
                   <svg
@@ -2181,6 +2102,7 @@ export default function Portfolio() {
                   </svg>
                 </a>
               )}
+              <TweetEmbedCard tweetUrl="https://x.com/BitteProtocol/status/1836349828218966327" />
             </div>
           </div>
         )}
