@@ -40,14 +40,14 @@ const SYNDICATION_URL = `https://cdn.syndication.twimg.com/tweet-result?id=${TWE
 const TWEET_URL = `https://x.com/BitteProtocol/status/${TWEET_ID}`
 
 // Static fallback data for when the syndication API is unavailable (503, rate-limited, etc.)
-// This ensures the card always renders with real content.
+// Uses local images to avoid Twitter CDN blocking issues.
 const STATIC_FALLBACK: NormalisedTweet = {
   text: "The Eleven Collection x @FKAtwigs\n\nBitte worked with @onchainvisions to build the AI agent powering The Eleven Collection, an on-chain art experience launching today.",
   name: "Bitte",
   screenName: "BitteProtocol",
-  avatarUrl: "https://pbs.twimg.com/profile_images/1780635251233665024/Us8LLdmB_400x400.jpg",
+  avatarUrl: "/images/fka-twigs-eleven-collection.webp",
   photos: [
-    { url: "https://pbs.twimg.com/media/GX4V6hxXwAAnz1a?format=jpg&name=medium" }
+    { url: "/images/eleven-collection-interface.jpg" }
   ],
   videoPoster: null,
   createdAt: "Sep 18, 2024",
@@ -145,7 +145,6 @@ function TweetCardUI({ tweet }: { tweet: NormalisedTweet }) {
             width={36}
             height={36}
             className="w-9 h-9 rounded-full object-cover shrink-0"
-            crossOrigin="anonymous"
           />
         ) : (
           <div className="w-9 h-9 rounded-full bg-gray-200 shrink-0" aria-hidden="true" />
