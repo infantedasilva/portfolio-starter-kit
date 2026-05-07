@@ -1010,8 +1010,8 @@ export default function Portfolio() {
           alt: "Bitte Protocol tweet about The Eleven Collection",
           project: "The Eleven Collection",
           category: "Visual Communication & Media",
-          isXEmbed: true,
-          tweetId: "1836349828218966327",
+          isXPost: true,
+          xPostId: "1836349828218966327",
         },
       ]
     }
@@ -1804,55 +1804,76 @@ export default function Portfolio() {
                         </svg>
                       </a>
                     </div>
-                  ) : (image as any).isXEmbed ? (
+                  ) : (image as any).isXPost ? (
                     <div
-                      className="relative overflow-hidden rounded-sm shadow-md bg-white"
+                      className="relative overflow-hidden rounded-lg shadow-lg bg-black"
                       style={{
-                        width: isMobile ? "11rem" : "20rem",
-                        height: isMobile ? "11rem" : "20rem",
+                        width: isMobile ? "16rem" : "20rem",
+                        height: isMobile ? "16rem" : "20rem",
                         transform: `rotateY(${getRotation(imageRefs.current[index], mousePosition.x)}deg)`,
                         transformStyle: "preserve-3d",
                         transition: draggedImageRef.current === index ? "none" : "all 0.3s ease-out",
                       }}
                     >
-                      {/* X/Twitter Card Design */}
+                      {/* X Post Card */}
                       <a
                         href={image.src || "#"}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block w-full h-full p-4 hover:bg-gray-50 transition-colors duration-200"
+                        className="block w-full h-full relative group"
                         onMouseDown={(e) => e.stopPropagation()}
                         onTouchStart={(e) => e.stopPropagation()}
                         aria-label="View post on X"
                       >
-                        {/* Header with X logo and account */}
-                        <div className="flex items-center gap-2 mb-3">
-                          <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center shrink-0">
-                            <svg viewBox="0 0 24 24" className="w-4 h-4 text-white" fill="currentColor" aria-hidden="true">
-                              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                            </svg>
+                        {/* Background gradient */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black" />
+                        
+                        {/* Content */}
+                        <div className="relative z-10 flex flex-col h-full p-4">
+                          {/* Header with X logo */}
+                          <div className="flex items-center gap-2 mb-3">
+                            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+                              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                              </svg>
+                            </div>
+                            <div className="flex flex-col">
+                              <span className="text-white text-sm font-semibold">Bitte Protocol</span>
+                              <span className="text-gray-400 text-xs">@BitteProtocol</span>
+                            </div>
                           </div>
-                          <div className="flex flex-col min-w-0">
-                            <span className="text-sm font-semibold text-gray-900 truncate">Bitte Protocol</span>
-                            <span className="text-xs text-gray-500 truncate">@BitteProtocol</span>
+                          
+                          {/* Post preview text */}
+                          <p className="text-white/90 text-sm leading-relaxed flex-1 line-clamp-4">
+                            The Eleven Collection by FKA twigs - a groundbreaking collaboration bringing performance art to the blockchain.
+                          </p>
+                          
+                          {/* Media preview placeholder */}
+                          <div className="mt-3 rounded-lg overflow-hidden bg-gray-800/50 aspect-video flex items-center justify-center group-hover:bg-gray-700/50 transition-colors">
+                            <div className="flex flex-col items-center gap-2 text-gray-400 group-hover:text-white transition-colors">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                              <span className="text-xs">View on X</span>
+                            </div>
+                          </div>
+                          
+                          {/* Footer */}
+                          <div className="mt-3 flex items-center justify-between text-gray-500 text-xs">
+                            <span>Sep 18, 2024</span>
+                            <div className="flex items-center gap-1 group-hover:text-white transition-colors">
+                              <span>Open</span>
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                              </svg>
+                            </div>
                           </div>
                         </div>
                         
-                        {/* Post content preview */}
-                        <div className="text-sm text-gray-800 leading-relaxed line-clamp-4 mb-3">
-                          The Eleven Collection by FKA twigs is now live. A groundbreaking collaboration translating performance art into digital collectibles.
-                        </div>
-                        
-                        {/* Footer */}
-                        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                          <span className="text-xs text-gray-400">Sep 18, 2024</span>
-                          <div className="flex items-center gap-1 text-gray-400">
-                            <span className="text-xs">View on</span>
-                            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="currentColor" aria-hidden="true">
-                              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                            </svg>
-                          </div>
-                        </div>
+                        {/* Hover overlay */}
+                        <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </a>
                     </div>
                   ) : (
@@ -1965,7 +1986,7 @@ export default function Portfolio() {
                       </button>
                     </div>
                   )}
-                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && !(image as any).isXEmbed && (
+                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && !(image as any).isXPost && (
                     <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
                       <button
                         onClick={(e) => {
