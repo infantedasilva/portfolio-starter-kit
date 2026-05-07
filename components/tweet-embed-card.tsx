@@ -40,17 +40,27 @@ const SYNDICATION_URL = `https://cdn.syndication.twimg.com/tweet-result?id=${TWE
 const TWEET_URL = `https://x.com/BitteProtocol/status/${TWEET_ID}`
 
 // Static fallback data for when the syndication API is unavailable (503, rate-limited, etc.)
-// Uses local images to avoid Twitter CDN blocking issues.
+// Uses actual Twitter CDN URLs - they will be proxied through our API route.
 const STATIC_FALLBACK: NormalisedTweet = {
   text: "The Eleven Collection x @FKAtwigs\n\nBitte worked with @onchainvisions to build the AI agent powering The Eleven Collection, an on-chain art experience launching today.",
   name: "Bitte",
   screenName: "BitteProtocol",
-  avatarUrl: "/images/fka-twigs-eleven-collection.webp",
+  avatarUrl: "https://pbs.twimg.com/profile_images/1780635251233665024/Us8LLdmB_400x400.jpg",
   photos: [
-    { url: "/images/eleven-collection-interface.jpg" }
+    { url: "https://pbs.twimg.com/media/GX4V6hxXwAAnz1a?format=jpg&name=medium" }
   ],
   videoPoster: null,
   createdAt: "Sep 18, 2024",
+}
+
+// Helper to proxy Twitter CDN images through our API to avoid CORS issues
+function proxyImageUrl(url: string): string {
+  if (!url) return url
+  // Only proxy Twitter CDN URLs
+  if (url.includes("pbs.twimg.com") || url.includes("abs.twimg.com") || url.includes("video.twimg.com")) {
+    return `/api/twitter-image?url=${encodeURIComponent(url)}`
+  }
+  return url
 }
 
 // ── Normaliser ─────────────────────────────────────────────────────────────
@@ -140,7 +150,7 @@ function TweetCardUI({ tweet }: { tweet: NormalisedTweet }) {
         {avatarUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={avatarUrl}
+            src={proxyImageUrl(avatarUrl)}
             alt={name}
             width={36}
             height={36}
@@ -185,7 +195,7 @@ function TweetCardUI({ tweet }: { tweet: NormalisedTweet }) {
             <div className="relative w-full aspect-video">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={videoPoster}
+                src={proxyImageUrl(videoPoster)}
                 alt="Video thumbnail"
                 className="w-full h-full object-cover block"
                 loading="eager"
@@ -207,7 +217,7 @@ function TweetCardUI({ tweet }: { tweet: NormalisedTweet }) {
           ) : photos.length === 1 ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={photos[0].url}
+              src={proxyImageUrl(photos[0].url)}
               alt="Tweet media"
               className="w-full object-cover block"
               loading="eager"
@@ -219,7 +229,7 @@ function TweetCardUI({ tweet }: { tweet: NormalisedTweet }) {
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   key={i}
-                  src={photo.url}
+                  src={proxyImageUrl(photo.url)}
                   alt={`Tweet media ${i + 1}`}
                   className="w-full h-[100px] object-cover block"
                   loading="eager"
