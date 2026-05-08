@@ -37,7 +37,7 @@ export default function ProjectPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Image Carousel */}
-      <div className="relative w-full h-screen bg-muted overflow-hidden">
+      <div className="relative w-full bg-muted overflow-hidden" style={{ height: "200vh" }}>
         <div className="relative w-full h-full flex items-center justify-center">
           {project.images[currentImageIndex].isYouTube ? (
             <iframe
