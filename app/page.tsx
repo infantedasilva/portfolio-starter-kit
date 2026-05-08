@@ -991,12 +991,6 @@ export default function Portfolio() {
           category: "Visual Communication & Media",
           isVideo: true,
         },
-        {
-          src: "/images/dsc04217.jpg",
-          alt: "FNAC",
-          project: "FNAC",
-          category: "Visual Communication & Media",
-        },
       ]
     }
 
