@@ -78,7 +78,7 @@ export default function TweetEmbedCard() {
 
   return (
     <div
-      className="bg-white border border-[#e2e2e2] overflow-hidden"
+      className="bg-white overflow-hidden"
       style={{ 
         width: "100%", 
         maxWidth: "300px",
@@ -108,30 +108,35 @@ export default function TweetEmbedCard() {
         </div>
       </div>
 
-      {/* Custom styles to remove all rounded corners from Twitter embed and container */}
+      {/* Strip all borders and rounded corners from the Twitter embed */}
       <style jsx global>{`
         .twitter-embed-container {
           border-radius: 0 !important;
+          border: none !important;
         }
         .twitter-embed-container .twitter-tweet {
           margin: 0 !important;
           width: 100% !important;
           max-width: 100% !important;
           border-radius: 0 !important;
-        }
-        .twitter-embed-container .twitter-tweet iframe {
-          border-radius: 0 !important;
+          border: none !important;
         }
         .twitter-embed-container iframe {
           border-radius: 0 !important;
+          border: none !important;
+          outline: none !important;
+          box-shadow: none !important;
         }
         .twitter-embed-container > div {
           margin: 0 !important;
           border-radius: 0 !important;
+          border: none !important;
         }
-        /* Target all nested elements to ensure no rounding */
+        /* Target all nested elements */
         .twitter-embed-container * {
           border-radius: 0 !important;
+          border: none !important;
+          box-shadow: none !important;
         }
       `}</style>
     </div>
