@@ -59,18 +59,6 @@ export default function AboutPage() {
               </a>
             </p>
 
-            <p className="text-foreground">
-              instagram:{" "}
-              <a
-                href="https://instagram.com/luisinfante"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-brand hover:underline"
-              >
-                @luisinfante
-              </a>
-            </p>
-
             <p className="text-muted-foreground text-sm">currently available for new projects</p>
           </div>
 

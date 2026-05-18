@@ -5,6 +5,7 @@ import type React from "react"
 import { useState, useEffect, useRef, useCallback } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import TweetEmbedCard from "@/components/tweet-embed-card"
 
 const projectNameToSlug = (name: string) => {
   return name
@@ -461,6 +462,12 @@ export default function Portfolio() {
       project: "Accepting NFTs Here",
       category: "Visual Communication & Media",
     },
+    {
+      src: "/images/qatalyze-sofa-full.jpg",
+      alt: "Qatalyze Interiors",
+      project: "Qatalyze Interiors",
+      category: "Visual Communication & Media",
+    },
   ]
 
   const videoPortfolioImages: { src: string; alt: string; project: string; category: string }[] = []
@@ -476,6 +483,21 @@ export default function Portfolio() {
       { src: "/images/accepting-nfts-table.jpg", alt: "Accepting NFTs Here sign on table" },
       { src: "/images/accepting-nfts-dumplings.jpg", alt: "Accepting NFTs Here at dumplings restaurant" },
       { src: "/images/accepting-nfts-map.jpg", alt: "Accepting NFTs Here map of Lisbon locations" },
+    ],
+  }
+
+  const qatalyzeInteriorsProject = {
+    name: "Qatalyze Interiors",
+    year: "2020",
+    description:
+      "At Qatalyze I was mainly designing and managing production of bespoke furniture for interior projects. The studio never had a virtual presence, neither in social media or a website. Anyway, there was the need of registering the process and some finished products we delivered to our clients. I was doing this through photography and video.",
+    images: [
+      { src: "/images/qatalyze-sofa-full.jpg", alt: "Qatalyze Interiors - Organic Sofa with Dome Backrests" },
+      { src: "/images/qatalyze-tv-wall.jpg", alt: "Qatalyze Interiors - Curved Blue TV Wall with Decorative Elements" },
+      { src: "/images/qatalyze-kitchen.jpg", alt: "Qatalyze Interiors - Bespoke Kitchen with Curved Cabinetry" },
+      { src: "/images/qatalyze-shelving.jpeg", alt: "Qatalyze Interiors - Modular Brass Shelving System" },
+      { src: "/images/qatalyze-oculos.jpg", alt: "Qatalyze Interiors - Decorative Bowl with Radial Pattern" },
+      { src: "/images/qatalyze-sofa-detail.jpg", alt: "Qatalyze Interiors - Sofa Fabric and Construction Detail" },
     ],
   }
 
@@ -779,6 +801,7 @@ export default function Portfolio() {
 
     // Visual Communication & Media projects (from visualCommunicationPortfolioImages)
     { name: "Branca Lisboa", year: "2019", category: "Visual Communication & Media" },
+    { name: "Qatalyze Interiors", year: "2020", category: "Visual Communication & Media" },
     { name: "Mintbase Interviews", year: "2022", category: "Visual Communication & Media" },
     { name: "A Vida Portuguesa", year: "2024", category: "Visual Communication & Media" },
     { name: "FNAC", year: "2022", category: "Visual Communication & Media" },
@@ -990,12 +1013,6 @@ export default function Portfolio() {
           category: "Visual Communication & Media",
           isVideo: true,
         },
-        {
-          src: "/images/dsc04217.jpg",
-          alt: "FNAC",
-          project: "FNAC",
-          category: "Visual Communication & Media",
-        },
       ]
     }
 
@@ -1005,6 +1022,13 @@ export default function Portfolio() {
         originalElevenCollection,
         { src: "/images/eleven-collection-interface.jpg", alt: "The Eleven Collection interface and visuals", project: "The Eleven Collection", category: "Visual Communication & Media" },
         { src: "/images/eleven-collection-performance.gif", alt: "FKA twigs performance from The Eleven Collection", project: "The Eleven Collection", category: "Visual Communication & Media" },
+        {
+          src: "https://x.com/BitteProtocol/status/1836349828218966327",
+          alt: "Bitte Protocol post about The Eleven Collection on X",
+          project: "The Eleven Collection",
+          category: "Visual Communication & Media",
+          isXPost: true,
+        },
       ]
     }
 
@@ -1022,6 +1046,18 @@ export default function Portfolio() {
           isMap: true,
           mapLink: "https://medium.com/mintbase/the-future-is-a-thing-of-the-past-tokenising-old-portuguese-products-in-lisbon-a6b365670842",
         },
+      ]
+    }
+
+    if (selectedProject === "Qatalyze Interiors") {
+      const originalQatalyze = visualCommPortfolioImages.find((img) => img.project === "Qatalyze Interiors")
+      return [
+        originalQatalyze,
+        { src: "/images/qatalyze-tv-wall.jpg", alt: "Qatalyze Interiors - Curved Blue TV Wall", project: "Qatalyze Interiors", category: "Visual Communication & Media" },
+        { src: "/images/qatalyze-kitchen.jpg", alt: "Qatalyze Interiors - Bespoke Kitchen", project: "Qatalyze Interiors", category: "Visual Communication & Media" },
+        { src: "/images/qatalyze-shelving.jpeg", alt: "Qatalyze Interiors - Modular Shelving", project: "Qatalyze Interiors", category: "Visual Communication & Media" },
+        { src: "/images/qatalyze-oculos.jpg", alt: "Qatalyze Interiors - Decorative Bowl", project: "Qatalyze Interiors", category: "Visual Communication & Media" },
+        { src: "/images/qatalyze-sofa-detail.jpg", alt: "Qatalyze Interiors - Sofa Detail", project: "Qatalyze Interiors", category: "Visual Communication & Media" },
       ]
     }
 
@@ -1796,6 +1832,17 @@ export default function Portfolio() {
                         </svg>
                       </a>
                     </div>
+                  ) : (image as any).isXPost ? (
+                    <div
+                      style={{
+                        width: isMobile ? "13rem" : "20rem",
+                        transform: `rotateY(${getRotation(imageRefs.current[index], mousePosition.x)}deg)`,
+                        transformStyle: "preserve-3d",
+                        transition: draggedImageRef.current === index ? "none" : "all 0.3s ease-out",
+                      }}
+                    >
+                      <TweetEmbedCard />
+                    </div>
                   ) : (
                     <img
                       src={image.src || "/placeholder.svg"}
@@ -1891,6 +1938,9 @@ export default function Portfolio() {
                             if (index === 5) {
                               handleProjectClick("Accepting NFTs Here")
                             }
+                            if (index === 6) {
+                              handleProjectClick("Qatalyze Interiors")
+                            }
                           }
                         }}
                         className="flex items-center gap-0 bg-white rounded-full transition-all duration-300 ease-out hover:gap-2 hover:pr-4 overflow-hidden shadow-lg border border-gray-200 group/button cursor-pointer"
@@ -1906,7 +1956,7 @@ export default function Portfolio() {
                       </button>
                     </div>
                   )}
-                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && (
+                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && !(image as any).isXPost && (
                     <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
                       <button
                         onClick={(e) => {
@@ -2134,6 +2184,16 @@ export default function Portfolio() {
           </div>
         )}
 
+        {selectedProject === "Qatalyze Interiors" && (
+          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
+            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
+              <h2 className="text-4xl font-bold text-gray-900 mb-2">{qatalyzeInteriorsProject.name}</h2>
+              <p className="text-lg text-gray-600 mb-6">{qatalyzeInteriorsProject.year}</p>
+              <p className="text-base text-gray-700 leading-relaxed">{qatalyzeInteriorsProject.description}</p>
+            </div>
+          </div>
+        )}
+
         {/* Adding MUDE project display */}
         {selectedProject === "MUDE" && (
           <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
@@ -2261,20 +2321,15 @@ export default function Portfolio() {
             <div className="px-6 py-6">
               <div className="space-y-4 text-sm text-foreground leading-relaxed">
                 <p>
-                  Hi, I'm <span className="font-bold text-foreground">Luis Infante</span>, a designer working between
-                  craft, industry, and emerging systems, where materials, technologies, and collaborations shape the way
-                  ideas take form. My practice is driven by research and process, often evolving through dialogue,
-                  experimentation, and the translation of complex ideas into tangible outcomes.
+                  Hi, I'm <span className="font-bold text-foreground">Luis Infante</span>, a designer working between craft, industry, and emerging systems, where materials, technologies, and collaborations shape the way ideas take form. My practice is driven by research and process, often evolving through dialogue, experimentation, and the translation of complex ideas into tangible outcomes.
                 </p>
 
                 <p>
-                  Alongside my background in jewelry, sculpture, product, and spatial design, I've worked across
-                  interior architecture, bespoke production, and creative strategy. From developing and producing custom
-                  furniture and interiors at Branca-Lisboa and Qatalyse, to leading marketing communications and
-                  narrative strategy at Bitte Protocol, my experience spans both physical and digital infrastructures.
-                  Whether working with artisans, architects, engineers, or AI-native teams, I focus on building
-                  bridges—between concept and production, design and communication, craft and systems—allowing projects
-                  to grow, adapt, and unfold across disciplines.
+                  My background is genuinely a bit all over the place, in the best way. Jewelry, sculpture, furniture, spatial design. Then bespoke production for high-end interiors. Then, somehow, leading communications for an AI protocol at the frontier of Web3. I've worked with artisans, architects, engineers, and people who only communicate in GitHub commits. What connects it all, I think, is that I'm most useful at the point where something needs to be made legible. Whether that's a complex piece of furniture or a technical product no one has quite figured out how to explain yet.
+                </p>
+
+                <p>
+                  I care a lot about how things look, how they're made, and how they're talked about. Usually all three at once.
                 </p>
               </div>
 
@@ -2289,18 +2344,6 @@ export default function Portfolio() {
                 >
                   <svg className="w-5 h-5 text-foreground" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                  </svg>
-                </a>
-
-                <a
-                  href="https://www.instagram.com/infante.da.silva/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors"
-                  aria-label="Instagram Profile"
-                >
-                  <svg className="w-5 h-5 text-foreground" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.646.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4z" />
                   </svg>
                 </a>
 
@@ -2386,20 +2429,15 @@ export default function Portfolio() {
               <div className="p-6 md:p-8 md:pr-16">
                 <div className="space-y-4 md:space-y-6 text-sm md:text-base text-gray-700 leading-relaxed">
                   <p>
-                    Hi, I'm <span className="font-bold">Luis Infante</span>, a designer working between craft, industry,
-                    and emerging systems, where materials, technologies, and collaborations shape the way ideas take
-                    form. My practice is driven by research and process, often evolving through dialogue,
-                    experimentation, and the translation of complex ideas into tangible outcomes.
+                    Hi, I&apos;m <span className="font-bold">Luis Infante</span>, a designer working between craft, industry, and emerging systems, where materials, technologies, and collaborations shape the way ideas take form. My practice is driven by research and process, often evolving through dialogue, experimentation, and the translation of complex ideas into tangible outcomes.
                   </p>
 
                   <p>
-                    Alongside my background in jewelry, sculpture, product, and spatial design, I've worked across
-                    interior architecture, bespoke production, and creative strategy. From developing and producing
-                    custom furniture and interiors at Branca-Lisboa and Qatalyse, to leading marketing communications
-                    and narrative strategy at Bitte Protocol, my experience spans both physical and digital
-                    infrastructures. Whether working with artisans, architects, engineers, or AI-native teams, I focus
-                    on building bridges—between concept and production, design and communication, craft and
-                    systems—allowing projects to grow, adapt, and unfold across disciplines.
+                    My background is genuinely a bit all over the place, in the best way. Jewelry, sculpture, furniture, spatial design. Then bespoke production for high-end interiors. Then, somehow, leading communications for an AI protocol at the frontier of Web3. I&apos;ve worked with artisans, architects, engineers, and people who only communicate in GitHub commits. What connects it all, I think, is that I&apos;m most useful at the point where something needs to be made legible. Whether that&apos;s a complex piece of furniture or a technical product no one has quite figured out how to explain yet.
+                  </p>
+
+                  <p>
+                    I care a lot about how things look, how they&apos;re made, and how they&apos;re talked about. Usually all three at once.
                   </p>
                 </div>
 
@@ -2413,18 +2451,6 @@ export default function Portfolio() {
                   >
                     <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                    </svg>
-                  </a>
-
-                  <a
-                    href="https://www.instagram.com/infante.da.silva/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:scale-110 hover:border-gray-300 transition-all duration-300 shadow-sm"
-                    aria-label="Instagram Profile"
-                  >
-                    <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-900" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.646.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4z" />
                     </svg>
                   </a>
 

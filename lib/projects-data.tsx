@@ -168,6 +168,21 @@ export const projectsData: Record<
       { src: "/images/branca-lisboa-desk.jpg", alt: "Branca Lisboa - Walnut Wood Desk with Curved Detail" },
     ],
   },
+  "qatalyze-interiors": {
+    name: "Qatalyze Interiors",
+    year: "2020",
+    category: "Visual Communication & Media",
+    description:
+      "At Qatalyze I was mainly designing and managing production of bespoke furniture for interior projects. The studio never had a virtual presence, neither in social media or a website. Anyway, there was the need of registering the process and some finished products we delivered to our clients. I was doing this through photography and video.",
+    images: [
+      { src: "/images/qatalyze-sofa-full.jpg", alt: "Qatalyze Interiors - Organic Sofa with Dome Backrests" },
+      { src: "/images/qatalyze-tv-wall.jpg", alt: "Qatalyze Interiors - Curved Blue TV Wall with Decorative Elements" },
+      { src: "/images/qatalyze-kitchen.jpg", alt: "Qatalyze Interiors - Bespoke Kitchen with Curved Cabinetry" },
+      { src: "/images/qatalyze-shelving.jpeg", alt: "Qatalyze Interiors - Modular Brass Shelving System" },
+      { src: "/images/qatalyze-oculos.jpg", alt: "Qatalyze Interiors - Decorative Bowl with Radial Pattern" },
+      { src: "/images/qatalyze-sofa-detail.jpg", alt: "Qatalyze Interiors - Sofa Fabric and Construction Detail" },
+    ],
+  },
   "mintbase-interviews": {
     name: "Mintbase Interviews",
     year: "2022",
