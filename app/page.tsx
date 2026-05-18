@@ -486,6 +486,21 @@ export default function Portfolio() {
     ],
   }
 
+  const qatalyzeInteriorsProject = {
+    name: "Qatalyze Interiors",
+    year: "2020",
+    description:
+      "At Qatalyze I was mainly designing and managing production of bespoke furniture for interior projects. The studio never had a virtual presence, neither in social media or a website. Anyway, there was the need of registering the process and some finished products we delivered to our clients. I was doing this through photography and video.",
+    images: [
+      { src: "/images/qatalyze-sofa-full.jpg", alt: "Qatalyze Interiors - Organic Sofa with Dome Backrests" },
+      { src: "/images/qatalyze-tv-wall.jpg", alt: "Qatalyze Interiors - Curved Blue TV Wall with Decorative Elements" },
+      { src: "/images/qatalyze-kitchen.jpg", alt: "Qatalyze Interiors - Bespoke Kitchen with Curved Cabinetry" },
+      { src: "/images/qatalyze-shelving.jpeg", alt: "Qatalyze Interiors - Modular Brass Shelving System" },
+      { src: "/images/qatalyze-oculos.jpg", alt: "Qatalyze Interiors - Decorative Bowl with Radial Pattern" },
+      { src: "/images/qatalyze-sofa-detail.jpg", alt: "Qatalyze Interiors - Sofa Fabric and Construction Detail" },
+    ],
+  }
+
   const elevenCollectionProject = {
     name: "The Eleven Collection",
     year: "2021",
@@ -2165,6 +2180,16 @@ export default function Portfolio() {
                   </svg>
                 </a>
               )}
+            </div>
+          </div>
+        )}
+
+        {selectedProject === "Qatalyze Interiors" && (
+          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
+            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
+              <h2 className="text-4xl font-bold text-gray-900 mb-2">{qatalyzeInteriorsProject.name}</h2>
+              <p className="text-lg text-gray-600 mb-6">{qatalyzeInteriorsProject.year}</p>
+              <p className="text-base text-gray-700 leading-relaxed">{qatalyzeInteriorsProject.description}</p>
             </div>
           </div>
         )}
