@@ -1413,8 +1413,9 @@ export default function Portfolio() {
   return (
     <main className="min-h-screen overflow-hidden md:overflow-auto">
       {/* Mobile: Same Gallery View as Desktop */}
-      <section className="block md:hidden px-4 py-6 relative overflow-hidden min-h-screen flex flex-col items-center justify-center">
-        <div className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center gap-2 px-4 py-3 bg-background/80 backdrop-blur-sm">
+      <section className="block md:hidden relative overflow-hidden h-screen">
+        {/* Fixed header */}
+        <div className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center gap-2 px-4 py-3">
           <Image
             src="/images/new-20logo.png"
             alt="Luis Infante"
@@ -1431,69 +1432,243 @@ export default function Portfolio() {
           </div>
         </div>
 
-        {!selectedProject && (
-          <div className="relative z-10 flex flex-col items-center mt-20">
-            <div className="relative rounded-lg overflow-hidden group/headshot">
-              <Image
-                src="/luis-headshot-new.jpg"
-                alt="Luis Infante - Creative Strategist & Designer"
-                width={200}
-                height={250}
-                priority
-                quality={90}
-                className="w-[200px] h-[250px] object-cover object-[center_bottom] shadow-2xl"
-                sizes="200px"
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent rounded-b-lg"></div>
+        {/* Headshot — centered, same as desktop */}
+        <div className="absolute inset-0 flex items-center justify-center z-10">
+          <div className="relative rounded-lg overflow-hidden mt-12">
+            <Image
+              src="/luis-headshot-new.jpg"
+              alt="Luis Infante - Creative Strategist & Designer"
+              width={200}
+              height={250}
+              priority
+              quality={90}
+              className="w-[180px] h-[225px] object-cover object-[center_bottom] shadow-2xl"
+              sizes="180px"
+            />
+            <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent rounded-b-lg" />
+            <div
+              className={`absolute bottom-3 right-3 transition-opacity duration-300 ${
+                !clickedButton && !selectedProject ? "opacity-100" : "opacity-0 pointer-events-none"
+              }`}
+            >
               <button
                 onClick={() => setShowAboutMe(true)}
-                className="absolute bottom-3 right-3 flex items-center gap-0 bg-white rounded-full transition-all duration-300 ease-out active:scale-95 overflow-hidden shadow-lg border border-border group/button cursor-pointer"
+                className="flex items-center gap-0 bg-white rounded-full transition-all duration-300 ease-out overflow-hidden shadow-lg border border-gray-200 group/button cursor-pointer"
               >
-                <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                  <svg className="w-2.5 h-2.5 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                  <svg className="w-3 h-3 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                   </svg>
                 </div>
               </button>
             </div>
           </div>
-        )}
-
-        <div className="relative w-full max-w-md h-[450px] mt-8 mb-20">
-          {["Interior Installations", "Furniture Design", "Visual Communication & Media", "Lighting", "Objects & Systems"]
-            .map((category, index) => (
-              <button
-                key={category}
-                onClick={() => handleButtonClick(category)}
-                onMouseEnter={() => setHoveredButton(category)}
-                onMouseLeave={() => setHoveredButton(null)}
-                className="floating-button absolute pointer-events-auto cursor-pointer transition-all duration-300 active:scale-95"
-                style={{
-                  top: imagePositions[index]?.top || "50%",
-                  left: imagePositions[index]?.left || "50%",
-                  transform: "translate(-50%, -50%)",
-                }}
-              >
-                <div className={`bg-white border border-gray-200 rounded-full px-2 py-0.5 text-[11px] font-medium text-gray-900 shadow-md transition-all duration-300 hover:scale-105 hover:border-gray-300 whitespace-nowrap ${
-                  hoveredButton === category
-                    ? "scale-105 border-gray-300 shadow-lg"
-                    : ""
-                }`}>
-                  {category}
-                </div>
-              </button>
-            ))}
         </div>
 
-        {/* Back button when category selected */}
-        {clickedButton && (
+        {/* Floating category buttons — same layout as desktop, scaled for mobile */}
+        <div
+          className={`absolute inset-0 z-20 transition-opacity duration-500 ${clickedButton ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+        >
+          {/* Interior Installations — top left, mirrors desktop top-[28%] left-[15%] */}
           <button
-            onClick={handleLogoClick}
-            className="fixed bottom-6 left-4 right-4 bg-white border border-gray-200 text-gray-900 py-2 px-4 rounded-full text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95 z-40"
+            className="floating-button absolute top-[28%] left-[8%] pointer-events-auto cursor-pointer animate-float-1 active:scale-95"
+            onClick={() => handleButtonClick("Interior Installations")}
           >
-            Back
+            <div className="bg-white border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium text-gray-900 shadow-lg transition-all duration-300 active:scale-95 whitespace-nowrap">
+              Interior Installations
+            </div>
           </button>
-        )}
+
+          {/* Visual Communication & Media — bottom left, mirrors desktop bottom-[25%] left-[10%] */}
+          <button
+            className="floating-button absolute bottom-[22%] left-[6%] pointer-events-auto cursor-pointer animate-float-5 active:scale-95"
+            onClick={() => handleButtonClick("Visual Communication & Media")}
+          >
+            <div className="bg-white border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium text-gray-900 shadow-lg transition-all duration-300 active:scale-95 whitespace-nowrap">
+              Visual Comm & Media
+            </div>
+          </button>
+
+          {/* Furniture — center-right, mirrors desktop top-[50%] left-[30%] → right side on mobile */}
+          <button
+            className="floating-button absolute top-[28%] right-[8%] pointer-events-auto cursor-pointer animate-float-2 active:scale-95"
+            onClick={() => handleButtonClick("Furniture")}
+          >
+            <div className="bg-white border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium text-gray-900 shadow-lg transition-all duration-300 active:scale-95 whitespace-nowrap">
+              Furniture
+            </div>
+          </button>
+
+          {/* Lighting — right side, mirrors desktop top-[38%] right-[25%] */}
+          <button
+            className="floating-button absolute top-[42%] right-[6%] pointer-events-auto cursor-pointer animate-float-3 active:scale-95"
+            onClick={() => handleButtonClick("Lighting")}
+          >
+            <div className="bg-white border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium text-gray-900 shadow-lg transition-all duration-300 active:scale-95 whitespace-nowrap">
+              Lighting
+            </div>
+          </button>
+
+          {/* Objects & Systems — bottom right, mirrors desktop top-[65%] right-[15%] */}
+          <button
+            className="floating-button absolute bottom-[22%] right-[6%] pointer-events-auto cursor-pointer animate-float-7 active:scale-95"
+            onClick={() => handleButtonClick("Objects & Systems")}
+          >
+            <div className="bg-white border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium text-gray-900 shadow-lg transition-all duration-300 active:scale-95 whitespace-nowrap">
+              Objects & Systems
+            </div>
+          </button>
+        </div>
+
+        {/* Images panel — slides up from bottom when a category is selected */}
+        <div
+          className={`absolute inset-0 z-20 transition-opacity duration-500 ${clickedButton ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        >
+          {clickedButton && (
+            <div className="absolute bottom-0 left-0 right-0 overflow-y-auto bg-background/95 backdrop-blur-sm rounded-t-2xl shadow-2xl border-t border-gray-200"
+              style={{ maxHeight: "60vh", top: "auto" }}
+            >
+              {/* Drag handle + category label */}
+              <div className="flex items-center justify-between px-4 pt-4 pb-2">
+                <p className="text-xs font-semibold text-gray-900 uppercase tracking-widest">{clickedButton}</p>
+                <button
+                  onClick={handleLogoClick}
+                  className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors active:scale-95"
+                  aria-label="Close"
+                >
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 px-3 pb-6">
+                {getCurrentImages().map((image, index) => (
+                  <div key={index} className="relative rounded-lg overflow-hidden bg-gray-50 aspect-square shadow-sm">
+                    {(image as any).isVideo ? (
+                      <video
+                        src={image.src || ""}
+                        className="w-full h-full object-cover"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        controls
+                      />
+                    ) : (image as any).isYouTube ? (
+                      <iframe
+                        src={image.src || ""}
+                        className="w-full h-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    ) : (image as any).isMap ? (
+                      <iframe
+                        src={image.src || ""}
+                        className="w-full h-full border-0"
+                        loading="lazy"
+                      />
+                    ) : (image as any).isXPost ? (
+                      <div className="w-full h-full flex items-center justify-center p-2 bg-gray-50">
+                        <TweetEmbedCard />
+                      </div>
+                    ) : (
+                      <img
+                        src={image.src || "/placeholder.svg"}
+                        alt={image.alt}
+                        className="w-full h-full object-cover"
+                      />
+                    )}
+                    {/* Project drill-in button */}
+                    {!selectedProject && (
+                      <button
+                        onClick={() => {
+                          if (clickedButton === "Furniture") {
+                            if (index === 0) handleProjectClick("Mars Chair")
+                            else if (index === 1) handleProjectClick("Tiles Table")
+                            else if (index === 2) handleProjectClick("Stone Soup")
+                            else if (index === 3) handleProjectClick("Pala Shelves")
+                            else if (index === 4) handleProjectClick("Rock Sofa")
+                            else if (index === 5) handleProjectClick("Disk Shelves")
+                          }
+                          if (clickedButton === "Lighting") {
+                            if (index === 0) handleProjectClick("Glass Plates")
+                            else if (index === 1) handleProjectClick("Calabashes")
+                            else if (index === 2) handleProjectClick("Occulo")
+                          }
+                          if (clickedButton === "Objects & Systems") {
+                            if (index === 0) handleProjectClick("Graf")
+                            else if (index === 1) handleProjectClick("Onio")
+                            else if (index === 2) handleProjectClick("Pool Guard")
+                            else if (index === 3) handleProjectClick("Nonu")
+                          }
+                          if (clickedButton === "Interior Installations") {
+                            if (index === 0) handleProjectClick("Santos Play Room")
+                            else if (index === 1) handleProjectClick("MUDE")
+                            else if (index === 2) handleProjectClick("Birre Kitchen")
+                          }
+                          if (clickedButton === "Visual Communication & Media") {
+                            if (index === 0) handleProjectClick("Branca Lisboa")
+                            else if (index === 1) handleProjectClick("Mintbase Interviews")
+                            else if (index === 2) handleProjectClick("A Vida Portuguesa")
+                            else if (index === 3) handleProjectClick("FNAC")
+                            else if (index === 4) handleProjectClick("The Eleven Collection")
+                            else if (index === 5) handleProjectClick("Accepting NFTs Here")
+                            else if (index === 6) handleProjectClick("Qatalyze Interiors")
+                          }
+                        }}
+                        className="absolute bottom-2 right-2 w-7 h-7 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-md active:scale-95 transition-transform"
+                        aria-label={`Open ${image.project}`}
+                      >
+                        <svg className="w-3 h-3 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Project info panel — appears at bottom when a project is selected */}
+        {selectedProject && (() => {
+          const projects: Record<string, { name: string; year: string; description: string }> = {
+            "Mars Chair": marsChairProject,
+            "Stone Soup": stoneSoupProject,
+            "Tiles Table": tilesTableProject,
+            "Onio": onioProject,
+            "Glass Plates": glassPlatesProject,
+            "Graf": grafProject,
+            "Calabashes": calabashesProject,
+            "Santos Play Room": santosPlayRoomProject,
+            "Branca Lisboa": brancaLisboaProject,
+            "Mintbase Interviews": mintbaseProject,
+          }
+          const proj = projects[selectedProject]
+          if (!proj) return null
+          return (
+            <div className="absolute bottom-0 left-0 right-0 z-30 bg-white border-t border-gray-200 rounded-t-2xl p-4 shadow-2xl" style={{ maxHeight: "45vh", overflowY: "auto" }}>
+              <div className="flex items-start justify-between mb-2">
+                <div>
+                  <h2 className="text-lg font-bold text-gray-900">{proj.name}</h2>
+                  <p className="text-xs text-gray-500">{proj.year}</p>
+                </div>
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors active:scale-95 flex-shrink-0"
+                  aria-label="Back to category"
+                >
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <p className="text-xs text-gray-700 leading-relaxed">{proj.description}</p>
+            </div>
+          )
+        })()}
       </section>
 
       {/* Desktop: Original Gallery View */}
