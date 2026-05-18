@@ -462,6 +462,12 @@ export default function Portfolio() {
       project: "Accepting NFTs Here",
       category: "Visual Communication & Media",
     },
+    {
+      src: "/images/qatalyze-sofa-full.jpg",
+      alt: "Qatalyze Interiors",
+      project: "Qatalyze Interiors",
+      category: "Visual Communication & Media",
+    },
   ]
 
   const videoPortfolioImages: { src: string; alt: string; project: string; category: string }[] = []
@@ -1024,6 +1030,18 @@ export default function Portfolio() {
           isMap: true,
           mapLink: "https://medium.com/mintbase/the-future-is-a-thing-of-the-past-tokenising-old-portuguese-products-in-lisbon-a6b365670842",
         },
+      ]
+    }
+
+    if (selectedProject === "Qatalyze Interiors") {
+      const originalQatalyze = visualCommPortfolioImages.find((img) => img.project === "Qatalyze Interiors")
+      return [
+        originalQatalyze,
+        { src: "/images/qatalyze-tv-wall.jpg", alt: "Qatalyze Interiors - Curved Blue TV Wall", project: "Qatalyze Interiors", category: "Visual Communication & Media" },
+        { src: "/images/qatalyze-kitchen.jpg", alt: "Qatalyze Interiors - Bespoke Kitchen", project: "Qatalyze Interiors", category: "Visual Communication & Media" },
+        { src: "/images/qatalyze-shelving.jpeg", alt: "Qatalyze Interiors - Modular Shelving", project: "Qatalyze Interiors", category: "Visual Communication & Media" },
+        { src: "/images/qatalyze-oculos.jpg", alt: "Qatalyze Interiors - Decorative Bowl", project: "Qatalyze Interiors", category: "Visual Communication & Media" },
+        { src: "/images/qatalyze-sofa-detail.jpg", alt: "Qatalyze Interiors - Sofa Detail", project: "Qatalyze Interiors", category: "Visual Communication & Media" },
       ]
     }
 
