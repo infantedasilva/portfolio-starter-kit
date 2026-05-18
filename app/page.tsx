@@ -1412,268 +1412,90 @@ export default function Portfolio() {
 
   return (
     <main className="min-h-screen overflow-hidden md:overflow-auto">
-      {/* Mobile: Gallery View matching Desktop */}
-      <div className="block md:hidden min-h-screen overflow-hidden bg-background relative">
-        {/* Fixed Header */}
-        <div className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center gap-2 px-4 py-4 bg-background/80 backdrop-blur-sm">
-          <img
+      {/* Mobile: Same Gallery View as Desktop */}
+      <section className="block md:hidden px-4 py-6 relative overflow-hidden min-h-screen flex flex-col items-center justify-center">
+        <div className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center gap-2 px-4 py-3 bg-background/80 backdrop-blur-sm">
+          <Image
             src="/images/new-20logo.png"
             alt="Luis Infante"
+            width={100}
+            height={40}
+            priority
+            quality={90}
             className="h-10 w-auto cursor-pointer"
             onClick={handleLogoClick}
+            sizes="100px"
           />
           <div className="px-2 py-0.5 text-[10px] rounded-full whitespace-nowrap border text-brand border-brand font-medium">
             Creative Strategist & Designer
           </div>
         </div>
 
-        {/* Main Content Area */}
-        <div className="pt-20 pb-4 px-4 min-h-screen flex flex-col">
-          {/* Headshot with About Me - visible when no category selected */}
-          {!clickedButton && !selectedProject && (
-            <div className="flex justify-center mb-4 mt-2">
-              <div className="relative rounded-lg overflow-hidden shadow-lg">
-                <img
-                  src="/luis-headshot-new.jpg"
-                  alt="Luis Infante"
-                  className="w-[180px] h-[220px] object-cover object-[center_bottom]"
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/50 to-transparent"></div>
-                <div className="absolute bottom-2 right-2">
-                  <button
-                    onClick={() => setShowAboutMe(true)}
-                    className="flex items-center gap-1 bg-white rounded-full px-2 py-1 shadow-lg border border-gray-200"
-                  >
-                    <svg className="w-3 h-3 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                    </svg>
-                    <span className="text-[10px] font-medium text-gray-900">About</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Floating Category Buttons - visible when no category selected */}
-          {!clickedButton && !selectedProject && (
-            <div className="flex-1 relative">
+        {!selectedProject && (
+          <div className="relative z-10 flex flex-col items-center mt-20">
+            <div className="relative rounded-lg overflow-hidden group/headshot">
+              <Image
+                src="/luis-headshot-new.jpg"
+                alt="Luis Infante - Creative Strategist & Designer"
+                width={200}
+                height={250}
+                priority
+                quality={90}
+                className="w-[200px] h-[250px] object-cover object-[center_bottom] shadow-2xl"
+                sizes="200px"
+              />
+              <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent rounded-b-lg"></div>
               <button
-                className="absolute top-[5%] left-[5%] animate-float-1"
-                onClick={() => handleButtonClick("Interior Installations")}
+                onClick={() => setShowAboutMe(true)}
+                className="absolute bottom-3 right-3 flex items-center gap-0 bg-white rounded-full transition-all duration-300 ease-out active:scale-95 overflow-hidden shadow-lg border border-border group/button cursor-pointer"
               >
-                <div className="bg-white border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium text-gray-900 shadow-md active:scale-95 transition-transform">
-                  Interior Installations
-                </div>
-              </button>
-
-              <button
-                className="absolute top-[8%] right-[5%] animate-float-4"
-                onClick={() => handleButtonClick("Furniture Design")}
-              >
-                <div className="bg-white border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium text-gray-900 shadow-md active:scale-95 transition-transform">
-                  Furniture Design
-                </div>
-              </button>
-
-              <button
-                className="absolute top-[30%] left-[8%] animate-float-2"
-                onClick={() => handleButtonClick("Visual Communication & Media")}
-              >
-                <div className="bg-white border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium text-gray-900 shadow-md active:scale-95 transition-transform whitespace-nowrap">
-                  Visual Comm & Media
-                </div>
-              </button>
-
-              <button
-                className="absolute top-[28%] right-[5%] animate-float-5"
-                onClick={() => handleButtonClick("Lighting")}
-              >
-                <div className="bg-white border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium text-gray-900 shadow-md active:scale-95 transition-transform">
-                  Lighting
-                </div>
-              </button>
-
-              <button
-                className="absolute top-[50%] left-[15%] animate-float-7"
-                onClick={() => handleButtonClick("Objects & Systems")}
-              >
-                <div className="bg-white border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium text-gray-900 shadow-md active:scale-95 transition-transform">
-                  Objects & Systems
-                </div>
-              </button>
-            </div>
-          )}
-
-          {/* Category Selected - Show Image Grid */}
-          {clickedButton && !selectedProject && (
-            <div className="flex-1 flex flex-col">
-              {/* Back button and Category Title */}
-              <div className="flex items-center gap-3 mb-4">
-                <button
-                  onClick={handleLogoClick}
-                  className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-sm active:scale-95 transition-transform"
-                >
-                  <svg className="w-4 h-4 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center flex-shrink-0">
+                  <svg className="w-2.5 h-2.5 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                   </svg>
-                </button>
-                <h2 className="text-base font-medium text-gray-900">{clickedButton}</h2>
-              </div>
-
-              {/* Image Grid */}
-              <div className="grid grid-cols-2 gap-3 pb-20">
-                {getCurrentImages().map((image, index) => (
-                  <div
-                    key={index}
-                    className="relative aspect-square rounded-lg overflow-hidden shadow-md active:scale-[0.98] transition-transform cursor-pointer"
-                    onClick={() => {
-                      if (clickedButton === "Furniture Design") {
-                        if (index === 0) handleProjectClick("Mars Chair")
-                        if (index === 1) handleProjectClick("Tiles Table")
-                        if (index === 2) handleProjectClick("Stone Soup")
-                        if (index === 3) handleProjectClick("Rock Sofa")
-                        if (index === 4) handleProjectClick("Nonu")
-                        if (index === 5) handleProjectClick("Graf Panels")
-                      }
-                      if (clickedButton === "Interior Installations") {
-                        if (index === 0) handleProjectClick("Pool Guard")
-                        if (index === 1) handleProjectClick("Play Room")
-                        if (index === 2) handleProjectClick("MUDE")
-                        if (index === 3) handleProjectClick("Birre Kitchen")
-                      }
-                      if (clickedButton === "Lighting") {
-                        if (index === 0) handleProjectClick("Onio Lamp")
-                        if (index === 1) handleProjectClick("Disk Shelves")
-                      }
-                      if (clickedButton === "Objects & Systems") {
-                        if (index === 0) handleProjectClick("Nonu")
-                        if (index === 1) handleProjectClick("Glass Plates")
-                        if (index === 2) handleProjectClick("Biombo")
-                      }
-                      if (clickedButton === "Visual Communication & Media") {
-                        if (index === 0) handleProjectClick("Branca Lisboa")
-                        if (index === 1) handleProjectClick("Mintbase Interviews")
-                        if (index === 2) handleProjectClick("A Vida Portuguesa")
-                        if (index === 3) handleProjectClick("FNAC")
-                        if (index === 4) handleProjectClick("The Eleven Collection")
-                        if (index === 5) handleProjectClick("Accepting NFTs Here")
-                        if (index === 6) handleProjectClick("Qatalyze Interiors")
-                      }
-                    }}
-                  >
-                    {(image as any).isVideo ? (
-                      <video
-                        src={image.src || ""}
-                        className="w-full h-full object-cover"
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                      />
-                    ) : (
-                      <Image
-                        src={image.src || ""}
-                        alt={image.alt || ""}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 50vw"
-                      />
-                    )}
-                    {/* Project name overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent">
-                      <div className="flex items-center gap-1">
-                        <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                        </svg>
-                        <span className="text-[10px] font-medium text-white truncate">{(image as any).project}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Project Selected - Show Project Details */}
-          {selectedProject && (
-            <div className="flex-1 flex flex-col">
-              {/* Back button */}
-              <div className="flex items-center gap-3 mb-4">
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-sm active:scale-95 transition-transform"
-                >
-                  <svg className="w-4 h-4 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <div>
-                  <h2 className="text-base font-medium text-gray-900">{selectedProject}</h2>
-                  <p className="text-xs text-gray-500">{clickedButton}</p>
                 </div>
-              </div>
-
-              {/* Project Images Grid */}
-              <div className="grid grid-cols-2 gap-3 pb-20">
-                {getCurrentImages().map((image, index) => (
-                  <div
-                    key={index}
-                    className="relative aspect-square rounded-lg overflow-hidden shadow-md"
-                    onClick={() => setLightboxImage({ src: image.src || "", alt: image.alt || "" })}
-                  >
-                    {(image as any).isVideo ? (
-                      <video
-                        src={image.src || ""}
-                        className="w-full h-full object-cover"
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        controls
-                      />
-                    ) : (image as any).isYouTube ? (
-                      <iframe
-                        src={image.src || ""}
-                        className="w-full h-full"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      />
-                    ) : (image as any).isMap ? (
-                      <iframe
-                        src={image.src || ""}
-                        className="w-full h-full border-0"
-                        loading="lazy"
-                      />
-                    ) : (image as any).isXPost ? (
-                      <div className="w-full h-full bg-gray-100 flex items-center justify-center p-2">
-                        <TweetEmbedCard url={image.src || ""} />
-                      </div>
-                    ) : (
-                      <Image
-                        src={image.src || ""}
-                        alt={image.alt || ""}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 50vw"
-                      />
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* View Full Project Button */}
-              <div className="fixed bottom-4 left-4 right-4 z-40">
-                <Link
-                  href={`/projects/${projectNameToSlug(selectedProject)}`}
-                  className="block w-full py-3 bg-gray-900 text-white text-center text-sm font-medium rounded-full shadow-lg active:scale-[0.98] transition-transform"
-                >
-                  View Full Project
-                </Link>
-              </div>
+              </button>
             </div>
-          )}
+          </div>
+        )}
+
+        <div className="relative w-full max-w-md h-[450px] mt-8 mb-20">
+          {getCategories()
+            .filter((cat) => cat !== "All")
+            .map((category, index) => (
+              <button
+                key={category}
+                onClick={() => handleButtonClick(category)}
+                onMouseEnter={() => setHoveredButton(category)}
+                onMouseLeave={() => setHoveredButton(null)}
+                className="floating-button absolute pointer-events-auto cursor-pointer transition-all duration-300 active:scale-95"
+                style={{
+                  top: imagePositions[index]?.top || "50%",
+                  left: imagePositions[index]?.left || "50%",
+                  transform: "translate(-50%, -50%)",
+                }}
+              >
+                <div className={`bg-white border border-gray-200 rounded-full px-2 py-0.5 text-[11px] font-medium text-gray-900 shadow-md transition-all duration-300 hover:scale-105 hover:border-gray-300 whitespace-nowrap ${
+                  hoveredButton === category
+                    ? "scale-105 border-gray-300 shadow-lg"
+                    : ""
+                }`}>
+                  {category}
+                </div>
+              </button>
+            ))}
         </div>
-      </div>
+
+        {/* Back button when category selected */}
+        {clickedButton && (
+          <button
+            onClick={handleLogoClick}
+            className="fixed bottom-6 left-4 right-4 bg-white border border-gray-200 text-gray-900 py-2 px-4 rounded-full text-sm font-medium shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95 z-40"
+          >
+            Back
+          </button>
+        )}
+      </section>
 
       {/* Desktop: Original Gallery View */}
       <section className="hidden md:block px-6 py-12 relative overflow-hidden h-screen flex items-center justify-center">
