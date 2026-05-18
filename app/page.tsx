@@ -1412,120 +1412,266 @@ export default function Portfolio() {
 
   return (
     <main className="min-h-screen overflow-hidden md:overflow-auto">
-      {/* Mobile: Projects Index with Profile */}
-      <div className="block md:hidden min-h-screen overflow-y-auto bg-background">
-        <div className="px-6 py-8">
-          {/* Logo and Pill Badge */}
-          <div className="flex flex-col items-center gap-3 mb-8">
-            <img
-              src="/images/new-20logo.png"
-              alt="Luis Infante"
-              className="h-12 w-auto cursor-pointer"
-              onClick={handleLogoClick}
-            />
-            <div className="px-3 py-1 text-xs rounded-full whitespace-nowrap border text-brand border-brand font-medium">
-              Creative Strategist & Designer
-            </div>
+      {/* Mobile: Gallery View matching Desktop */}
+      <div className="block md:hidden min-h-screen overflow-hidden bg-background relative">
+        {/* Fixed Header */}
+        <div className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center gap-2 px-4 py-4 bg-background/80 backdrop-blur-sm">
+          <img
+            src="/images/new-20logo.png"
+            alt="Luis Infante"
+            className="h-10 w-auto cursor-pointer"
+            onClick={handleLogoClick}
+          />
+          <div className="px-2 py-0.5 text-[10px] rounded-full whitespace-nowrap border text-brand border-brand font-medium">
+            Creative Strategist & Designer
           </div>
+        </div>
 
-          {/* Headshot with About Me Button - Desktop style */}
-          <div className="flex justify-center mb-6">
-            <div className="relative rounded-lg overflow-hidden group/headshot">
-              <img
-                src="/luis-headshot-new.jpg"
-                alt="Luis Infante"
-                className="w-[200px] h-[250px] object-cover object-[center_bottom]"
-              />
-              <div className="absolute bottom-3 right-3">
-                <button
-                  onClick={() => setShowAboutMe(true)}
-                  className="flex items-center gap-0 bg-white rounded-full transition-all duration-300 ease-out hover:gap-2 hover:pr-3 overflow-hidden shadow-lg border border-border group/button cursor-pointer"
-                >
-                  <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                    <svg className="w-3 h-3 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        {/* Main Content Area */}
+        <div className="pt-20 pb-4 px-4 min-h-screen flex flex-col">
+          {/* Headshot with About Me - visible when no category selected */}
+          {!clickedButton && !selectedProject && (
+            <div className="flex justify-center mb-4 mt-2">
+              <div className="relative rounded-lg overflow-hidden shadow-lg">
+                <img
+                  src="/luis-headshot-new.jpg"
+                  alt="Luis Infante"
+                  className="w-[180px] h-[220px] object-cover object-[center_bottom]"
+                />
+                <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/50 to-transparent"></div>
+                <div className="absolute bottom-2 right-2">
+                  <button
+                    onClick={() => setShowAboutMe(true)}
+                    className="flex items-center gap-1 bg-white rounded-full px-2 py-1 shadow-lg border border-gray-200"
+                  >
+                    <svg className="w-3 h-3 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                     </svg>
-                  </div>
-                  <span className="text-xs font-medium text-foreground whitespace-nowrap opacity-0 max-w-0 group-hover/button:opacity-100 group-hover/button:max-w-[80px] transition-all duration-300 ease-out">
-                    About Me
-                  </span>
-                </button>
+                    <span className="text-[10px] font-medium text-gray-900">About</span>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
-          <div className="flex gap-2 overflow-x-auto pb-2 px-6 snap-x snap-mandatory scrollbar-hide">
-            <button
-              onClick={() => setMobileFilter("All")}
-              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors flex-shrink-0 snap-start ${
-                mobileFilterCategory === "All"
-                  ? "bg-foreground text-background"
-                  : "bg-background border border-border text-foreground hover:border-foreground"
-              }`}
-            >
-              All
-            </button>
-            <button
-              onClick={() => setMobileFilter("Furniture Design")}
-              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors flex-shrink-0 snap-start ${
-                mobileFilterCategory === "Furniture Design"
-                  ? "bg-foreground text-background"
-                  : "bg-background border border-border text-foreground hover:border-foreground"
-              }`}
-            >
-              Furniture
-            </button>
-            <button
-              onClick={() => setMobileFilter("Interior Architecture")}
-              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors flex-shrink-0 snap-start ${
-                mobileFilterCategory === "Interior Architecture"
-                  ? "bg-foreground text-background"
-                  : "bg-background border border-border text-foreground hover:border-foreground"
-              }`}
-            >
-              Interior Installations
-            </button>
-            <button
-              onClick={() => setMobileFilter("Lighting")}
-              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors flex-shrink-0 snap-start ${
-                mobileFilterCategory === "Lighting"
-                  ? "bg-foreground text-background"
-                  : "bg-background border border-border text-foreground hover:border-foreground"
-              }`}
-            >
-              Lighting
-            </button>
-            <button
-              onClick={() => setMobileFilter("Objects & Systems")}
-              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors flex-shrink-0 snap-start ${
-                mobileFilterCategory === "Objects & Systems"
-                  ? "bg-foreground text-background"
-                  : "bg-background border border-border text-foreground hover:border-foreground"
-              }`}
-            >
-              Objects & Systems
-            </button>
-          </div>
+          {/* Floating Category Buttons - visible when no category selected */}
+          {!clickedButton && !selectedProject && (
+            <div className="flex-1 relative">
+              <button
+                className="absolute top-[5%] left-[5%] animate-float-1"
+                onClick={() => handleButtonClick("Interior Installations")}
+              >
+                <div className="bg-white border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium text-gray-900 shadow-md active:scale-95 transition-transform">
+                  Interior Installations
+                </div>
+              </button>
 
-          <div className="border-t border-border px-6">
-            {projectsMetadata
-              .filter((p) => mobileFilterCategory === "All" || p.category === mobileFilterCategory)
-              .sort((a, b) => Number.parseInt(b.year) - Number.parseInt(a.year))
-              .map((project) => (
-                <Link
-                  key={project.name}
-                  href={`/projects/${projectNameToSlug(project.name)}`}
-                  className="block w-full text-left py-3 border-b border-border hover:text-brand transition-colors group"
+              <button
+                className="absolute top-[8%] right-[5%] animate-float-4"
+                onClick={() => handleButtonClick("Furniture Design")}
+              >
+                <div className="bg-white border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium text-gray-900 shadow-md active:scale-95 transition-transform">
+                  Furniture Design
+                </div>
+              </button>
+
+              <button
+                className="absolute top-[30%] left-[8%] animate-float-2"
+                onClick={() => handleButtonClick("Visual Communication & Media")}
+              >
+                <div className="bg-white border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium text-gray-900 shadow-md active:scale-95 transition-transform whitespace-nowrap">
+                  Visual Comm & Media
+                </div>
+              </button>
+
+              <button
+                className="absolute top-[28%] right-[5%] animate-float-5"
+                onClick={() => handleButtonClick("Lighting")}
+              >
+                <div className="bg-white border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium text-gray-900 shadow-md active:scale-95 transition-transform">
+                  Lighting
+                </div>
+              </button>
+
+              <button
+                className="absolute top-[50%] left-[15%] animate-float-7"
+                onClick={() => handleButtonClick("Objects & Systems")}
+              >
+                <div className="bg-white border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium text-gray-900 shadow-md active:scale-95 transition-transform">
+                  Objects & Systems
+                </div>
+              </button>
+            </div>
+          )}
+
+          {/* Category Selected - Show Image Grid */}
+          {clickedButton && !selectedProject && (
+            <div className="flex-1 flex flex-col">
+              {/* Back button and Category Title */}
+              <div className="flex items-center gap-3 mb-4">
+                <button
+                  onClick={handleLogoClick}
+                  className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-sm active:scale-95 transition-transform"
                 >
-                  <div className="flex justify-between items-baseline gap-4">
-                    <h3 className="text-sm font-medium text-foreground group-hover:text-brand transition-colors flex-1">
-                      {project.name}
-                    </h3>
-                    <span className="text-sm text-muted-foreground flex-shrink-0 ml-auto">{project.year}</span>
+                  <svg className="w-4 h-4 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <h2 className="text-base font-medium text-gray-900">{clickedButton}</h2>
+              </div>
+
+              {/* Image Grid */}
+              <div className="grid grid-cols-2 gap-3 pb-20">
+                {getCurrentImages().map((image, index) => (
+                  <div
+                    key={index}
+                    className="relative aspect-square rounded-lg overflow-hidden shadow-md active:scale-[0.98] transition-transform cursor-pointer"
+                    onClick={() => {
+                      if (clickedButton === "Furniture Design") {
+                        if (index === 0) handleProjectClick("Mars Chair")
+                        if (index === 1) handleProjectClick("Tiles Table")
+                        if (index === 2) handleProjectClick("Stone Soup")
+                        if (index === 3) handleProjectClick("Rock Sofa")
+                        if (index === 4) handleProjectClick("Nonu")
+                        if (index === 5) handleProjectClick("Graf Panels")
+                      }
+                      if (clickedButton === "Interior Installations") {
+                        if (index === 0) handleProjectClick("Pool Guard")
+                        if (index === 1) handleProjectClick("Play Room")
+                        if (index === 2) handleProjectClick("MUDE")
+                        if (index === 3) handleProjectClick("Birre Kitchen")
+                      }
+                      if (clickedButton === "Lighting") {
+                        if (index === 0) handleProjectClick("Onio Lamp")
+                        if (index === 1) handleProjectClick("Disk Shelves")
+                      }
+                      if (clickedButton === "Objects & Systems") {
+                        if (index === 0) handleProjectClick("Nonu")
+                        if (index === 1) handleProjectClick("Glass Plates")
+                        if (index === 2) handleProjectClick("Biombo")
+                      }
+                      if (clickedButton === "Visual Communication & Media") {
+                        if (index === 0) handleProjectClick("Branca Lisboa")
+                        if (index === 1) handleProjectClick("Mintbase Interviews")
+                        if (index === 2) handleProjectClick("A Vida Portuguesa")
+                        if (index === 3) handleProjectClick("FNAC")
+                        if (index === 4) handleProjectClick("The Eleven Collection")
+                        if (index === 5) handleProjectClick("Accepting NFTs Here")
+                        if (index === 6) handleProjectClick("Qatalyze Interiors")
+                      }
+                    }}
+                  >
+                    {(image as any).isVideo ? (
+                      <video
+                        src={image.src || ""}
+                        className="w-full h-full object-cover"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                      />
+                    ) : (
+                      <Image
+                        src={image.src || ""}
+                        alt={image.alt || ""}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 50vw"
+                      />
+                    )}
+                    {/* Project name overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent">
+                      <div className="flex items-center gap-1">
+                        <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                        </svg>
+                        <span className="text-[10px] font-medium text-white truncate">{(image as any).project}</span>
+                      </div>
+                    </div>
                   </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Project Selected - Show Project Details */}
+          {selectedProject && (
+            <div className="flex-1 flex flex-col">
+              {/* Back button */}
+              <div className="flex items-center gap-3 mb-4">
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center shadow-sm active:scale-95 transition-transform"
+                >
+                  <svg className="w-4 h-4 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <div>
+                  <h2 className="text-base font-medium text-gray-900">{selectedProject}</h2>
+                  <p className="text-xs text-gray-500">{clickedButton}</p>
+                </div>
+              </div>
+
+              {/* Project Images Grid */}
+              <div className="grid grid-cols-2 gap-3 pb-20">
+                {getCurrentImages().map((image, index) => (
+                  <div
+                    key={index}
+                    className="relative aspect-square rounded-lg overflow-hidden shadow-md"
+                    onClick={() => setLightboxImage({ src: image.src || "", alt: image.alt || "" })}
+                  >
+                    {(image as any).isVideo ? (
+                      <video
+                        src={image.src || ""}
+                        className="w-full h-full object-cover"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        controls
+                      />
+                    ) : (image as any).isYouTube ? (
+                      <iframe
+                        src={image.src || ""}
+                        className="w-full h-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    ) : (image as any).isMap ? (
+                      <iframe
+                        src={image.src || ""}
+                        className="w-full h-full border-0"
+                        loading="lazy"
+                      />
+                    ) : (image as any).isXPost ? (
+                      <div className="w-full h-full bg-gray-100 flex items-center justify-center p-2">
+                        <TweetEmbedCard url={image.src || ""} />
+                      </div>
+                    ) : (
+                      <Image
+                        src={image.src || ""}
+                        alt={image.alt || ""}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 50vw"
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* View Full Project Button */}
+              <div className="fixed bottom-4 left-4 right-4 z-40">
+                <Link
+                  href={`/projects/${projectNameToSlug(selectedProject)}`}
+                  className="block w-full py-3 bg-gray-900 text-white text-center text-sm font-medium rounded-full shadow-lg active:scale-[0.98] transition-transform"
+                >
+                  View Full Project
                 </Link>
-              ))}
-          </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
