@@ -2404,20 +2404,15 @@ export default function Portfolio() {
               <div className="p-6 md:p-8 md:pr-16">
                 <div className="space-y-4 md:space-y-6 text-sm md:text-base text-gray-700 leading-relaxed">
                   <p>
-                    Hi, I'm <span className="font-bold">Luis Infante</span>, a designer working between craft, industry,
-                    and emerging systems, where materials, technologies, and collaborations shape the way ideas take
-                    form. My practice is driven by research and process, often evolving through dialogue,
-                    experimentation, and the translation of complex ideas into tangible outcomes.
+                    Hi, I&apos;m <span className="font-bold">Luis Infante</span>, a designer working between craft, industry, and emerging systems, where materials, technologies, and collaborations shape the way ideas take form. My practice is driven by research and process, often evolving through dialogue, experimentation, and the translation of complex ideas into tangible outcomes.
                   </p>
 
                   <p>
-                    Alongside my background in jewelry, sculpture, product, and spatial design, I've worked across
-                    interior architecture, bespoke production, and creative strategy. From developing and producing
-                    custom furniture and interiors at Branca-Lisboa and Qatalyse, to leading marketing communications
-                    and narrative strategy at Bitte Protocol, my experience spans both physical and digital
-                    infrastructures. Whether working with artisans, architects, engineers, or AI-native teams, I focus
-                    on building bridges—between concept and production, design and communication, craft and
-                    systems—allowing projects to grow, adapt, and unfold across disciplines.
+                    My background is genuinely a bit all over the place, in the best way. Jewelry, sculpture, furniture, spatial design. Then bespoke production for high-end interiors. Then, somehow, leading communications for an AI protocol at the frontier of Web3. I&apos;ve worked with artisans, architects, engineers, and people who only communicate in GitHub commits. What connects it all, I think, is that I&apos;m most useful at the point where something needs to be made legible. Whether that&apos;s a complex piece of furniture or a technical product no one has quite figured out how to explain yet.
+                  </p>
+
+                  <p>
+                    I care a lot about how things look, how they&apos;re made, and how they&apos;re talked about. Usually all three at once.
                   </p>
                 </div>
 
