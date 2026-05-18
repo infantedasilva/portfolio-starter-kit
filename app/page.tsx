@@ -1460,8 +1460,7 @@ export default function Portfolio() {
         )}
 
         <div className="relative w-full max-w-md h-[450px] mt-8 mb-20">
-          {getCategories()
-            .filter((cat) => cat !== "All")
+          {["Interior Installations", "Furniture Design", "Visual Communication & Media", "Lighting", "Objects & Systems"]
             .map((category, index) => (
               <button
                 key={category}
