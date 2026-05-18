@@ -786,6 +786,7 @@ export default function Portfolio() {
 
     // Visual Communication & Media projects (from visualCommunicationPortfolioImages)
     { name: "Branca Lisboa", year: "2019", category: "Visual Communication & Media" },
+    { name: "Qatalyze Interiors", year: "2020", category: "Visual Communication & Media" },
     { name: "Mintbase Interviews", year: "2022", category: "Visual Communication & Media" },
     { name: "A Vida Portuguesa", year: "2024", category: "Visual Communication & Media" },
     { name: "FNAC", year: "2022", category: "Visual Communication & Media" },
