@@ -1923,6 +1923,9 @@ export default function Portfolio() {
                             if (index === 5) {
                               handleProjectClick("Accepting NFTs Here")
                             }
+                            if (index === 6) {
+                              handleProjectClick("Qatalyze Interiors")
+                            }
                           }
                         }}
                         className="flex items-center gap-0 bg-white rounded-full transition-all duration-300 ease-out hover:gap-2 hover:pr-4 overflow-hidden shadow-lg border border-gray-200 group/button cursor-pointer"
