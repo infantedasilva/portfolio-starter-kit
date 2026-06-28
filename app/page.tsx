@@ -1211,6 +1211,8 @@ export default function Portfolio() {
 
   const handleTouchMove = useCallback((e: TouchEvent) => {
     if (draggedImageRef.current !== null && imageRefs.current[draggedImageRef.current]) {
+      // Prevent the page from scrolling while an image is being dragged with a finger
+      if (e.cancelable) e.preventDefault()
       const touch = e.touches[0]
       setMousePosition({ x: touch.clientX, y: touch.clientY })
 
@@ -1430,8 +1432,8 @@ export default function Portfolio() {
         </div>
 
         {!selectedProject && (
-          <div className="relative z-10 flex flex-col items-center mt-28 md:mt-36">
-            <div className="relative rounded-lg overflow-hidden group/headshot">
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none">
+            <div className="relative rounded-lg overflow-hidden group/headshot pointer-events-auto">
               <Image
                 src="/luis-headshot-new.jpg"
                 alt="Luis Infante - Creative Strategist & Designer"
@@ -1480,7 +1482,7 @@ export default function Portfolio() {
             onMouseLeave={() => setHoveredButton(null)}
             onClick={() => handleButtonClick("Interior Installations")}
           >
-            <div className="bg-white border border-gray-200 rounded-full px-6 py-3 text-base font-medium text-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300">
+            <div className="bg-white border border-gray-200 rounded-full px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-medium text-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300 whitespace-nowrap">
               Interior Installations
             </div>
           </button>
@@ -1503,7 +1505,7 @@ export default function Portfolio() {
             onMouseLeave={() => setHoveredButton(null)}
             onClick={() => handleButtonClick("Visual Communication & Media")}
           >
-            <div className="bg-white border border-gray-200 rounded-full px-6 py-3 text-base font-medium text-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300">
+            <div className="bg-white border border-gray-200 rounded-full px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-medium text-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300 whitespace-nowrap">
               Visual Communication & Media
             </div>
           </button>
@@ -1545,7 +1547,7 @@ export default function Portfolio() {
             onMouseLeave={() => setHoveredButton(null)}
             onClick={() => handleButtonClick("Objects & Systems")}
           >
-            <div className="bg-white border border-gray-200 rounded-full px-6 py-3 text-base font-medium text-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300 whitespace-nowrap">
+            <div className="bg-white border border-gray-200 rounded-full px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-medium text-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300 whitespace-nowrap">
               Objects & Systems
             </div>
           </button>
