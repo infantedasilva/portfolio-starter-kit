@@ -35,9 +35,9 @@ export default function ProjectPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="flex flex-col h-[100dvh] md:block md:h-auto md:min-h-screen bg-background">
       {/* Image Carousel */}
-      <div className="relative w-full bg-muted overflow-hidden h-[70vh] md:h-[200vh]">
+      <div className="relative w-full bg-muted overflow-hidden h-[55dvh] shrink-0 md:h-[200vh]">
         <div className="relative w-full h-full flex items-center justify-center">
           {project.images[currentImageIndex].isYouTube ? (
             <iframe
@@ -130,7 +130,7 @@ export default function ProjectPage() {
       </div>
 
       {/* Project Details */}
-      <div className="max-w-2xl mx-auto px-6 py-8 md:py-12 pb-28 md:pb-12">
+      <div className="flex-1 min-h-0 overflow-y-auto md:flex-none md:overflow-visible w-full max-w-2xl mx-auto px-6 py-6 md:py-12 pb-24 md:pb-12">
         <div className="mb-5 md:mb-8">
           <h1 className="text-2xl md:text-3xl font-medium text-foreground mb-1 md:mb-2 text-balance">
             {project.name}
