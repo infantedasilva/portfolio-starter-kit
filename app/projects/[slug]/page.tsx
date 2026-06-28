@@ -36,8 +36,27 @@ export default function ProjectPage() {
 
   return (
     <div className="flex flex-col h-[100dvh] md:block md:h-auto md:min-h-screen bg-background">
+      {/* Mobile-only header */}
+      <div className="md:hidden shrink-0 flex flex-col items-center gap-2 px-6 pt-5 pb-3">
+        <Link href="/" aria-label="Back to homepage">
+          <Image
+            src="/images/new-20logo.png"
+            alt="Luis Infante"
+            width={200}
+            height={80}
+            priority
+            quality={90}
+            className="h-12 w-auto cursor-pointer"
+            sizes="120px"
+          />
+        </Link>
+        <div className="px-3 py-1 text-sm rounded-full whitespace-nowrap border text-brand border-brand font-medium">
+          Creative Strategist & Designer
+        </div>
+      </div>
+
       {/* Image Carousel */}
-      <div className="relative w-full bg-muted overflow-hidden h-[55dvh] shrink-0 md:h-[200vh]">
+      <div className="relative w-full bg-muted overflow-hidden flex-1 min-h-0 md:flex-none md:h-[200vh]">
         <div className="relative w-full h-full flex items-center justify-center">
           {project.images[currentImageIndex].isYouTube ? (
             <iframe
