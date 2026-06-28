@@ -56,7 +56,7 @@ export default function ProjectPage() {
       </div>
 
       {/* Image Carousel */}
-      <div className="relative w-full bg-muted overflow-hidden flex-1 min-h-0 md:flex-none md:h-[200vh]">
+      <div className="relative w-full bg-muted overflow-hidden flex-[1.6] min-h-0 md:flex-none md:h-[200vh]">
         <div className="relative w-full h-full flex items-center justify-center">
           {project.images[currentImageIndex].isYouTube ? (
             <iframe
@@ -149,20 +149,22 @@ export default function ProjectPage() {
       </div>
 
       {/* Project Details */}
-      <div className="flex-1 min-h-0 overflow-y-auto md:flex-none md:overflow-visible w-full max-w-2xl mx-auto px-6 py-6 md:py-12 pb-24 md:pb-12">
-        <div className="mb-5 md:mb-8">
-          <h1 className="text-2xl md:text-3xl font-medium text-foreground mb-1 md:mb-2 text-balance">
+      <div className="flex-1 min-h-0 overflow-y-auto md:flex-none md:overflow-visible w-full max-w-2xl mx-auto px-6 py-4 md:py-12 pb-24 md:pb-12">
+        <div className="mb-3 md:mb-8">
+          <h1 className="text-xl md:text-3xl font-medium text-foreground mb-0.5 md:mb-2 text-balance">
             {project.name}
           </h1>
-          <p className="text-muted-foreground text-base md:text-lg">{project.year}</p>
+          <p className="text-muted-foreground text-sm md:text-lg">{project.year}</p>
         </div>
 
         <div className="prose prose-neutral max-w-none">
-          <p className="text-sm md:text-base text-foreground leading-relaxed text-pretty">{project.description}</p>
+          <p className="text-xs leading-relaxed md:text-base text-foreground md:leading-relaxed text-pretty">
+            {project.description}
+          </p>
         </div>
 
         {project.blogUrl && (
-          <div className="mt-8">
+          <div className="mt-4 md:mt-8">
             <a
               href={project.blogUrl}
               target="_blank"
