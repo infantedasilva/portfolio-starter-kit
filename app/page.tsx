@@ -1376,7 +1376,7 @@ export default function Portfolio() {
         </div>
 
         {!selectedProject && (
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none">
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none md:pt-24">
             <div className="relative rounded-lg overflow-hidden group/headshot pointer-events-auto">
               <Image
                 src="/luis-headshot-new.jpg"
@@ -1419,7 +1419,7 @@ export default function Portfolio() {
           className={`absolute inset-0 pointer-events-none z-20 transition-opacity duration-500 ${clickedButton ? "opacity-0" : "opacity-100"}`}
         >
           <button
-            className={`floating-button absolute top-[28%] left-[15%] pointer-events-auto cursor-pointer transition-all duration-300 ${
+            className={`floating-button absolute top-[24%] left-[6%] md:top-[28%] md:left-[15%] pointer-events-auto cursor-pointer transition-all duration-300 ${
               hoveredButton === "interior" ? "animate-none scale-110" : "animate-float-1"
             } ${clickedButton ? "pointer-events-none" : ""}`}
             onMouseEnter={() => setHoveredButton("interior")}
@@ -1456,7 +1456,7 @@ export default function Portfolio() {
 
           {/* Furniture button - Moved lower from top-[45%] to top-[50%] on desktop */}
           <button
-            className={`floating-button absolute top-[28%] right-[15%] md:top-[50%] md:right-auto md:left-[30%] pointer-events-auto cursor-pointer transition-all duration-300 ${
+            className={`floating-button absolute top-[38%] right-[6%] md:top-[50%] md:right-auto md:left-[30%] pointer-events-auto cursor-pointer transition-all duration-300 ${
               hoveredButton === "furniture" ? "animate-none scale-110" : "animate-float-2"
             } ${clickedButton ? "pointer-events-none" : ""}`}
             onMouseEnter={() => setHoveredButton("furniture")}
@@ -1470,7 +1470,7 @@ export default function Portfolio() {
 
           {/* Lighting button - Right side, above Objects & Systems */}
           <button
-            className={`floating-button absolute top-[36%] right-[10%] md:top-[38%] md:right-[25%] pointer-events-auto cursor-pointer transition-all duration-300 ${
+            className={`floating-button absolute top-[52%] right-[6%] md:top-[38%] md:right-[25%] pointer-events-auto cursor-pointer transition-all duration-300 ${
               hoveredButton === "lighting" ? "animate-none scale-110" : "animate-float-3"
             } ${clickedButton ? "pointer-events-none" : ""}`}
             onMouseEnter={() => setHoveredButton("lighting")}
@@ -1484,7 +1484,7 @@ export default function Portfolio() {
 
           {/* Objects & Systems button - Moved lower from top-[60%] to top-[65%] */}
           <button
-            className={`floating-button absolute top-[65%] right-[15%] pointer-events-auto cursor-pointer transition-all duration-300 ${
+            className={`floating-button absolute top-[66%] left-[6%] md:top-[65%] md:left-auto md:right-[15%] pointer-events-auto cursor-pointer transition-all duration-300 ${
               hoveredButton === "objects" ? "animate-none scale-110" : "animate-float-7"
             } ${clickedButton ? "pointer-events-none" : ""}`}
             onMouseEnter={() => setHoveredButton("objects")}
@@ -1792,111 +1792,111 @@ export default function Portfolio() {
         </div>
 
         {selectedProject === "Mars Chair" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{marsChairProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{marsChairProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{marsChairProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{marsChairProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{marsChairProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{marsChairProject.description}</p>
             </div>
           </div>
         )}
 
         {selectedProject === "Stone Soup" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{stoneSoupProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{stoneSoupProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{stoneSoupProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{stoneSoupProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{stoneSoupProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{stoneSoupProject.description}</p>
             </div>
           </div>
         )}
 
         {selectedProject === "Tiles Table" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{tilesTableProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{tilesTableProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{tilesTableProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{tilesTableProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{tilesTableProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{tilesTableProject.description}</p>
             </div>
           </div>
         )}
 
         {selectedProject === "Onio" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{onioProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{onioProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{onioProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{onioProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{onioProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{onioProject.description}</p>
             </div>
           </div>
         )}
 
         {selectedProject === "Glass Plates" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{glassPlatesProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{glassPlatesProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{glassPlatesProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{glassPlatesProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{glassPlatesProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{glassPlatesProject.description}</p>
             </div>
           </div>
         )}
 
         {selectedProject === "Graf" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{grafProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{grafProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{grafProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{grafProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{grafProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{grafProject.description}</p>
             </div>
           </div>
         )}
 
         {selectedProject === "Calabashes" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{calabashesProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{calabashesProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{calabashesProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{calabashesProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{calabashesProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{calabashesProject.description}</p>
             </div>
           </div>
         )}
 
         {selectedProject === "Santos Play Room" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{santosPlayRoomProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{santosPlayRoomProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{santosPlayRoomProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{santosPlayRoomProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{santosPlayRoomProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{santosPlayRoomProject.description}</p>
             </div>
           </div>
         )}
 
         {selectedProject === "Branca Lisboa" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{brancaLisboaProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{brancaLisboaProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{brancaLisboaProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{brancaLisboaProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{brancaLisboaProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{brancaLisboaProject.description}</p>
             </div>
           </div>
         )}
 
         {selectedProject === "Mintbase Interviews" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{mintbaseProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{mintbaseProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{mintbaseProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{mintbaseProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{mintbaseProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{mintbaseProject.description}</p>
             </div>
           </div>
         )}
 
         {selectedProject === "A Vida Portuguesa" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{aVidaPortuguesaProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{aVidaPortuguesaProject.year}</p>
-              <div className="text-base text-gray-700 leading-relaxed mb-6">
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{aVidaPortuguesaProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{aVidaPortuguesaProject.year}</p>
+              <div className="text-xs md:text-base text-gray-700 leading-relaxed mb-4 md:mb-6">
                 {aVidaPortuguesaProject.descriptionJSX || aVidaPortuguesaProject.description}
               </div>
               {aVidaPortuguesaProject.blogUrl && (
@@ -1925,11 +1925,11 @@ export default function Portfolio() {
 
         {/* Adding FNAC project display */}
         {selectedProject === "FNAC" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">FNAC</h2>
-              <p className="text-lg text-gray-600 mb-6">2022</p>
-              <p className="text-base text-gray-700 leading-relaxed">
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">FNAC</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">2022</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">
                 Our team at Mintbase partnered with FNAC Portugal to integrate NEAR-based NFT technology into the "Novos
                 Talentos" program. We enabled contest winners to tokenize their works as redeemable NFTs, ensuring
                 perpetual royalties and promoting digital ownership. This initiative bridges legacy retail with the Web3
@@ -1940,11 +1940,11 @@ export default function Portfolio() {
         )}
 
         {selectedProject === "The Eleven Collection" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{elevenCollectionProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{elevenCollectionProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed mb-6">{elevenCollectionProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{elevenCollectionProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{elevenCollectionProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed mb-4 md:mb-6">{elevenCollectionProject.description}</p>
               {elevenCollectionProject.blogUrl && (
                 <a
                   href={elevenCollectionProject.blogUrl}
@@ -1969,11 +1969,11 @@ export default function Portfolio() {
         )}
 
         {selectedProject === "Accepting NFTs Here" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{acceptingNftsProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{acceptingNftsProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed mb-6">{acceptingNftsProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{acceptingNftsProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{acceptingNftsProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed mb-4 md:mb-6">{acceptingNftsProject.description}</p>
               {acceptingNftsProject.blogUrl && (
                 <a
                   href={acceptingNftsProject.blogUrl}
@@ -1998,98 +1998,98 @@ export default function Portfolio() {
         )}
 
         {selectedProject === "Qatalyze Interiors" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{qatalyzeInteriorsProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{qatalyzeInteriorsProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{qatalyzeInteriorsProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{qatalyzeInteriorsProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{qatalyzeInteriorsProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{qatalyzeInteriorsProject.description}</p>
             </div>
           </div>
         )}
 
         {/* Adding MUDE project display */}
         {selectedProject === "MUDE" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{mudeProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{mudeProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{mudeProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{mudeProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{mudeProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{mudeProject.description}</p>
             </div>
           </div>
         )}
 
         {selectedProject === "Birre Kitchen" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{birreKitchenProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{birreKitchenProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{birreKitchenProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{birreKitchenProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{birreKitchenProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{birreKitchenProject.description}</p>
             </div>
           </div>
         )}
 
         {selectedProject === "Pool Guard" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{poolGuardProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{poolGuardProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{poolGuardProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{poolGuardProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{poolGuardProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{poolGuardProject.description}</p>
             </div>
           </div>
         )}
 
         {selectedProject === "Pala Shelves" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{palaShelvesProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{palaShelvesProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{palaShelvesProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{palaShelvesProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{palaShelvesProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{palaShelvesProject.description}</p>
             </div>
           </div>
         )}
 
         {selectedProject === "Occulo" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{occuloProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{occuloProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{occuloProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{occuloProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{occuloProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{occuloProject.description}</p>
             </div>
           </div>
         )}
 
         {selectedProject === "Rock Sofa" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{rockSofaProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{rockSofaProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{rockSofaProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{rockSofaProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{rockSofaProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{rockSofaProject.description}</p>
             </div>
           </div>
         )}
 
         {selectedProject === "Disk Shelves" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{diskShelvesProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{diskShelvesProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{diskShelvesProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{diskShelvesProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{diskShelvesProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{diskShelvesProject.description}</p>
             </div>
           </div>
         )}
 
         {selectedProject === "Nonu" && (
-          <div className="fixed top-1/2 left-8 transform -translate-y-1/2 z-40 max-w-sm">
-            <div className="bg-white rounded-lg shadow-2xl p-8 border border-gray-200 shadow-none">
-              <h2 className="text-4xl font-bold text-gray-900 mb-2">{nonuProject.name}</h2>
-              <p className="text-lg text-gray-600 mb-6">{nonuProject.year}</p>
-              <p className="text-base text-gray-700 leading-relaxed">{nonuProject.description}</p>
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{nonuProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{nonuProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{nonuProject.description}</p>
             </div>
           </div>
         )}
 
         {clickedButton && (
-          <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-30 shadow-none">
+          <div className="fixed bottom-4 right-4 z-50 transform md:bottom-8 md:right-auto md:left-1/2 md:-translate-x-1/2 md:z-30 shadow-none">
             <button
               onClick={handleBackClick}
               className="flex items-center gap-0 bg-white rounded-full transition-all duration-300 ease-out hover:gap-2 hover:pl-4 overflow-hidden shadow-lg border border-gray-200 group cursor-pointer"

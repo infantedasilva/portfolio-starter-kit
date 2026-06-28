@@ -35,9 +35,28 @@ export default function ProjectPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="flex flex-col h-[100dvh] md:block md:h-auto md:min-h-screen bg-background">
+      {/* Mobile-only header */}
+      <div className="md:hidden shrink-0 flex flex-col items-center gap-2 px-6 pt-5 pb-3">
+        <Link href="/" aria-label="Back to homepage">
+          <Image
+            src="/images/new-20logo.png"
+            alt="Luis Infante"
+            width={200}
+            height={80}
+            priority
+            quality={90}
+            className="h-12 w-auto cursor-pointer"
+            sizes="120px"
+          />
+        </Link>
+        <div className="px-3 py-1 text-sm rounded-full whitespace-nowrap border text-brand border-brand font-medium">
+          Creative Strategist & Designer
+        </div>
+      </div>
+
       {/* Image Carousel */}
-      <div className="relative w-full bg-muted overflow-hidden" style={{ height: "200vh" }}>
+      <div className="relative w-full bg-muted overflow-hidden flex-[1.6] min-h-0 md:flex-none md:h-[200vh]">
         <div className="relative w-full h-full flex items-center justify-center">
           {project.images[currentImageIndex].isYouTube ? (
             <iframe
@@ -130,18 +149,22 @@ export default function ProjectPage() {
       </div>
 
       {/* Project Details */}
-      <div className="max-w-2xl mx-auto px-6 py-12">
-        <div className="mb-8">
-          <h1 className="text-3xl font-medium text-foreground mb-2">{project.name}</h1>
-          <p className="text-muted-foreground text-lg">{project.year}</p>
+      <div className="flex-1 min-h-0 overflow-y-auto md:flex-none md:overflow-visible w-full max-w-2xl mx-auto px-6 py-4 md:py-12 pb-24 md:pb-12">
+        <div className="mb-3 md:mb-8">
+          <h1 className="text-xl md:text-3xl font-medium text-foreground mb-0.5 md:mb-2 text-balance">
+            {project.name}
+          </h1>
+          <p className="text-muted-foreground text-sm md:text-lg">{project.year}</p>
         </div>
 
         <div className="prose prose-neutral max-w-none">
-          <p className="text-foreground leading-relaxed">{project.description}</p>
+          <p className="text-xs leading-relaxed md:text-base text-foreground md:leading-relaxed text-pretty">
+            {project.description}
+          </p>
         </div>
 
         {project.blogUrl && (
-          <div className="mt-8">
+          <div className="mt-4 md:mt-8">
             <a
               href={project.blogUrl}
               target="_blank"
