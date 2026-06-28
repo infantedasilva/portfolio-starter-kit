@@ -1298,6 +1298,14 @@ export default function Portfolio() {
 
   // Unified pointer-down handler for starting a drag on mouse, touch or pen.
   const handleImagePointerDown = (e: React.PointerEvent<HTMLDivElement>, index: number) => {
+    // If the press started on an interactive element (e.g. the "+" open-project
+    // button, a link, or media controls), don't start a drag. Capturing the pointer
+    // here would steal the click and prevent the project from opening.
+    const target = e.target as HTMLElement
+    if (target.closest("button, a")) {
+      return
+    }
+
     // Capture the pointer so move/up events keep firing on this element even if the
     // finger/cursor moves off it.
     try {
