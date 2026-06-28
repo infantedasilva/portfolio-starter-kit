@@ -1376,7 +1376,7 @@ export default function Portfolio() {
         </div>
 
         {!selectedProject && (
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none">
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none md:pt-24">
             <div className="relative rounded-lg overflow-hidden group/headshot pointer-events-auto">
               <Image
                 src="/luis-headshot-new.jpg"
