@@ -2089,7 +2089,7 @@ export default function Portfolio() {
         )}
 
         {clickedButton && (
-          <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-30 shadow-none">
+          <div className="fixed bottom-4 right-4 z-50 transform md:bottom-8 md:right-auto md:left-1/2 md:-translate-x-1/2 md:z-30 shadow-none">
             <button
               onClick={handleBackClick}
               className="flex items-center gap-0 bg-white rounded-full transition-all duration-300 ease-out hover:gap-2 hover:pl-4 overflow-hidden shadow-lg border border-gray-200 group cursor-pointer"
