@@ -1419,7 +1419,7 @@ export default function Portfolio() {
           className={`absolute inset-0 pointer-events-none z-20 transition-opacity duration-500 ${clickedButton ? "opacity-0" : "opacity-100"}`}
         >
           <button
-            className={`floating-button absolute top-[28%] left-[15%] pointer-events-auto cursor-pointer transition-all duration-300 ${
+            className={`floating-button absolute top-[24%] left-[6%] md:top-[28%] md:left-[15%] pointer-events-auto cursor-pointer transition-all duration-300 ${
               hoveredButton === "interior" ? "animate-none scale-110" : "animate-float-1"
             } ${clickedButton ? "pointer-events-none" : ""}`}
             onMouseEnter={() => setHoveredButton("interior")}
@@ -1456,7 +1456,7 @@ export default function Portfolio() {
 
           {/* Furniture button - Moved lower from top-[45%] to top-[50%] on desktop */}
           <button
-            className={`floating-button absolute top-[28%] right-[15%] md:top-[50%] md:right-auto md:left-[30%] pointer-events-auto cursor-pointer transition-all duration-300 ${
+            className={`floating-button absolute top-[38%] right-[6%] md:top-[50%] md:right-auto md:left-[30%] pointer-events-auto cursor-pointer transition-all duration-300 ${
               hoveredButton === "furniture" ? "animate-none scale-110" : "animate-float-2"
             } ${clickedButton ? "pointer-events-none" : ""}`}
             onMouseEnter={() => setHoveredButton("furniture")}
@@ -1470,7 +1470,7 @@ export default function Portfolio() {
 
           {/* Lighting button - Right side, above Objects & Systems */}
           <button
-            className={`floating-button absolute top-[36%] right-[10%] md:top-[38%] md:right-[25%] pointer-events-auto cursor-pointer transition-all duration-300 ${
+            className={`floating-button absolute top-[52%] right-[6%] md:top-[38%] md:right-[25%] pointer-events-auto cursor-pointer transition-all duration-300 ${
               hoveredButton === "lighting" ? "animate-none scale-110" : "animate-float-3"
             } ${clickedButton ? "pointer-events-none" : ""}`}
             onMouseEnter={() => setHoveredButton("lighting")}
@@ -1484,7 +1484,7 @@ export default function Portfolio() {
 
           {/* Objects & Systems button - Moved lower from top-[60%] to top-[65%] */}
           <button
-            className={`floating-button absolute top-[65%] right-[15%] pointer-events-auto cursor-pointer transition-all duration-300 ${
+            className={`floating-button absolute top-[66%] left-[6%] md:top-[65%] md:left-auto md:right-[15%] pointer-events-auto cursor-pointer transition-all duration-300 ${
               hoveredButton === "objects" ? "animate-none scale-110" : "animate-float-7"
             } ${clickedButton ? "pointer-events-none" : ""}`}
             onMouseEnter={() => setHoveredButton("objects")}
