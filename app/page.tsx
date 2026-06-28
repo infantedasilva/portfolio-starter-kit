@@ -1188,10 +1188,14 @@ export default function Portfolio() {
     }
   }
 
-  const handleMouseMove = useCallback((e: MouseEvent) => {
+  // Unified pointer move handler — works for mouse, touch and pen.
+  const handlePointerMove = useCallback((e: PointerEvent) => {
     setMousePosition({ x: e.clientX, y: e.clientY })
 
     if (draggedImageRef.current !== null && imageRefs.current[draggedImageRef.current]) {
+      // Stop the browser from scrolling/panning while a finger is dragging an image.
+      if (e.cancelable) e.preventDefault()
+
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current)
       }
@@ -1209,55 +1213,7 @@ export default function Portfolio() {
     }
   }, [])
 
-  const handleTouchMove = useCallback((e: TouchEvent) => {
-    if (draggedImageRef.current !== null && imageRefs.current[draggedImageRef.current]) {
-      // Prevent the page from scrolling while an image is being dragged with a finger
-      if (e.cancelable) e.preventDefault()
-      const touch = e.touches[0]
-      setMousePosition({ x: touch.clientX, y: touch.clientY })
-
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current)
-      }
-
-      animationFrameRef.current = requestAnimationFrame(() => {
-        const element = imageRefs.current[draggedImageRef.current!]
-        if (element) {
-          const newX = touch.clientX - dragOffsetRef.current.x
-          const newY = touch.clientY - dragOffsetRef.current.y
-
-          element.style.left = `${newX}px`
-          element.style.top = `${newY}px`
-        }
-      })
-    }
-  }, [])
-
-  const handleMouseUp = useCallback(() => {
-    if (draggedImageRef.current !== null && imageRefs.current[draggedImageRef.current]) {
-      const element = imageRefs.current[draggedImageRef.current]
-      if (element) {
-        const currentLeft = element.style.left
-        const currentTop = element.style.top
-
-        setImagePositions((prev) => {
-          const newPositions = [...prev]
-          newPositions[draggedImageRef.current!] = {
-            top: currentTop,
-            left: currentLeft,
-          }
-          return newPositions
-        })
-      }
-    }
-
-    draggedImageRef.current = null
-    dragOffsetRef.current = { x: 0, y: 0 }
-    setDraggedImage(null)
-    setIsInteractingWithVideo({})
-  }, [])
-
-  const handleTouchEnd = useCallback(() => {
+  const handlePointerUp = useCallback(() => {
     if (draggedImageRef.current !== null && imageRefs.current[draggedImageRef.current]) {
       const element = imageRefs.current[draggedImageRef.current]
       if (element) {
@@ -1295,23 +1251,22 @@ export default function Portfolio() {
   }, [])
 
   useEffect(() => {
-    window.addEventListener("mousemove", handleMouseMove, { passive: true })
-    window.addEventListener("mouseup", handleMouseUp, { passive: true })
-    // Touch events should always be available for drag on touch-enabled devices
-    window.addEventListener("touchmove", handleTouchMove, { passive: false })
-    window.addEventListener("touchend", handleTouchEnd, { passive: true })
+    // Pointer events unify mouse, touch and pen. The move listener is non-passive
+    // so we can preventDefault() and stop the page from scrolling mid-drag.
+    window.addEventListener("pointermove", handlePointerMove, { passive: false })
+    window.addEventListener("pointerup", handlePointerUp, { passive: true })
+    window.addEventListener("pointercancel", handlePointerUp, { passive: true })
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove)
-      window.removeEventListener("mouseup", handleMouseUp)
-      window.removeEventListener("touchmove", handleTouchMove)
-      window.removeEventListener("touchend", handleTouchEnd)
+      window.removeEventListener("pointermove", handlePointerMove)
+      window.removeEventListener("pointerup", handlePointerUp)
+      window.removeEventListener("pointercancel", handlePointerUp)
 
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current)
       }
     }
-  }, [handleMouseMove, handleMouseUp, handleTouchMove, handleTouchEnd, isMobile])
+  }, [handlePointerMove, handlePointerUp])
 
   useEffect(() => {
     const handleEscKey = (e: KeyboardEvent) => {
@@ -1341,33 +1296,14 @@ export default function Portfolio() {
     setMobileFilterCategory("All") // Reset mobile filter when switching desktop categories
   }
 
-  const handleImageTouchStart = (e: React.TouchEvent<HTMLDivElement>, index: number) => {
-    // Touch dragging is enabled on all touch devices, including mobile, so the
-    // gallery behaves the same as on the web (drag images with a finger).
-    e.preventDefault()
-    const touch = e.touches[0]
-    draggedImageRef.current = index
-    setDraggedImage(index)
+  // Unified pointer-down handler for starting a drag on mouse, touch or pen.
+  const handleImagePointerDown = (e: React.PointerEvent<HTMLDivElement>, index: number) => {
+    // Capture the pointer so move/up events keep firing on this element even if the
+    // finger/cursor moves off it.
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId)
+    } catch {}
 
-    const rect = e.currentTarget.getBoundingClientRect()
-    dragOffsetRef.current = {
-      x: touch.clientX - rect.left,
-      y: touch.clientY - rect.top,
-    }
-
-    setImageZIndices((prev) => {
-      const newZIndices = [...prev]
-      maxZIndexRef.current += 1
-      newZIndices[index] = maxZIndexRef.current
-      return newZIndices
-    })
-  }
-
-  const handleImageMouseDown = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
-    // Disable mouse dragging on mobile to prevent accidental drags
-    if (isMobile) return
-
-    e.preventDefault()
     draggedImageRef.current = index
     setDraggedImage(index)
 
@@ -1576,9 +1512,9 @@ export default function Portfolio() {
                       clickedButton === "Furniture Design" && !selectedProject && (index === 3 || index === 2)
                         ? "scale(0.9)"
                         : undefined,
+                    touchAction: "none",
                   }}
-                  onMouseDown={(e) => handleImageMouseDown(e, index)}
-                  onTouchStart={(e) => handleImageTouchStart(e, index)}
+                  onPointerDown={(e) => handleImagePointerDown(e, index)}
                 >
                   {(image as any).isVideo ? (
                     <div className="relative">
@@ -1603,8 +1539,8 @@ export default function Portfolio() {
                         playsInline
                         onPlay={() => setIsVideoPlaying((prev) => ({ ...prev, [index]: true }))}
                         onPause={() => setIsVideoPlaying((prev) => ({ ...prev, [index]: false }))}
-                        onMouseDown={(e) => {
-                          // If clicking on video controls (bottom 40px of video), don't drag
+                        onPointerDown={(e) => {
+                          // If interacting with video controls (bottom 40px of video), don't drag
                           const rect = e.currentTarget.getBoundingClientRect()
                           const clickY = e.clientY - rect.top
                           if (clickY > rect.height - 40) {
@@ -1612,19 +1548,7 @@ export default function Portfolio() {
                             setIsInteractingWithVideo((prev) => ({ ...prev, [index]: true }))
                           }
                         }}
-                        onMouseUp={() => {
-                          setIsInteractingWithVideo((prev) => ({ ...prev, [index]: false }))
-                        }}
-                        onTouchStart={(e) => {
-                          const touch = e.touches[0]
-                          const rect = e.currentTarget.getBoundingClientRect()
-                          const clickY = touch.clientY - rect.top
-                          if (clickY > rect.height - 40) {
-                            e.stopPropagation()
-                            setIsInteractingWithVideo((prev) => ({ ...prev, [index]: true }))
-                          }
-                        }}
-                        onTouchEnd={() => {
+                        onPointerUp={() => {
                           setIsInteractingWithVideo((prev) => ({ ...prev, [index]: false }))
                         }}
                       />
@@ -1643,7 +1567,7 @@ export default function Portfolio() {
                                 video.play()
                               }
                             }}
-                            onTouchStart={(e) => {
+                            onPointerDown={(e) => {
                               e.stopPropagation()
                               const video = e.currentTarget.parentElement?.parentElement?.querySelector("video")
                               if (video) {
@@ -1689,8 +1613,7 @@ export default function Portfolio() {
                         className="w-full h-full border-0 pointer-events-auto select-none"
                         style={{ display: "block" }}
                         loading="lazy"
-                        onMouseDown={(e) => e.stopPropagation()}
-                        onTouchStart={(e) => e.stopPropagation()}
+                        onPointerDown={(e) => e.stopPropagation()}
                       />
                       {/* Clickable overlay label */}
                       <a
@@ -1699,8 +1622,7 @@ export default function Portfolio() {
                         rel="noopener noreferrer"
                         className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-3 py-2 bg-white/90 backdrop-blur-sm border-t border-gray-100 hover:bg-white transition-colors duration-200 group"
                         aria-label="Read the full story about Lisbon NFT locations on Medium"
-                        onMouseDown={(e) => e.stopPropagation()}
-                        onTouchStart={(e) => e.stopPropagation()}
+                        onPointerDown={(e) => e.stopPropagation()}
                       >
                         <span className="text-xs font-medium text-gray-700 truncate">Lisbon NFT locations</span>
                         <svg
