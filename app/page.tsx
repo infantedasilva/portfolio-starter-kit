@@ -1188,10 +1188,14 @@ export default function Portfolio() {
     }
   }
 
-  const handleMouseMove = useCallback((e: MouseEvent) => {
+  // Unified pointer move handler — works for mouse, touch and pen.
+  const handlePointerMove = useCallback((e: PointerEvent) => {
     setMousePosition({ x: e.clientX, y: e.clientY })
 
     if (draggedImageRef.current !== null && imageRefs.current[draggedImageRef.current]) {
+      // Stop the browser from scrolling/panning while a finger is dragging an image.
+      if (e.cancelable) e.preventDefault()
+
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current)
       }
@@ -1209,53 +1213,7 @@ export default function Portfolio() {
     }
   }, [])
 
-  const handleTouchMove = useCallback((e: TouchEvent) => {
-    if (draggedImageRef.current !== null && imageRefs.current[draggedImageRef.current]) {
-      const touch = e.touches[0]
-      setMousePosition({ x: touch.clientX, y: touch.clientY })
-
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current)
-      }
-
-      animationFrameRef.current = requestAnimationFrame(() => {
-        const element = imageRefs.current[draggedImageRef.current!]
-        if (element) {
-          const newX = touch.clientX - dragOffsetRef.current.x
-          const newY = touch.clientY - dragOffsetRef.current.y
-
-          element.style.left = `${newX}px`
-          element.style.top = `${newY}px`
-        }
-      })
-    }
-  }, [])
-
-  const handleMouseUp = useCallback(() => {
-    if (draggedImageRef.current !== null && imageRefs.current[draggedImageRef.current]) {
-      const element = imageRefs.current[draggedImageRef.current]
-      if (element) {
-        const currentLeft = element.style.left
-        const currentTop = element.style.top
-
-        setImagePositions((prev) => {
-          const newPositions = [...prev]
-          newPositions[draggedImageRef.current!] = {
-            top: currentTop,
-            left: currentLeft,
-          }
-          return newPositions
-        })
-      }
-    }
-
-    draggedImageRef.current = null
-    dragOffsetRef.current = { x: 0, y: 0 }
-    setDraggedImage(null)
-    setIsInteractingWithVideo({})
-  }, [])
-
-  const handleTouchEnd = useCallback(() => {
+  const handlePointerUp = useCallback(() => {
     if (draggedImageRef.current !== null && imageRefs.current[draggedImageRef.current]) {
       const element = imageRefs.current[draggedImageRef.current]
       if (element) {
@@ -1293,23 +1251,22 @@ export default function Portfolio() {
   }, [])
 
   useEffect(() => {
-    window.addEventListener("mousemove", handleMouseMove, { passive: true })
-    window.addEventListener("mouseup", handleMouseUp, { passive: true })
-    // Touch events should always be available for drag on touch-enabled devices
-    window.addEventListener("touchmove", handleTouchMove, { passive: false })
-    window.addEventListener("touchend", handleTouchEnd, { passive: true })
+    // Pointer events unify mouse, touch and pen. The move listener is non-passive
+    // so we can preventDefault() and stop the page from scrolling mid-drag.
+    window.addEventListener("pointermove", handlePointerMove, { passive: false })
+    window.addEventListener("pointerup", handlePointerUp, { passive: true })
+    window.addEventListener("pointercancel", handlePointerUp, { passive: true })
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove)
-      window.removeEventListener("mouseup", handleMouseUp)
-      window.removeEventListener("touchmove", handleTouchMove)
-      window.removeEventListener("touchend", handleTouchEnd)
+      window.removeEventListener("pointermove", handlePointerMove)
+      window.removeEventListener("pointerup", handlePointerUp)
+      window.removeEventListener("pointercancel", handlePointerUp)
 
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current)
       }
     }
-  }, [handleMouseMove, handleMouseUp, handleTouchMove, handleTouchEnd, isMobile])
+  }, [handlePointerMove, handlePointerUp])
 
   useEffect(() => {
     const handleEscKey = (e: KeyboardEvent) => {
@@ -1339,35 +1296,14 @@ export default function Portfolio() {
     setMobileFilterCategory("All") // Reset mobile filter when switching desktop categories
   }
 
-  const handleImageTouchStart = (e: React.TouchEvent<HTMLDivElement>, index: number) => {
-    // Touch dragging is enabled on desktop (for hybrid devices) but disabled on mobile
-    // to prevent interference with scrolling
-    if (isMobile) return
+  // Unified pointer-down handler for starting a drag on mouse, touch or pen.
+  const handleImagePointerDown = (e: React.PointerEvent<HTMLDivElement>, index: number) => {
+    // Capture the pointer so move/up events keep firing on this element even if the
+    // finger/cursor moves off it.
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId)
+    } catch {}
 
-    e.preventDefault()
-    const touch = e.touches[0]
-    draggedImageRef.current = index
-    setDraggedImage(index)
-
-    const rect = e.currentTarget.getBoundingClientRect()
-    dragOffsetRef.current = {
-      x: touch.clientX - rect.left,
-      y: touch.clientY - rect.top,
-    }
-
-    setImageZIndices((prev) => {
-      const newZIndices = [...prev]
-      maxZIndexRef.current += 1
-      newZIndices[index] = maxZIndexRef.current
-      return newZIndices
-    })
-  }
-
-  const handleImageMouseDown = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
-    // Disable mouse dragging on mobile to prevent accidental drags
-    if (isMobile) return
-
-    e.preventDefault()
     draggedImageRef.current = index
     setDraggedImage(index)
 
@@ -1412,125 +1348,8 @@ export default function Portfolio() {
 
   return (
     <main className="min-h-screen overflow-hidden md:overflow-auto">
-      {/* Mobile: Projects Index with Profile */}
-      <div className="block md:hidden min-h-screen overflow-y-auto bg-background">
-        <div className="px-6 py-8">
-          {/* Logo and Pill Badge */}
-          <div className="flex flex-col items-center gap-3 mb-8">
-            <img
-              src="/images/new-20logo.png"
-              alt="Luis Infante"
-              className="h-12 w-auto cursor-pointer"
-              onClick={handleLogoClick}
-            />
-            <div className="px-3 py-1 text-xs rounded-full whitespace-nowrap border text-brand border-brand font-medium">
-              Creative Strategist & Designer
-            </div>
-          </div>
-
-          {/* Headshot with About Me Button - Desktop style */}
-          <div className="flex justify-center mb-6">
-            <div className="relative rounded-lg overflow-hidden group/headshot">
-              <img
-                src="/luis-headshot-new.jpg"
-                alt="Luis Infante"
-                className="w-[200px] h-[250px] object-cover object-[center_bottom]"
-              />
-              <div className="absolute bottom-3 right-3">
-                <button
-                  onClick={() => setShowAboutMe(true)}
-                  className="flex items-center gap-0 bg-white rounded-full transition-all duration-300 ease-out hover:gap-2 hover:pr-3 overflow-hidden shadow-lg border border-border group/button cursor-pointer"
-                >
-                  <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center flex-shrink-0">
-                    <svg className="w-3 h-3 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                    </svg>
-                  </div>
-                  <span className="text-xs font-medium text-foreground whitespace-nowrap opacity-0 max-w-0 group-hover/button:opacity-100 group-hover/button:max-w-[80px] transition-all duration-300 ease-out">
-                    About Me
-                  </span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex gap-2 overflow-x-auto pb-2 px-6 snap-x snap-mandatory scrollbar-hide">
-            <button
-              onClick={() => setMobileFilter("All")}
-              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors flex-shrink-0 snap-start ${
-                mobileFilterCategory === "All"
-                  ? "bg-foreground text-background"
-                  : "bg-background border border-border text-foreground hover:border-foreground"
-              }`}
-            >
-              All
-            </button>
-            <button
-              onClick={() => setMobileFilter("Furniture Design")}
-              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors flex-shrink-0 snap-start ${
-                mobileFilterCategory === "Furniture Design"
-                  ? "bg-foreground text-background"
-                  : "bg-background border border-border text-foreground hover:border-foreground"
-              }`}
-            >
-              Furniture
-            </button>
-            <button
-              onClick={() => setMobileFilter("Interior Architecture")}
-              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors flex-shrink-0 snap-start ${
-                mobileFilterCategory === "Interior Architecture"
-                  ? "bg-foreground text-background"
-                  : "bg-background border border-border text-foreground hover:border-foreground"
-              }`}
-            >
-              Interior Installations
-            </button>
-            <button
-              onClick={() => setMobileFilter("Lighting")}
-              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors flex-shrink-0 snap-start ${
-                mobileFilterCategory === "Lighting"
-                  ? "bg-foreground text-background"
-                  : "bg-background border border-border text-foreground hover:border-foreground"
-              }`}
-            >
-              Lighting
-            </button>
-            <button
-              onClick={() => setMobileFilter("Objects & Systems")}
-              className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-colors flex-shrink-0 snap-start ${
-                mobileFilterCategory === "Objects & Systems"
-                  ? "bg-foreground text-background"
-                  : "bg-background border border-border text-foreground hover:border-foreground"
-              }`}
-            >
-              Objects & Systems
-            </button>
-          </div>
-
-          <div className="border-t border-border px-6">
-            {projectsMetadata
-              .filter((p) => mobileFilterCategory === "All" || p.category === mobileFilterCategory)
-              .sort((a, b) => Number.parseInt(b.year) - Number.parseInt(a.year))
-              .map((project) => (
-                <Link
-                  key={project.name}
-                  href={`/projects/${projectNameToSlug(project.name)}`}
-                  className="block w-full text-left py-3 border-b border-border hover:text-brand transition-colors group"
-                >
-                  <div className="flex justify-between items-baseline gap-4">
-                    <h3 className="text-sm font-medium text-foreground group-hover:text-brand transition-colors flex-1">
-                      {project.name}
-                    </h3>
-                    <span className="text-sm text-muted-foreground flex-shrink-0 ml-auto">{project.year}</span>
-                  </div>
-                </Link>
-              ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Desktop: Original Gallery View */}
-      <section className="hidden md:block px-6 py-12 relative overflow-hidden h-screen flex items-center justify-center">
+      {/* Unified Gallery View — same draggable experience on mobile and desktop */}
+      <section className="block px-6 py-12 relative overflow-hidden h-screen">
         <div className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center gap-3 px-8 py-4 md:px-10 md:py-6">
           <Image
             src="/images/new-20logo.png"
@@ -1549,8 +1368,8 @@ export default function Portfolio() {
         </div>
 
         {!selectedProject && (
-          <div className="relative z-10 flex flex-col items-center mt-36">
-            <div className="relative rounded-lg overflow-hidden group/headshot">
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none">
+            <div className="relative rounded-lg overflow-hidden group/headshot pointer-events-auto">
               <Image
                 src="/luis-headshot-new.jpg"
                 alt="Luis Infante - Creative Strategist & Designer"
@@ -1558,8 +1377,8 @@ export default function Portfolio() {
                 height={500}
                 priority
                 quality={90}
-                className="w-[400px] h-[500px] object-cover object-[center_bottom] shadow-2xl"
-                sizes="400px"
+                className="w-[220px] h-[275px] md:w-[400px] md:h-[500px] object-cover object-[center_bottom] shadow-2xl"
+                sizes="(max-width: 768px) 220px, 400px"
               />
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/60 to-transparent rounded-b-lg"></div>
 
@@ -1599,7 +1418,7 @@ export default function Portfolio() {
             onMouseLeave={() => setHoveredButton(null)}
             onClick={() => handleButtonClick("Interior Installations")}
           >
-            <div className="bg-white border border-gray-200 rounded-full px-6 py-3 text-base font-medium text-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300">
+            <div className="bg-white border border-gray-200 rounded-full px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-medium text-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300 whitespace-nowrap">
               Interior Installations
             </div>
           </button>
@@ -1622,7 +1441,7 @@ export default function Portfolio() {
             onMouseLeave={() => setHoveredButton(null)}
             onClick={() => handleButtonClick("Visual Communication & Media")}
           >
-            <div className="bg-white border border-gray-200 rounded-full px-6 py-3 text-base font-medium text-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300">
+            <div className="bg-white border border-gray-200 rounded-full px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-medium text-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300 whitespace-nowrap">
               Visual Communication & Media
             </div>
           </button>
@@ -1664,7 +1483,7 @@ export default function Portfolio() {
             onMouseLeave={() => setHoveredButton(null)}
             onClick={() => handleButtonClick("Objects & Systems")}
           >
-            <div className="bg-white border border-gray-200 rounded-full px-6 py-3 text-base font-medium text-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300 whitespace-nowrap">
+            <div className="bg-white border border-gray-200 rounded-full px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-medium text-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 hover:border-gray-300 whitespace-nowrap">
               Objects & Systems
             </div>
           </button>
@@ -1693,9 +1512,9 @@ export default function Portfolio() {
                       clickedButton === "Furniture Design" && !selectedProject && (index === 3 || index === 2)
                         ? "scale(0.9)"
                         : undefined,
+                    touchAction: "none",
                   }}
-                  onMouseDown={(e) => handleImageMouseDown(e, index)}
-                  onTouchStart={(e) => handleImageTouchStart(e, index)}
+                  onPointerDown={(e) => handleImagePointerDown(e, index)}
                 >
                   {(image as any).isVideo ? (
                     <div className="relative">
@@ -1720,8 +1539,8 @@ export default function Portfolio() {
                         playsInline
                         onPlay={() => setIsVideoPlaying((prev) => ({ ...prev, [index]: true }))}
                         onPause={() => setIsVideoPlaying((prev) => ({ ...prev, [index]: false }))}
-                        onMouseDown={(e) => {
-                          // If clicking on video controls (bottom 40px of video), don't drag
+                        onPointerDown={(e) => {
+                          // If interacting with video controls (bottom 40px of video), don't drag
                           const rect = e.currentTarget.getBoundingClientRect()
                           const clickY = e.clientY - rect.top
                           if (clickY > rect.height - 40) {
@@ -1729,19 +1548,7 @@ export default function Portfolio() {
                             setIsInteractingWithVideo((prev) => ({ ...prev, [index]: true }))
                           }
                         }}
-                        onMouseUp={() => {
-                          setIsInteractingWithVideo((prev) => ({ ...prev, [index]: false }))
-                        }}
-                        onTouchStart={(e) => {
-                          const touch = e.touches[0]
-                          const rect = e.currentTarget.getBoundingClientRect()
-                          const clickY = touch.clientY - rect.top
-                          if (clickY > rect.height - 40) {
-                            e.stopPropagation()
-                            setIsInteractingWithVideo((prev) => ({ ...prev, [index]: true }))
-                          }
-                        }}
-                        onTouchEnd={() => {
+                        onPointerUp={() => {
                           setIsInteractingWithVideo((prev) => ({ ...prev, [index]: false }))
                         }}
                       />
@@ -1760,7 +1567,7 @@ export default function Portfolio() {
                                 video.play()
                               }
                             }}
-                            onTouchStart={(e) => {
+                            onPointerDown={(e) => {
                               e.stopPropagation()
                               const video = e.currentTarget.parentElement?.parentElement?.querySelector("video")
                               if (video) {
@@ -1806,8 +1613,7 @@ export default function Portfolio() {
                         className="w-full h-full border-0 pointer-events-auto select-none"
                         style={{ display: "block" }}
                         loading="lazy"
-                        onMouseDown={(e) => e.stopPropagation()}
-                        onTouchStart={(e) => e.stopPropagation()}
+                        onPointerDown={(e) => e.stopPropagation()}
                       />
                       {/* Clickable overlay label */}
                       <a
@@ -1816,8 +1622,7 @@ export default function Portfolio() {
                         rel="noopener noreferrer"
                         className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-3 py-2 bg-white/90 backdrop-blur-sm border-t border-gray-100 hover:bg-white transition-colors duration-200 group"
                         aria-label="Read the full story about Lisbon NFT locations on Medium"
-                        onMouseDown={(e) => e.stopPropagation()}
-                        onTouchStart={(e) => e.stopPropagation()}
+                        onPointerDown={(e) => e.stopPropagation()}
                       >
                         <span className="text-xs font-medium text-gray-700 truncate">Lisbon NFT locations</span>
                         <svg
