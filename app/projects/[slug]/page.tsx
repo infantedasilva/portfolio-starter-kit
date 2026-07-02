@@ -11,7 +11,9 @@ export default function ProjectPage() {
   const slug = params.slug as string
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
-  const touchStartX = useRef<number | null>(null)
+  const [lightboxIndex, setLightboxIndex] = useState(0)
+  const lightboxScrollRef = useRef<HTMLDivElement | null>(null)
+  const lightboxScrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     if (!isLightboxOpen) return
@@ -20,6 +22,15 @@ export default function ProjectPage() {
     }
     window.addEventListener("keydown", handleEscKey)
     return () => window.removeEventListener("keydown", handleEscKey)
+  }, [isLightboxOpen])
+
+  // Jump the scroll strip to the opened slide instantly (no animation) once
+  // the lightbox has mounted with its images.
+  useEffect(() => {
+    if (!isLightboxOpen) return
+    const container = lightboxScrollRef.current
+    if (!container) return
+    container.scrollLeft = lightboxIndex * container.clientWidth
   }, [isLightboxOpen])
 
   const project = projectsData[slug as keyof typeof projectsData]
@@ -45,23 +56,33 @@ export default function ProjectPage() {
     setCurrentImageIndex((prev) => (prev === project.images.length - 1 ? 0 : prev + 1))
   }
 
-  const handleLightboxTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX
-  }
-
-  const handleLightboxTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return
-    const deltaX = e.changedTouches[0].clientX - touchStartX.current
-    const SWIPE_THRESHOLD = 50
-    if (deltaX > SWIPE_THRESHOLD) {
-      handlePrevImage()
-    } else if (deltaX < -SWIPE_THRESHOLD) {
-      handleNextImage()
-    }
-    touchStartX.current = null
-  }
-
   const currentImage = project.images[currentImageIndex]
+
+  // The lightbox only swipes between plain images (video/YouTube slides
+  // can't render inside it), so it keeps its own filtered index and syncs
+  // the main carousel back to the matching slide as you swipe.
+  const lightboxSlides = project.images.filter((img) => !img.isYouTube && !img.isVideo)
+
+  const openLightbox = () => {
+    const idx = lightboxSlides.findIndex((img) => img === currentImage)
+    setLightboxIndex(idx >= 0 ? idx : 0)
+    setIsLightboxOpen(true)
+  }
+
+  const handleLightboxScroll = () => {
+    const container = lightboxScrollRef.current
+    if (!container) return
+    if (lightboxScrollTimeoutRef.current) clearTimeout(lightboxScrollTimeoutRef.current)
+    lightboxScrollTimeoutRef.current = setTimeout(() => {
+      const newIndex = Math.round(container.scrollLeft / container.clientWidth)
+      setLightboxIndex((prev) => {
+        if (newIndex === prev) return prev
+        const originalIndex = project.images.indexOf(lightboxSlides[newIndex])
+        if (originalIndex >= 0) setCurrentImageIndex(originalIndex)
+        return newIndex
+      })
+    }, 100)
+  }
 
   return (
     <div className="flex flex-col h-[100dvh] md:block md:h-auto md:min-h-screen bg-background">
@@ -117,7 +138,7 @@ export default function ProjectPage() {
 
           {!currentImage.isYouTube && !currentImage.isVideo && (
             <button
-              onClick={() => setIsLightboxOpen(true)}
+              onClick={openLightbox}
               className="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-background/90 border border-border flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-200"
               aria-label="Expand image"
             >
@@ -258,10 +279,8 @@ export default function ProjectPage() {
       {/* Lightbox Modal */}
       {isLightboxOpen && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center backdrop-blur-xl bg-background/80 p-4"
+          className="fixed inset-0 z-[100] flex items-center justify-center backdrop-blur-xl bg-background/80"
           onClick={() => setIsLightboxOpen(false)}
-          onTouchStart={handleLightboxTouchStart}
-          onTouchEnd={handleLightboxTouchEnd}
           role="dialog"
           aria-modal="true"
           aria-labelledby="lightbox-image"
@@ -277,16 +296,31 @@ export default function ProjectPage() {
               </svg>
             </button>
           </div>
-          <Image
-            src={currentImage.src || "/placeholder.svg"}
-            alt={currentImage.alt}
-            width={1920}
-            height={1080}
-            quality={95}
-            className="w-auto max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-            sizes="95vw"
-          />
+          {/* Native horizontal scroll-snap strip so swiping between images is a
+              real, visible scroll (with momentum) instead of an instant swap. */}
+          <div
+            ref={lightboxScrollRef}
+            onScroll={handleLightboxScroll}
+            className="w-full h-full flex overflow-x-auto snap-x snap-mandatory no-scrollbar"
+          >
+            {lightboxSlides.map((img, i) => (
+              <div
+                key={`${img.src}-${i}`}
+                className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-4"
+              >
+                <Image
+                  src={img.src || "/placeholder.svg"}
+                  alt={img.alt}
+                  width={1920}
+                  height={1080}
+                  quality={95}
+                  className="w-auto max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+                  onClick={(e) => e.stopPropagation()}
+                  sizes="95vw"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

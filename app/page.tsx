@@ -25,7 +25,8 @@ export default function Portfolio() {
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null)
   const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([])
   const [lightboxIndex, setLightboxIndex] = useState(0)
-  const lightboxTouchStartX = useRef<number | null>(null)
+  const lightboxScrollRef = useRef<HTMLDivElement | null>(null)
+  const lightboxScrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const [isVideoPlaying, setIsVideoPlaying] = useState<{ [key: number]: boolean }>({})
   const [isInteractingWithVideo, setIsInteractingWithVideo] = useState<{ [key: number]: boolean }>({})
@@ -1289,6 +1290,15 @@ export default function Portfolio() {
     }
   }, [lightboxImage])
 
+  // Jump the scroll strip to the opened slide instantly (no animation) once
+  // the lightbox has mounted with its images.
+  useEffect(() => {
+    if (!lightboxImage) return
+    const container = lightboxScrollRef.current
+    if (!container) return
+    container.scrollLeft = lightboxIndex * container.clientWidth
+  }, [lightboxImage])
+
   const getRotation = (element: HTMLDivElement | null, mouseX: number) => {
     if (!element || draggedImageRef.current !== null) return 0
     const rect = element.getBoundingClientRect()
@@ -1384,27 +1394,16 @@ export default function Portfolio() {
     setLightboxImage({ src: image.src || "", alt: image.alt })
   }
 
-  const goToLightboxIndex = (newIndex: number) => {
-    if (lightboxImages.length === 0) return
-    const wrapped = (newIndex + lightboxImages.length) % lightboxImages.length
-    setLightboxIndex(wrapped)
-    setLightboxImage(lightboxImages[wrapped])
-  }
-
-  const handleLightboxTouchStart = (e: React.TouchEvent) => {
-    lightboxTouchStartX.current = e.touches[0].clientX
-  }
-
-  const handleLightboxTouchEnd = (e: React.TouchEvent) => {
-    if (lightboxTouchStartX.current === null) return
-    const deltaX = e.changedTouches[0].clientX - lightboxTouchStartX.current
-    const SWIPE_THRESHOLD = 50
-    if (deltaX > SWIPE_THRESHOLD) {
-      goToLightboxIndex(lightboxIndex - 1)
-    } else if (deltaX < -SWIPE_THRESHOLD) {
-      goToLightboxIndex(lightboxIndex + 1)
-    }
-    lightboxTouchStartX.current = null
+  // Fires while the user is natively scrolling/swiping the lightbox strip so
+  // lightboxIndex stays in sync with whichever slide is currently snapped.
+  const handleLightboxScroll = () => {
+    const container = lightboxScrollRef.current
+    if (!container) return
+    if (lightboxScrollTimeoutRef.current) clearTimeout(lightboxScrollTimeoutRef.current)
+    lightboxScrollTimeoutRef.current = setTimeout(() => {
+      const newIndex = Math.round(container.scrollLeft / container.clientWidth)
+      setLightboxIndex((prev) => (newIndex !== prev ? newIndex : prev))
+    }, 100)
   }
 
   return (
@@ -2456,10 +2455,8 @@ export default function Portfolio() {
       {/* Lightbox Modal */}
       {lightboxImage && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center backdrop-blur-xl bg-white/80 p-4"
+          className="fixed inset-0 z-[100] flex items-center justify-center backdrop-blur-xl bg-white/80"
           onClick={() => setLightboxImage(null)}
-          onTouchStart={handleLightboxTouchStart}
-          onTouchEnd={handleLightboxTouchEnd}
           role="dialog"
           aria-modal="true"
           aria-labelledby="lightbox-image"
@@ -2480,16 +2477,31 @@ export default function Portfolio() {
               </div>
             </button>
           </div>
-          <Image
-            src={lightboxImage.src || "/placeholder.svg"}
-            alt={lightboxImage.alt}
-            width={1920}
-            height={1080}
-            quality={95}
-            className="w-auto max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-            sizes="95vw"
-          />
+          {/* Native horizontal scroll-snap strip so swiping between images is a
+              real, visible scroll (with momentum) instead of an instant swap. */}
+          <div
+            ref={lightboxScrollRef}
+            onScroll={handleLightboxScroll}
+            className="w-full h-full flex overflow-x-auto snap-x snap-mandatory no-scrollbar"
+          >
+            {lightboxImages.map((img, i) => (
+              <div
+                key={`${img.src}-${i}`}
+                className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-4"
+              >
+                <Image
+                  src={img.src || "/placeholder.svg"}
+                  alt={img.alt}
+                  width={1920}
+                  height={1080}
+                  quality={95}
+                  className="w-auto max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+                  onClick={(e) => e.stopPropagation()}
+                  sizes="95vw"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </main>
