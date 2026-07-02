@@ -38,6 +38,11 @@ export default function Portfolio() {
   const dragOffsetRef = useRef({ x: 0, y: 0 })
   const animationFrameRef = useRef<number | null>(null)
 
+  // On mobile there's no hover, so the "+" button on a picture is revealed by
+  // touching that picture (or dragging it) instead, and stays until another
+  // picture is touched.
+  const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null)
+
   const [imageZIndices, setImageZIndices] = useState<number[]>([])
   const maxZIndexRef = useRef(100)
 
@@ -1297,6 +1302,7 @@ export default function Portfolio() {
   const handleButtonClick = (buttonName: string) => {
     setClickedButton(clickedButton === buttonName ? null : buttonName)
     setMobileFilterCategory("All") // Reset mobile filter when switching desktop categories
+    setActiveImageIndex(null)
   }
 
   // Unified pointer-down handler for starting a drag on mouse, touch or pen.
@@ -1317,6 +1323,7 @@ export default function Portfolio() {
 
     draggedImageRef.current = index
     setDraggedImage(index)
+    setActiveImageIndex(index)
 
     const rect = e.currentTarget.getBoundingClientRect()
     dragOffsetRef.current = {
@@ -1339,17 +1346,20 @@ export default function Portfolio() {
       setClickedButton(null)
     }
     setMobileFilterCategory("All") // Reset mobile filter when going back
+    setActiveImageIndex(null)
   }
 
   const handleLogoClick = () => {
     setSelectedProject(null)
     setClickedButton(null)
     setMobileFilterCategory("All") // Reset mobile filter on logo click
+    setActiveImageIndex(null)
   }
 
   const handleProjectClick = (projectName: string) => {
     setSelectedProject(projectName)
     setMobileFilterCategory("All") // Reset mobile filter when selecting a project
+    setActiveImageIndex(null)
   }
 
   // Function to handle mobile filter changes
@@ -1741,7 +1751,15 @@ export default function Portfolio() {
                     />
                   )}
                   {!selectedProject && (
-                    <div className="absolute bottom-4 right-4 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
+                    <div
+                      className={`absolute bottom-4 right-4 transition-opacity duration-300 pointer-events-auto ${
+                        isMobile
+                          ? activeImageIndex === index || draggedImageRef.current === index
+                            ? "opacity-100"
+                            : "opacity-0"
+                          : "opacity-0 md:group-hover:opacity-100"
+                      }`}
+                    >
                       <button
                         onClick={(e) => {
                           e.stopPropagation()
@@ -1799,21 +1817,37 @@ export default function Portfolio() {
                             }
                           }
                         }}
-                        className="flex items-center gap-0 bg-white rounded-full transition-all duration-300 ease-out hover:gap-2 hover:pr-4 overflow-hidden shadow-lg border border-gray-200 group/button cursor-pointer"
+                        className={`flex items-center gap-0 bg-white rounded-full transition-all duration-300 ease-out hover:gap-2 hover:pr-4 overflow-hidden shadow-lg border border-gray-200 group/button cursor-pointer ${
+                          isMobile && (activeImageIndex === index || draggedImageRef.current === index) ? "gap-2 pr-4" : ""
+                        }`}
                       >
                         <div className="w-8 h-8 aspect-square rounded-full bg-white flex items-center justify-center flex-shrink-0">
                           <svg className="w-4 h-4 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                           </svg>
                         </div>
-                        <span className="text-sm font-medium text-gray-900 whitespace-nowrap opacity-0 max-w-0 group-hover/button:opacity-100 group-hover/button:max-w-[200px] transition-all duration-300 ease-out">
+                        <span
+                          className={`text-sm font-medium text-gray-900 whitespace-nowrap transition-all duration-300 ease-out ${
+                            isMobile && (activeImageIndex === index || draggedImageRef.current === index)
+                              ? "opacity-100 max-w-[200px]"
+                              : "opacity-0 max-w-0 group-hover/button:opacity-100 group-hover/button:max-w-[200px]"
+                          }`}
+                        >
                           {image.project || "View Project"}
                         </span>
                       </button>
                     </div>
                   )}
                   {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && !(image as any).isXPost && (
-                    <div className="absolute bottom-4 right-4 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
+                    <div
+                      className={`absolute bottom-4 right-4 transition-opacity duration-300 pointer-events-auto ${
+                        isMobile
+                          ? activeImageIndex === index || draggedImageRef.current === index
+                            ? "opacity-100"
+                            : "opacity-0"
+                          : "opacity-0 md:group-hover:opacity-100"
+                      }`}
+                    >
                       <button
                         onClick={(e) => {
                           e.stopPropagation()
