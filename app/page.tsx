@@ -23,6 +23,9 @@ export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState<string | null>(null)
 
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null)
+  const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([])
+  const [lightboxIndex, setLightboxIndex] = useState(0)
+  const lightboxTouchStartX = useRef<number | null>(null)
 
   const [isVideoPlaying, setIsVideoPlaying] = useState<{ [key: number]: boolean }>({})
   const [isInteractingWithVideo, setIsInteractingWithVideo] = useState<{ [key: number]: boolean }>({})
@@ -34,6 +37,11 @@ export default function Portfolio() {
   const draggedImageRef = useRef<number | null>(null)
   const dragOffsetRef = useRef({ x: 0, y: 0 })
   const animationFrameRef = useRef<number | null>(null)
+
+  // On mobile there's no hover, so the "+" button on a picture is revealed by
+  // touching that picture (or dragging it) instead, and stays until another
+  // picture is touched.
+  const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null)
 
   const [imageZIndices, setImageZIndices] = useState<number[]>([])
   const maxZIndexRef = useRef(100)
@@ -1294,6 +1302,7 @@ export default function Portfolio() {
   const handleButtonClick = (buttonName: string) => {
     setClickedButton(clickedButton === buttonName ? null : buttonName)
     setMobileFilterCategory("All") // Reset mobile filter when switching desktop categories
+    setActiveImageIndex(null)
   }
 
   // Unified pointer-down handler for starting a drag on mouse, touch or pen.
@@ -1314,6 +1323,7 @@ export default function Portfolio() {
 
     draggedImageRef.current = index
     setDraggedImage(index)
+    setActiveImageIndex(index)
 
     const rect = e.currentTarget.getBoundingClientRect()
     dragOffsetRef.current = {
@@ -1336,22 +1346,65 @@ export default function Portfolio() {
       setClickedButton(null)
     }
     setMobileFilterCategory("All") // Reset mobile filter when going back
+    setActiveImageIndex(null)
   }
 
   const handleLogoClick = () => {
     setSelectedProject(null)
     setClickedButton(null)
     setMobileFilterCategory("All") // Reset mobile filter on logo click
+    setActiveImageIndex(null)
   }
 
   const handleProjectClick = (projectName: string) => {
     setSelectedProject(projectName)
     setMobileFilterCategory("All") // Reset mobile filter when selecting a project
+    setActiveImageIndex(null)
   }
 
   // Function to handle mobile filter changes
   const setMobileFilter = (filter: string) => {
     setMobileFilterCategory(filter)
+  }
+
+  // Opens the lightbox for a given image and captures the sibling images from
+  // the current project/category so the lightbox can be swiped between them.
+  const openLightbox = (image: { src?: string; alt: string }) => {
+    const swipeable = getCurrentImages()
+      .filter(
+        (img): img is { src: string; alt: string } =>
+          !!img && !(img as any).isVideo && !(img as any).isYouTube && !(img as any).isMap && !(img as any).isXPost,
+      )
+      .map((img) => ({ src: img.src || "", alt: img.alt }))
+
+    const idx = swipeable.findIndex((img) => img.src === image.src)
+
+    setLightboxImages(swipeable)
+    setLightboxIndex(idx >= 0 ? idx : 0)
+    setLightboxImage({ src: image.src || "", alt: image.alt })
+  }
+
+  const goToLightboxIndex = (newIndex: number) => {
+    if (lightboxImages.length === 0) return
+    const wrapped = (newIndex + lightboxImages.length) % lightboxImages.length
+    setLightboxIndex(wrapped)
+    setLightboxImage(lightboxImages[wrapped])
+  }
+
+  const handleLightboxTouchStart = (e: React.TouchEvent) => {
+    lightboxTouchStartX.current = e.touches[0].clientX
+  }
+
+  const handleLightboxTouchEnd = (e: React.TouchEvent) => {
+    if (lightboxTouchStartX.current === null) return
+    const deltaX = e.changedTouches[0].clientX - lightboxTouchStartX.current
+    const SWIPE_THRESHOLD = 50
+    if (deltaX > SWIPE_THRESHOLD) {
+      goToLightboxIndex(lightboxIndex - 1)
+    } else if (deltaX < -SWIPE_THRESHOLD) {
+      goToLightboxIndex(lightboxIndex + 1)
+    }
+    lightboxTouchStartX.current = null
   }
 
   return (
@@ -1498,7 +1551,7 @@ export default function Portfolio() {
         </div>
 
         <div
-          className={`absolute inset-0 pointer-events-none z-20 transition-opacity duration-500 ${clickedButton ? "opacity-100" : "opacity-0"}`}
+          className={`absolute inset-0 pointer-events-none transition-opacity duration-500 ${clickedButton ? "opacity-100" : "opacity-0"} ${draggedImage !== null ? "z-[60]" : "z-20"}`}
         >
           {clickedButton && (
             <>
@@ -1665,7 +1718,7 @@ export default function Portfolio() {
                       fetchPriority="low"
                       onClick={() => {
                         if (!draggedImageRef.current && selectedProject) {
-                          setLightboxImage({ src: image.src || "", alt: image.alt })
+                          openLightbox(image)
                         }
                       }}
                       className={`w-full h-auto object-contain pointer-events-none select-none ${
@@ -1698,7 +1751,15 @@ export default function Portfolio() {
                     />
                   )}
                   {!selectedProject && (
-                    <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
+                    <div
+                      className={`absolute bottom-4 right-4 transition-opacity duration-300 pointer-events-auto ${
+                        isMobile
+                          ? activeImageIndex === index || draggedImageRef.current === index
+                            ? "opacity-100"
+                            : "opacity-0"
+                          : "opacity-0 md:group-hover:opacity-100"
+                      }`}
+                    >
                       <button
                         onClick={(e) => {
                           e.stopPropagation()
@@ -1756,25 +1817,41 @@ export default function Portfolio() {
                             }
                           }
                         }}
-                        className="flex items-center gap-0 bg-white rounded-full transition-all duration-300 ease-out hover:gap-2 hover:pr-4 overflow-hidden shadow-lg border border-gray-200 group/button cursor-pointer"
+                        className={`flex items-center gap-0 bg-white rounded-full transition-all duration-300 ease-out hover:gap-2 hover:pr-4 overflow-hidden shadow-lg border border-gray-200 group/button cursor-pointer ${
+                          isMobile && (activeImageIndex === index || draggedImageRef.current === index) ? "gap-2 pr-4" : ""
+                        }`}
                       >
                         <div className="w-8 h-8 aspect-square rounded-full bg-white flex items-center justify-center flex-shrink-0">
                           <svg className="w-4 h-4 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                           </svg>
                         </div>
-                        <span className="text-sm font-medium text-gray-900 whitespace-nowrap opacity-0 max-w-0 group-hover/button:opacity-100 group-hover/button:max-w-[200px] transition-all duration-300 ease-out">
+                        <span
+                          className={`text-sm font-medium text-gray-900 whitespace-nowrap transition-all duration-300 ease-out ${
+                            isMobile && (activeImageIndex === index || draggedImageRef.current === index)
+                              ? "opacity-100 max-w-[200px]"
+                              : "opacity-0 max-w-0 group-hover/button:opacity-100 group-hover/button:max-w-[200px]"
+                          }`}
+                        >
                           {image.project || "View Project"}
                         </span>
                       </button>
                     </div>
                   )}
                   {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && !(image as any).isXPost && (
-                    <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-auto">
+                    <div
+                      className={`absolute bottom-4 right-4 transition-opacity duration-300 pointer-events-auto ${
+                        isMobile
+                          ? activeImageIndex === index || draggedImageRef.current === index
+                            ? "opacity-100"
+                            : "opacity-0"
+                          : "opacity-0 md:group-hover:opacity-100"
+                      }`}
+                    >
                       <button
                         onClick={(e) => {
                           e.stopPropagation()
-                          setLightboxImage({ src: image.src || "", alt: image.alt })
+                          openLightbox(image)
                         }}
                         className="w-8 h-8 aspect-square rounded-full bg-white flex items-center justify-center flex-shrink-0 shadow-lg border border-gray-200 cursor-pointer hover:scale-110 transition-transform duration-200"
                         aria-label="View fullscreen"
@@ -2381,6 +2458,8 @@ export default function Portfolio() {
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center backdrop-blur-xl bg-white/80 p-4"
           onClick={() => setLightboxImage(null)}
+          onTouchStart={handleLightboxTouchStart}
+          onTouchEnd={handleLightboxTouchEnd}
           role="dialog"
           aria-modal="true"
           aria-labelledby="lightbox-image"

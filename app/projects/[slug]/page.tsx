@@ -1,7 +1,7 @@
 "use client"
 
 import { useParams } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { projectsData } from "@/lib/projects-data"
@@ -10,6 +10,17 @@ export default function ProjectPage() {
   const params = useParams()
   const slug = params.slug as string
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false)
+  const touchStartX = useRef<number | null>(null)
+
+  useEffect(() => {
+    if (!isLightboxOpen) return
+    const handleEscKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsLightboxOpen(false)
+    }
+    window.addEventListener("keydown", handleEscKey)
+    return () => window.removeEventListener("keydown", handleEscKey)
+  }, [isLightboxOpen])
 
   const project = projectsData[slug as keyof typeof projectsData]
 
@@ -33,6 +44,24 @@ export default function ProjectPage() {
   const handleNextImage = () => {
     setCurrentImageIndex((prev) => (prev === project.images.length - 1 ? 0 : prev + 1))
   }
+
+  const handleLightboxTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+
+  const handleLightboxTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current
+    const SWIPE_THRESHOLD = 50
+    if (deltaX > SWIPE_THRESHOLD) {
+      handlePrevImage()
+    } else if (deltaX < -SWIPE_THRESHOLD) {
+      handleNextImage()
+    }
+    touchStartX.current = null
+  }
+
+  const currentImage = project.images[currentImageIndex]
 
   return (
     <div className="flex flex-col h-[100dvh] md:block md:h-auto md:min-h-screen bg-background">
@@ -77,13 +106,25 @@ export default function ProjectPage() {
             />
           ) : (
             <Image
-              src={project.images[currentImageIndex].src || "/placeholder.svg"}
-              alt={project.images[currentImageIndex].alt}
+              src={currentImage.src || "/placeholder.svg"}
+              alt={currentImage.alt}
               fill
               className="object-contain"
               quality={95}
               sizes="100vw"
             />
+          )}
+
+          {!currentImage.isYouTube && !currentImage.isVideo && (
+            <button
+              onClick={() => setIsLightboxOpen(true)}
+              className="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-background/90 border border-border flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-200"
+              aria-label="Expand image"
+            >
+              <svg className="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+            </button>
           )}
         </div>
 
@@ -213,6 +254,41 @@ export default function ProjectPage() {
           <span className="text-sm font-medium text-foreground">Back</span>
         </Link>
       </div>
+
+      {/* Lightbox Modal */}
+      {isLightboxOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center backdrop-blur-xl bg-background/80 p-4"
+          onClick={() => setIsLightboxOpen(false)}
+          onTouchStart={handleLightboxTouchStart}
+          onTouchEnd={handleLightboxTouchEnd}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="lightbox-image"
+        >
+          <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-30">
+            <button
+              onClick={() => setIsLightboxOpen(false)}
+              className="w-10 h-10 rounded-full bg-background flex items-center justify-center shadow-lg border border-border"
+              aria-label="Close lightbox"
+            >
+              <svg className="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <Image
+            src={currentImage.src || "/placeholder.svg"}
+            alt={currentImage.alt}
+            width={1920}
+            height={1080}
+            quality={95}
+            className="w-auto max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+            sizes="95vw"
+          />
+        </div>
+      )}
     </div>
   )
 }
