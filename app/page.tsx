@@ -1780,7 +1780,8 @@ export default function Portfolio() {
                         }
                       }}
                       className={`w-full h-auto object-contain pointer-events-none select-none ${
-                        image.alt === "A Vida Portuguesa - Grayscale color palette animation"
+                        image.alt === "A Vida Portuguesa - Grayscale color palette animation" ||
+                        image.alt === "Bitte Protocol - Aug 2025 Peak Growth Month"
                           ? "max-w-[8rem] md:max-w-[14.4rem]"
                           : clickedButton === "Visual Communication & Media" && !selectedProject
                             ? "max-w-[10rem] md:max-w-[18rem]"
