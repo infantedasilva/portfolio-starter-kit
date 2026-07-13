@@ -586,6 +586,10 @@ export default function Portfolio() {
         src: "/images/branca-lisboa-desk.jpg",
         alt: "Branca Lisboa - Walnut Wood Desk with Curved Detail",
       },
+      {
+        src: "/images/img-9010t.jpg",
+        alt: "Branca Lisboa - Back View of Black Ergonomic Chair with Blurred Figure Walking By",
+      },
     ],
   }
 

@@ -165,6 +165,10 @@ export const projectsData: Record<
       { src: "/images/branca-lisboa-white-stool.gif", alt: "Branca Lisboa - Animated Rotation of White Wooden Stool" },
       { src: "/images/branca-lisboa-red-chair.jpg", alt: "Branca Lisboa - Single Red Chair Front View" },
       { src: "/images/branca-lisboa-desk.jpg", alt: "Branca Lisboa - Walnut Wood Desk with Curved Detail" },
+      {
+        src: "/images/img-9010t.jpg",
+        alt: "Branca Lisboa - Back View of Black Ergonomic Chair with Blurred Figure Walking By",
+      },
     ],
   },
   "qatalyze-interiors": {
