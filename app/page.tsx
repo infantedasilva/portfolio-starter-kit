@@ -1079,12 +1079,10 @@ export default function Portfolio() {
         { src: "/images/accepting-nfts-table.jpg", alt: "Accepting NFTs Here sign on table", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
         { src: "/images/accepting-nfts-dumplings.jpg", alt: "Accepting NFTs Here at dumplings restaurant", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
         {
-          src: "https://www.openstreetmap.org/export/embed.html?bbox=-9.1700%2C38.7050%2C-9.1200%2C38.7300&layer=mapnik&marker=38.7169%2C-9.1399",
-          alt: "Interactive map of Lisbon NFT locations",
+          src: "/images/accepting-nfts-lisbon-route-guide.png",
+          alt: "Accepting NFTs Here - Lisbon walked route guide with 11 participating locations",
           project: "Accepting NFTs Here",
           category: "Visual Communication & Media",
-          isMap: true,
-          mapLink: "https://medium.com/mintbase/the-future-is-a-thing-of-the-past-tokenising-old-portuguese-products-in-lisbon-a6b365670842",
         },
       ]
     }

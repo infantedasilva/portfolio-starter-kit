@@ -250,6 +250,10 @@ export const projectsData: Record<
       { src: "/images/accepting-nfts-here.jpg", alt: "Accepting NFTs Here signage at restaurant" },
       { src: "/images/accepting-nfts-table.jpg", alt: "Accepting NFTs Here sign on table" },
       { src: "/images/accepting-nfts-dumplings.jpg", alt: "Accepting NFTs Here at dumplings restaurant" },
+      {
+        src: "/images/accepting-nfts-lisbon-route-guide.png",
+        alt: "Accepting NFTs Here - Lisbon walked route guide with 11 participating locations",
+      },
     ],
   },
   "the-eleven-collection": {
