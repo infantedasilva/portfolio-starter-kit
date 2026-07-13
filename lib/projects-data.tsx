@@ -153,7 +153,10 @@ export const projectsData: Record<
     description:
       "After finishing the Product Design course, I had my first professional contact in Branca-Lisboa, directed by Marco Sousa Santos. For two years I was related with several departments that compose Branca-Lisboa studio. From the participation in interior projects to the elaboration of new products for the brand. It was also in the range of my responsibilities in the company communication as newsletters development, product campaigns and management of social networks and the brand site.",
     images: [
-      { src: "/images/img-9010t.jpg", alt: "Branca Lisboa - Thumbnail" },
+      {
+        src: "/images/branca-lisboa-overhead-black.jpg",
+        alt: "Branca Lisboa - Front View of Black Armchair with Silhouette Walking By",
+      },
       {
         src: "/images/branca-lisboa-two-chairs.gif",
         alt: "Branca Lisboa - Animated Rotation of Gray and Black Ergonomic Chairs",
@@ -161,10 +164,6 @@ export const projectsData: Record<
       { src: "/images/branca-lisboa-overhead.jpg", alt: "Branca Lisboa - Overhead View of Multiple Chair Backs" },
       { src: "/images/branca-lisboa-white-stool.gif", alt: "Branca Lisboa - Animated Rotation of White Wooden Stool" },
       { src: "/images/branca-lisboa-red-chair.jpg", alt: "Branca Lisboa - Single Red Chair Front View" },
-      {
-        src: "/images/branca-lisboa-overhead-black.jpg",
-        alt: "Branca Lisboa - Overhead View of Black Ergonomic Kneeling Chair",
-      },
       { src: "/images/branca-lisboa-desk.jpg", alt: "Branca Lisboa - Walnut Wood Desk with Curved Detail" },
     ],
   },
@@ -247,6 +246,7 @@ export const projectsData: Record<
       "The 'Accepting NFTs Here' project by Mintbase tested how NFTs could be used in real life in Lisbon. Local businesses like cafés, bars, and shops accepted NFTs as a way for customers to redeem real products, such as drinks, food, or other items. Instead of being only digital collectibles, the NFTs worked like vouchers. The project showed how blockchain and NFTs can be used in everyday situations and help connect digital ownership with physical places.",
     blogUrl: "https://medium.com/mintbase/accepting-nfts-here-bringing-nfts-to-real-life-in-the-streets-of-lisbon-2de5e0892062",
     images: [
+      { src: "/images/accepting-nfts-lisbon-map.png", alt: "Accepting NFTs Here - Map of Lisbon Locations" },
       { src: "/images/accepting-nfts-here.jpg", alt: "Accepting NFTs Here signage at restaurant" },
       { src: "/images/accepting-nfts-table.jpg", alt: "Accepting NFTs Here sign on table" },
       { src: "/images/accepting-nfts-dumplings.jpg", alt: "Accepting NFTs Here at dumplings restaurant" },

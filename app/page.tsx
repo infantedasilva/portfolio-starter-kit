@@ -436,8 +436,8 @@ export default function Portfolio() {
     category: string
   }[] = [
     {
-      src: "/images/img-9010t.jpg",
-      alt: "Branca Lisboa",
+      src: "/images/branca-lisboa-overhead-black.jpg",
+      alt: "Branca Lisboa - Front View of Black Armchair with Silhouette Walking By",
       project: "Branca Lisboa",
       category: "Visual Communication & Media",
     },
@@ -466,8 +466,8 @@ export default function Portfolio() {
       category: "Visual Communication & Media",
     },
     {
-      src: "/images/accepting-nfts-here.jpg",
-      alt: "Accepting NFTs Here",
+      src: "/images/accepting-nfts-lisbon-map.png",
+      alt: "Accepting NFTs Here - Map of Lisbon Locations",
       project: "Accepting NFTs Here",
       category: "Visual Communication & Media",
     },
@@ -544,10 +544,6 @@ export default function Portfolio() {
       {
         src: "/images/branca-lisboa-red-chair.jpg",
         alt: "Branca Lisboa - Single Red Chair Front View",
-      },
-      {
-        src: "/images/branca-lisboa-overhead-black.jpg",
-        alt: "Branca Lisboa - Overhead View of Black Ergonomic Kneeling Chair",
       },
       {
         src: "/images/branca-lisboa-desk.jpg",
@@ -1041,6 +1037,7 @@ export default function Portfolio() {
       const originalAcceptingNfts = visualCommPortfolioImages.find((img) => img.project === "Accepting NFTs Here")
       return [
         originalAcceptingNfts,
+        { src: "/images/accepting-nfts-here.jpg", alt: "Accepting NFTs Here signage at restaurant", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
         { src: "/images/accepting-nfts-table.jpg", alt: "Accepting NFTs Here sign on table", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
         { src: "/images/accepting-nfts-dumplings.jpg", alt: "Accepting NFTs Here at dumplings restaurant", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
         {
@@ -1717,9 +1714,11 @@ export default function Portfolio() {
                         }
                       }}
                       className={`w-full h-auto object-contain pointer-events-none select-none ${
-                        clickedButton === "Visual Communication & Media" && !selectedProject
-                          ? "max-w-[10rem] md:max-w-[18rem]"
-                          : selectedProject === "Graf" && index > 0
+                        image.alt === "A Vida Portuguesa - Grayscale color palette animation"
+                          ? "max-w-[8rem] md:max-w-[14.4rem]"
+                          : clickedButton === "Visual Communication & Media" && !selectedProject
+                            ? "max-w-[10rem] md:max-w-[18rem]"
+                            : selectedProject === "Graf" && index > 0
                             ? "max-w-[14rem] md:max-w-[26rem]" // Corrected from original code's specific condition
                             : selectedProject === "The Eleven Collection" && image.alt === "The Eleven Collection interface and visuals"
                               ? "max-w-[16rem] md:max-w-[32rem]"
@@ -2263,7 +2262,17 @@ export default function Portfolio() {
               {/* Marco Sousa Santos */}
               <div className="mb-6">
                 <h5 className="text-sm font-bold text-foreground">Marco Sousa Santos</h5>
-                <p className="text-xs text-foreground/70 mb-2">CEO and Creative Director at Branca Lisboa</p>
+                <p className="text-xs text-foreground/70 mb-2">
+                  CEO and Creative Director at{" "}
+                  <a
+                    href="https://www.branca-lisboa.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-foreground"
+                  >
+                    Branca Lisboa
+                  </a>
+                </p>
                 <p className="text-xs text-foreground/70 italic leading-relaxed">
                   "Luis embraced each project with remarkable dedication, proving to be a fundamental element in
                   achieving our goals. Beyond his dedication and technical skill, Luis Infante is genuinely creative and
@@ -2370,7 +2379,17 @@ export default function Portfolio() {
                 <div className="flex items-start gap-4 mb-4 md:mb-6">
                   <div className="flex-1">
                     <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">Marco Sousa Santos</h3>
-                    <p className="text-xs md:text-sm text-gray-600">CEO and Creative Director at Branca Lisboa</p>
+                    <p className="text-xs md:text-sm text-gray-600">
+                      CEO and Creative Director at{" "}
+                      <a
+                        href="https://www.branca-lisboa.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline hover:text-gray-900"
+                      >
+                        Branca Lisboa
+                      </a>
+                    </p>
                     <p className="text-xs text-gray-500 mt-1">December 11, 2025 · Marco managed Luis directly</p>
                   </div>
                 </div>
