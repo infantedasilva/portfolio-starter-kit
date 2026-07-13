@@ -1055,6 +1055,12 @@ export default function Portfolio() {
       return [
         originalFNAC,
         {
+          src: "/images/dsc04217.jpg",
+          alt: "FNAC - Mintbase NFT store on phone in front of FNAC store sign",
+          project: "FNAC",
+          category: "Visual Communication & Media",
+        },
+        {
           src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Fnac%20usecase-oo7QBLp55jYyCXmnei9Mt7z2VL2wrZ.mp4",
           alt: "FNAC Use Case Video",
           project: "FNAC",
@@ -1676,6 +1682,10 @@ export default function Portfolio() {
                           setIsInteractingWithVideo((prev) => ({ ...prev, [index]: false }))
                         }}
                       />
+                      {/* Transparent drag-capture layer so the browser's native video controls
+                          (which live in a separate rendering layer) never swallow the drag
+                          gesture — only the bottom 40px (native scrubber/controls) is left clickable. */}
+                      <div className="absolute inset-x-0 top-0 bottom-10" />
                       {!isVideoPlaying[index] && (
                         <div
                           className="absolute inset-0 flex items-center justify-center pointer-events-none"

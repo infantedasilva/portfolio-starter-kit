@@ -242,6 +242,10 @@ export const projectsData: Record<
         alt: "FNAC Novos Talentos",
       },
       {
+        src: "/images/dsc04217.jpg",
+        alt: "FNAC - Mintbase NFT store on phone in front of FNAC store sign",
+      },
+      {
         src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ssstwitter.com_1768334502446-PLAqNUD1tfjf7TMlmVrTbLZRldt3ze.mp4",
         alt: "FNAC Mintbase Partnership Video",
         isVideo: true,
