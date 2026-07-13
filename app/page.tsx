@@ -648,6 +648,10 @@ export default function Portfolio() {
         src: "/images/vida-portuguesa-branding.jpg",
         alt: "A Vida Portuguesa - Branding collateral with swallow bird illustrations and NFT redemption materials",
       },
+      {
+        src: "/images/vida-portuguesa-exhibition-table.jpg",
+        alt: "A Vida Portuguesa - Exhibition table with A Andorinha The Swallow packaging under green lighting",
+      },
     ],
     video: {
       src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avidaportuguesaexplainer-zofCQoM5tEkm5Nhmsx5Cnbk3K9rd27.mp4",

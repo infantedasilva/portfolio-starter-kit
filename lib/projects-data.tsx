@@ -216,6 +216,10 @@ export const projectsData: Record<
       'Visual Communication & Media project for <a href="https://www.avidaportuguesa.com/en" target="_blank" rel="noopener noreferrer">A Vida Portuguesa</a>, a Portuguese brand that celebrates Portuguese craftsmanship and heritage.',
     images: [
       { src: "/images/vida-portuguesa-palette.gif", alt: "A Vida Portuguesa - Grayscale color palette animation" },
+      {
+        src: "/images/vida-portuguesa-exhibition-table.jpg",
+        alt: "A Vida Portuguesa - Exhibition table with A Andorinha The Swallow packaging under green lighting",
+      },
     ],
   },
   fnac: {
