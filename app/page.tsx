@@ -1628,7 +1628,9 @@ export default function Portfolio() {
                     <div className="relative">
                       <video
                         src={image.src || ""}
-                        className={`w-full h-auto object-contain pointer-events-auto select-none max-w-[8rem] md:max-w-[16rem] transition-all duration-300 ease-out ${
+                        className={`w-full h-auto object-contain pointer-events-auto select-none ${
+                          image.alt === "Bitte Wallet - Product demo video" ? "max-w-[11rem] md:max-w-[20rem]" : "max-w-[8rem] md:max-w-[16rem]"
+                        } transition-all duration-300 ease-out ${
                           isMobile
                             ? ""
                             : draggedImageRef.current === index
@@ -1765,6 +1767,16 @@ export default function Portfolio() {
                         transition: draggedImageRef.current === index ? "none" : "all 0.3s ease-out",
                       }}
                     >
+                      {/* Instagram's embed hydrates into a cross-origin iframe, which
+                          swallows pointer events before they reach our drag handler.
+                          This handle bar sits outside the iframe so the card stays
+                          draggable while the embed itself remains fully interactive. */}
+                      <div
+                        className="flex items-center justify-center h-5 bg-white border border-b-0 border-gray-200 rounded-t-lg cursor-grab active:cursor-grabbing"
+                        style={{ touchAction: "none" }}
+                      >
+                        <div className="w-8 h-1 rounded-full bg-gray-300" />
+                      </div>
                       <InstagramEmbedCard url={(image as any).instagramUrl} />
                     </div>
                   ) : (
@@ -1781,17 +1793,22 @@ export default function Portfolio() {
                       }}
                       className={`w-full h-auto object-contain pointer-events-none select-none ${
                         image.alt === "A Vida Portuguesa - Grayscale color palette animation" ||
-                        image.alt === "Bitte Protocol - Aug 2025 Peak Growth Month"
+                        image.alt === "Bitte Protocol - Aug 2025 Peak Growth Month" ||
+                        image.alt === "Bitte Protocol - Jul 2025 Viral Spike, 43K views" ||
+                        image.alt === "Bitte Protocol - Feb 2025 Kite AI Launch, 9K views" ||
+                        image.alt === "Bitte Protocol - Mar 2025 Hackathon Recap, 8.8K views"
                           ? "max-w-[8rem] md:max-w-[14.4rem]"
-                          : clickedButton === "Visual Communication & Media" && !selectedProject
-                            ? "max-w-[10rem] md:max-w-[18rem]"
-                            : selectedProject === "Graf" && index > 0
-                            ? "max-w-[14rem] md:max-w-[26rem]" // Corrected from original code's specific condition
-                            : selectedProject === "The Eleven Collection" && image.alt === "The Eleven Collection interface and visuals"
-                              ? "max-w-[16rem] md:max-w-[32rem]"
-                              : selectedProject
-                                ? "max-w-[10rem] md:max-w-[18rem]"
-                                : "max-w-[10rem] md:max-w-[18rem]"
+                          : image.alt === "Bitte Wallet - Arctic Hippo Free Token Drop mockup"
+                            ? "max-w-[12rem] md:max-w-[22rem]"
+                            : clickedButton === "Visual Communication & Media" && !selectedProject
+                              ? "max-w-[10rem] md:max-w-[18rem]"
+                              : selectedProject === "Graf" && index > 0
+                              ? "max-w-[14rem] md:max-w-[26rem]" // Corrected from original code's specific condition
+                              : selectedProject === "The Eleven Collection" && image.alt === "The Eleven Collection interface and visuals"
+                                ? "max-w-[16rem] md:max-w-[32rem]"
+                                : selectedProject
+                                  ? "max-w-[10rem] md:max-w-[18rem]"
+                                  : "max-w-[10rem] md:max-w-[18rem]"
                       } overflow-hidden transition-all duration-300 ease-out perspective-1000 relative shadow-none ${
                         isMobile
                           ? ""
