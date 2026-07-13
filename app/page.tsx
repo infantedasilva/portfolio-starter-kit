@@ -448,14 +448,14 @@ export default function Portfolio() {
       category: "Visual Communication & Media",
     },
     {
-      src: "/images/a-vida-portuguesa.jpg",
-      alt: "A Vida Portuguesa",
+      src: "/images/vida-portuguesa-palette.gif",
+      alt: "A Vida Portuguesa - Grayscale color palette animation",
       project: "A Vida Portuguesa",
       category: "Visual Communication & Media",
     },
     {
-      src: "/images/dsc04217.jpg",
-      alt: "FNAC",
+      src: "/images/fnac-novos-talentos-logo.png",
+      alt: "FNAC Novos Talentos",
       project: "FNAC",
       category: "Visual Communication & Media",
     },
@@ -519,7 +519,7 @@ export default function Portfolio() {
     images: [
       { src: "/images/fka-twigs-eleven-collection.webp", alt: "FKA twigs - The Eleven Collection" },
       { src: "/images/eleven-collection-interface.jpg", alt: "The Eleven Collection interface and visuals" },
-      { src: "/images/eleven-collection-performance.gif", alt: "FKA twigs performance from The Eleven Collection" },
+      { src: "/images/eleven-collection-performance.webp", alt: "FKA twigs performance from The Eleven Collection" },
     ],
   }
 
@@ -610,10 +610,6 @@ export default function Portfolio() {
       {
         src: "/images/vida-portuguesa-branding.jpg",
         alt: "A Vida Portuguesa - Branding collateral with swallow bird illustrations and NFT redemption materials",
-      },
-      {
-        src: "/images/vida-portuguesa-palette.gif",
-        alt: "A Vida Portuguesa - Grayscale color palette animation",
       },
     ],
     video: {
@@ -1030,7 +1026,7 @@ export default function Portfolio() {
       return [
         originalElevenCollection,
         { src: "/images/eleven-collection-interface.jpg", alt: "The Eleven Collection interface and visuals", project: "The Eleven Collection", category: "Visual Communication & Media" },
-        { src: "/images/eleven-collection-performance.gif", alt: "FKA twigs performance from The Eleven Collection", project: "The Eleven Collection", category: "Visual Communication & Media" },
+        { src: "/images/eleven-collection-performance.webp", alt: "FKA twigs performance from The Eleven Collection", project: "The Eleven Collection", category: "Visual Communication & Media" },
         {
           src: "https://x.com/BitteProtocol/status/1836349828218966327",
           alt: "Bitte Protocol post about The Eleven Collection on X",
@@ -1725,9 +1721,11 @@ export default function Portfolio() {
                           ? "max-w-[10rem] md:max-w-[18rem]"
                           : selectedProject === "Graf" && index > 0
                             ? "max-w-[14rem] md:max-w-[26rem]" // Corrected from original code's specific condition
-                            : selectedProject
-                              ? "max-w-[10rem] md:max-w-[18rem]"
-                              : "max-w-[10rem] md:max-w-[18rem]"
+                            : selectedProject === "The Eleven Collection" && image.alt === "The Eleven Collection interface and visuals"
+                              ? "max-w-[16rem] md:max-w-[32rem]"
+                              : selectedProject
+                                ? "max-w-[10rem] md:max-w-[18rem]"
+                                : "max-w-[10rem] md:max-w-[18rem]"
                       } overflow-hidden transition-all duration-300 ease-out perspective-1000 relative shadow-none ${
                         isMobile
                           ? ""

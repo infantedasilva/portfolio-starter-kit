@@ -211,7 +211,9 @@ export const projectsData: Record<
     category: "Visual Communication & Media",
     description:
       'Visual Communication & Media project for <a href="https://www.avidaportuguesa.com/en" target="_blank" rel="noopener noreferrer">A Vida Portuguesa</a>, a Portuguese brand that celebrates Portuguese craftsmanship and heritage.',
-    images: [{ src: "/images/a-vida-portuguesa.jpg", alt: "A Vida Portuguesa" }],
+    images: [
+      { src: "/images/vida-portuguesa-palette.gif", alt: "A Vida Portuguesa - Grayscale color palette animation" },
+    ],
   },
   fnac: {
     name: "FNAC",
@@ -220,6 +222,10 @@ export const projectsData: Record<
     description:
       'Our team at Mintbase partnered with FNAC Portugal to integrate NEAR-based NFT technology into the "Novos Talentos" program. We enabled contest winners to tokenize their works as redeemable NFTs, ensuring perpetual royalties and promoting digital ownership. This initiative bridges legacy retail with the Web3 creator economy, modernizing cultural patronage.',
     images: [
+      {
+        src: "/images/fnac-novos-talentos-logo.png",
+        alt: "FNAC Novos Talentos",
+      },
       {
         src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ssstwitter.com_1768334502446-PLAqNUD1tfjf7TMlmVrTbLZRldt3ze.mp4",
         alt: "FNAC Mintbase Partnership Video",
@@ -244,7 +250,6 @@ export const projectsData: Record<
       { src: "/images/accepting-nfts-here.jpg", alt: "Accepting NFTs Here signage at restaurant" },
       { src: "/images/accepting-nfts-table.jpg", alt: "Accepting NFTs Here sign on table" },
       { src: "/images/accepting-nfts-dumplings.jpg", alt: "Accepting NFTs Here at dumplings restaurant" },
-      { src: "/images/accepting-nfts-map.jpg", alt: "Accepting NFTs Here map of Lisbon locations" },
     ],
   },
   "the-eleven-collection": {
@@ -257,7 +262,7 @@ export const projectsData: Record<
     images: [
       { src: "/images/fka-twigs-eleven-collection.webp", alt: "FKA twigs - The Eleven Collection" },
       { src: "/images/eleven-collection-interface.jpg", alt: "The Eleven Collection interface and visuals" },
-      { src: "/images/eleven-collection-performance.gif", alt: "FKA twigs performance from The Eleven Collection" },
+      { src: "/images/eleven-collection-performance.webp", alt: "FKA twigs performance from The Eleven Collection" },
     ],
   },
   mude: {
