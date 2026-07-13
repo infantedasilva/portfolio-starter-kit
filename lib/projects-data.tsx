@@ -265,6 +265,25 @@ export const projectsData: Record<
       { src: "/images/eleven-collection-performance.webp", alt: "FKA twigs performance from The Eleven Collection" },
     ],
   },
+  "bitte-protocol": {
+    name: "Bitte Protocol",
+    year: "2025",
+    category: "Visual Communication & Media",
+    description:
+      "As Creative Strategist at Bitte Protocol, I led visual storytelling across social media and product design — from data-driven growth recap graphics to UI mockups and demo videos for the Bitte Wallet's Free Token Drop feature. This work bridged technical product updates with an accessible, on-brand visual language for the community.",
+    images: [
+      { src: "/images/bitte-protocol-stats-aug-2025.png", alt: "Bitte Protocol - Aug 2025 Peak Growth Month" },
+      { src: "/images/bitte-protocol-stats-jul-2025.png", alt: "Bitte Protocol - Jul 2025 Viral Spike, 43K views" },
+      { src: "/images/bitte-protocol-stats-feb-2025.png", alt: "Bitte Protocol - Feb 2025 Kite AI Launch, 9K views" },
+      { src: "/images/bitte-protocol-stats-mar-2025.png", alt: "Bitte Protocol - Mar 2025 Hackathon Recap, 8.8K views" },
+      { src: "/images/bitte-protocol-wallet-mockup.png", alt: "Bitte Wallet - Arctic Hippo Free Token Drop mockup" },
+      {
+        src: "/images/bitte-protocol-wallet-demo.mp4",
+        alt: "Bitte Wallet - Product demo video",
+        isVideo: true,
+      },
+    ],
+  },
   mude: {
     name: "MUDE",
     year: "2017",

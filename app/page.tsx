@@ -6,6 +6,7 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import TweetEmbedCard from "@/components/tweet-embed-card"
+import InstagramEmbedCard from "@/components/instagram-embed-card"
 
 const projectNameToSlug = (name: string) => {
   return name
@@ -477,6 +478,12 @@ export default function Portfolio() {
       project: "Qatalyze Interiors",
       category: "Visual Communication & Media",
     },
+    {
+      src: "/images/bitte-protocol-stats-aug-2025.png",
+      alt: "Bitte Protocol - Aug 2025 Peak Growth Month",
+      project: "Bitte Protocol",
+      category: "Visual Communication & Media",
+    },
   ]
 
   const videoPortfolioImages: { src: string; alt: string; project: string; category: string }[] = []
@@ -507,6 +514,36 @@ export default function Portfolio() {
       { src: "/images/qatalyze-shelving.jpeg", alt: "Qatalyze Interiors - Modular Brass Shelving System" },
       { src: "/images/qatalyze-oculos.jpg", alt: "Qatalyze Interiors - Decorative Bowl with Radial Pattern" },
       { src: "/images/qatalyze-sofa-detail.jpg", alt: "Qatalyze Interiors - Sofa Fabric and Construction Detail" },
+    ],
+  }
+
+  const bitteProtocolProject = {
+    name: "Bitte Protocol",
+    year: "2025",
+    description:
+      "As Creative Strategist at Bitte Protocol, I led visual storytelling across social media and product design — from data-driven growth recap graphics to UI mockups and demo videos for the Bitte Wallet's Free Token Drop feature. This work bridged technical product updates with an accessible, on-brand visual language for the community.",
+    images: [
+      { src: "/images/bitte-protocol-stats-jul-2025.png", alt: "Bitte Protocol - Jul 2025 Viral Spike, 43K views" },
+      { src: "/images/bitte-protocol-stats-feb-2025.png", alt: "Bitte Protocol - Feb 2025 Kite AI Launch, 9K views" },
+      { src: "/images/bitte-protocol-stats-mar-2025.png", alt: "Bitte Protocol - Mar 2025 Hackathon Recap, 8.8K views" },
+      { src: "/images/bitte-protocol-wallet-mockup.png", alt: "Bitte Wallet - Arctic Hippo Free Token Drop mockup" },
+      {
+        src: "/images/bitte-protocol-wallet-demo.mp4",
+        alt: "Bitte Wallet - Product demo video",
+        isVideo: true,
+      },
+      {
+        src: "https://www.instagram.com/p/Ci2NbGyrJlb/",
+        alt: "Bitte Protocol Instagram post",
+        isInstagramPost: true,
+        instagramUrl: "https://www.instagram.com/p/Ci2NbGyrJlb/?utm_source=ig_web_copy_link",
+      },
+      {
+        src: "https://www.instagram.com/p/Cizq83EM-2-/",
+        alt: "Bitte Protocol Instagram post",
+        isInstagramPost: true,
+        instagramUrl: "https://www.instagram.com/p/Cizq83EM-2-/?utm_source=ig_web_copy_link",
+      },
     ],
   }
 
@@ -806,6 +843,7 @@ export default function Portfolio() {
     { name: "Mintbase Interviews", year: "2022", category: "Visual Communication & Media" },
     { name: "A Vida Portuguesa", year: "2024", category: "Visual Communication & Media" },
     { name: "FNAC", year: "2022", category: "Visual Communication & Media" },
+    { name: "Bitte Protocol", year: "2025", category: "Visual Communication & Media" },
   ]
 
   const projects = [
@@ -1060,6 +1098,18 @@ export default function Portfolio() {
         { src: "/images/qatalyze-shelving.jpeg", alt: "Qatalyze Interiors - Modular Shelving", project: "Qatalyze Interiors", category: "Visual Communication & Media" },
         { src: "/images/qatalyze-oculos.jpg", alt: "Qatalyze Interiors - Decorative Bowl", project: "Qatalyze Interiors", category: "Visual Communication & Media" },
         { src: "/images/qatalyze-sofa-detail.jpg", alt: "Qatalyze Interiors - Sofa Detail", project: "Qatalyze Interiors", category: "Visual Communication & Media" },
+      ]
+    }
+
+    if (selectedProject === "Bitte Protocol") {
+      const originalBitteProtocol = visualCommPortfolioImages.find((img) => img.project === "Bitte Protocol")
+      return [
+        originalBitteProtocol,
+        ...bitteProtocolProject.images.map((img) => ({
+          ...img,
+          project: "Bitte Protocol",
+          category: "Visual Communication & Media",
+        })),
       ]
     }
 
@@ -1376,7 +1426,12 @@ export default function Portfolio() {
     const swipeable = getCurrentImages()
       .filter(
         (img): img is { src: string; alt: string } =>
-          !!img && !(img as any).isVideo && !(img as any).isYouTube && !(img as any).isMap && !(img as any).isXPost,
+          !!img &&
+          !(img as any).isVideo &&
+          !(img as any).isYouTube &&
+          !(img as any).isMap &&
+          !(img as any).isXPost &&
+          !(img as any).isInstagramPost,
       )
       .map((img) => ({ src: img.src || "", alt: img.alt }))
 
@@ -1701,6 +1756,17 @@ export default function Portfolio() {
                     >
                       <TweetEmbedCard />
                     </div>
+                  ) : (image as any).isInstagramPost ? (
+                    <div
+                      style={{
+                        width: isMobile ? "13rem" : "20rem",
+                        transform: `rotateY(${getRotation(imageRefs.current[index], mousePosition.x)}deg)`,
+                        transformStyle: "preserve-3d",
+                        transition: draggedImageRef.current === index ? "none" : "all 0.3s ease-out",
+                      }}
+                    >
+                      <InstagramEmbedCard url={(image as any).instagramUrl} />
+                    </div>
                   ) : (
                     <img
                       src={image.src || "/placeholder.svg"}
@@ -1811,6 +1877,9 @@ export default function Portfolio() {
                             if (index === 6) {
                               handleProjectClick("Qatalyze Interiors")
                             }
+                            if (index === 7) {
+                              handleProjectClick("Bitte Protocol")
+                            }
                           }
                         }}
                         className={`flex items-center gap-0 bg-white rounded-full transition-all duration-300 ease-out hover:gap-2 hover:pr-4 overflow-hidden shadow-lg border border-gray-200 group/button cursor-pointer ${
@@ -1834,7 +1903,7 @@ export default function Portfolio() {
                       </button>
                     </div>
                   )}
-                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && !(image as any).isXPost && (
+                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && !(image as any).isXPost && !(image as any).isInstagramPost && (
                     <div
                       className={`absolute bottom-4 right-4 transition-opacity duration-300 pointer-events-auto ${
                         isMobile
@@ -2076,6 +2145,16 @@ export default function Portfolio() {
               <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{qatalyzeInteriorsProject.name}</h2>
               <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{qatalyzeInteriorsProject.year}</p>
               <p className="text-xs md:text-base text-gray-700 leading-relaxed">{qatalyzeInteriorsProject.description}</p>
+            </div>
+          </div>
+        )}
+
+        {selectedProject === "Bitte Protocol" && (
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{bitteProtocolProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{bitteProtocolProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{bitteProtocolProject.description}</p>
             </div>
           </div>
         )}
