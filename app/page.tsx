@@ -65,10 +65,13 @@ export default function Portfolio() {
     { top: "75%", left: "70%" },
   ]
 
+  // Rule: no position here may place an image in the fixed header's zone
+  // (top ~0-24%, where the logo + badge live) — anything above that is
+  // unreachable to drag, since the header sits above it at z-50.
   const projectPositions = [
-    { top: "5%", left: "15%" }, // Left side, top
-    { top: "12%", left: "75%" }, // Right side, top
-    { top: "20%", left: "10%" }, // Left side
+    { top: "26%", left: "15%" }, // Left side, top
+    { top: "30%", left: "75%" }, // Right side, top
+    { top: "34%", left: "10%" }, // Left side
     { top: "35%", left: "80%" }, // Right side
     { top: "45%", left: "20%" }, // Left side
     { top: "55%", left: "75%" }, // Right side
@@ -80,15 +83,15 @@ export default function Portfolio() {
   ]
 
   const projectPagePositions = [
-    { top: "5%", left: "55%" },
-    { top: "15%", left: "70%" },
+    { top: "26%", left: "55%" },
+    { top: "30%", left: "70%" },
     { top: "25%", left: "60%" },
     { top: "35%", left: "75%" },
     { top: "45%", left: "65%" },
     { top: "55%", left: "80%" },
     { top: "65%", left: "58%" },
     { top: "75%", left: "72%" },
-    { top: "10%", left: "85%" },
+    { top: "28%", left: "85%" },
     { top: "50%", left: "68%" },
     { top: "80%", left: "62%" },
   ]
