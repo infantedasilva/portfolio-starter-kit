@@ -2636,6 +2636,7 @@ export default function Portfolio() {
                   width={1920}
                   height={1080}
                   quality={95}
+                  unoptimized={img.src?.endsWith(".gif")}
                   className="w-auto max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
                   onClick={(e) => e.stopPropagation()}
                   sizes="95vw"
