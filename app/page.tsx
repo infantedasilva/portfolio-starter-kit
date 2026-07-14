@@ -1797,6 +1797,7 @@ export default function Portfolio() {
                     </div>
                   ) : (image as any).isInstagramPost ? (
                     <div
+                      className="relative"
                       style={{
                         width: isMobile ? "13rem" : "20rem",
                         transform: `rotateY(${getRotation(imageRefs.current[index], mousePosition.x)}deg)`,
@@ -1806,15 +1807,15 @@ export default function Portfolio() {
                     >
                       {/* Instagram's embed hydrates into a cross-origin iframe, which
                           swallows pointer events before they reach our drag handler.
-                          A padded frame around the embed (rather than a thin strip)
-                          keeps the whole card grabbable while the embed itself
-                          remains fully interactive. */}
+                          This grip sits centered above the card so it stays
+                          draggable while the embed itself remains fully interactive. */}
                       <div
-                        className="bg-white border border-gray-200 rounded-lg p-3 shadow-lg cursor-grab active:cursor-grabbing"
+                        className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center justify-center w-10 h-5 bg-white border border-gray-200 rounded-full shadow cursor-grab active:cursor-grabbing"
                         style={{ touchAction: "none" }}
                       >
-                        <InstagramEmbedCard url={(image as any).instagramUrl} />
+                        <div className="w-6 h-1 rounded-full bg-gray-300" />
                       </div>
+                      <InstagramEmbedCard url={(image as any).instagramUrl} />
                     </div>
                   ) : (
                     <img
