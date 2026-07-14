@@ -1806,15 +1806,15 @@ export default function Portfolio() {
                     >
                       {/* Instagram's embed hydrates into a cross-origin iframe, which
                           swallows pointer events before they reach our drag handler.
-                          This handle bar sits outside the iframe so the card stays
-                          draggable while the embed itself remains fully interactive. */}
+                          A padded frame around the embed (rather than a thin strip)
+                          keeps the whole card grabbable while the embed itself
+                          remains fully interactive. */}
                       <div
-                        className="flex items-center justify-center h-5 bg-white border border-b-0 border-gray-200 rounded-t-lg cursor-grab active:cursor-grabbing"
+                        className="bg-white border border-gray-200 rounded-lg p-3 shadow-lg cursor-grab active:cursor-grabbing"
                         style={{ touchAction: "none" }}
                       >
-                        <div className="w-8 h-1 rounded-full bg-gray-300" />
+                        <InstagramEmbedCard url={(image as any).instagramUrl} />
                       </div>
-                      <InstagramEmbedCard url={(image as any).instagramUrl} />
                     </div>
                   ) : (
                     <img
