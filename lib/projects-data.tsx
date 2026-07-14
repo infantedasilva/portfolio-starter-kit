@@ -312,7 +312,7 @@ export const projectsData: Record<
         isVideo: true,
       },
       {
-        src: "https://www.youtube.com/embed/MFrP7w1Z9wE",
+        src: "https://www.youtube.com/embed/MFrP7w1Z9wE?autoplay=1&mute=1&loop=1&playlist=MFrP7w1Z9wE&controls=0",
         alt: "Bitte Protocol - YouTube video",
         isYouTube: true,
         isLarger: true,
