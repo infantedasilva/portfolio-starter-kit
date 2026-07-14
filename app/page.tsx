@@ -28,6 +28,7 @@ export default function Portfolio() {
   const [lightboxIndex, setLightboxIndex] = useState(0)
   const lightboxScrollRef = useRef<HTMLDivElement | null>(null)
   const lightboxScrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const headerRef = useRef<HTMLDivElement | null>(null)
 
   const [isVideoPlaying, setIsVideoPlaying] = useState<{ [key: number]: boolean }>({})
   const [isInteractingWithVideo, setIsInteractingWithVideo] = useState<{ [key: number]: boolean }>({})
@@ -107,6 +108,29 @@ export default function Portfolio() {
       setImagePositions(homepagePositions)
     }
   }, [selectedProject, clickedButton])
+
+  // Chromium/WebKit sometimes fail to repaint the fixed-position header
+  // (and its logo image) after devicePixelRatio changes, e.g. when a window
+  // is dragged between displays with different scaling — it stays blank
+  // until some other layout event forces a reflow. Force one ourselves.
+  useEffect(() => {
+    let mql = window.matchMedia(`(resolution: ${window.devicePixelRatio}dppx)`)
+
+    const forceRepaint = () => {
+      const header = headerRef.current
+      if (header) {
+        header.style.display = "none"
+        void header.offsetHeight
+        header.style.display = ""
+      }
+      mql.removeEventListener("change", forceRepaint)
+      mql = window.matchMedia(`(resolution: ${window.devicePixelRatio}dppx)`)
+      mql.addEventListener("change", forceRepaint)
+    }
+
+    mql.addEventListener("change", forceRepaint)
+    return () => mql.removeEventListener("change", forceRepaint)
+  }, [])
 
   const marsChairProject = {
     name: "Mars Chair",
@@ -1491,7 +1515,7 @@ export default function Portfolio() {
     <main className="min-h-screen overflow-hidden md:overflow-auto">
       {/* Unified Gallery View — same draggable experience on mobile and desktop */}
       <section className="block px-6 py-12 relative overflow-hidden h-screen">
-        <div className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center gap-3 px-8 py-4 md:px-10 md:py-6">
+        <div ref={headerRef} className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center gap-3 px-8 py-4 md:px-10 md:py-6">
           <Image
             src="/images/new-20logo.png"
             alt="Luis Infante"
@@ -1501,7 +1525,6 @@ export default function Portfolio() {
             quality={90}
             className="h-16 md:h-24 w-auto cursor-pointer"
             onClick={handleLogoClick}
-            sizes="(max-width: 768px) 64px, 96px"
           />
           <div className="px-3 py-1 text-sm rounded-full whitespace-nowrap border text-brand border-brand font-medium">
             Creative Strategist & Designer
