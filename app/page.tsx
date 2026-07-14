@@ -6,6 +6,7 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import TweetEmbedCard from "@/components/tweet-embed-card"
+import InstagramEmbedCard from "@/components/instagram-embed-card"
 
 const projectNameToSlug = (name: string) => {
   return name
@@ -64,10 +65,13 @@ export default function Portfolio() {
     { top: "75%", left: "70%" },
   ]
 
+  // Rule: no position here may place an image in the fixed header's zone
+  // (top ~0-24%, where the logo + badge live) — anything above that is
+  // unreachable to drag, since the header sits above it at z-50.
   const projectPositions = [
-    { top: "5%", left: "15%" }, // Left side, top
-    { top: "12%", left: "75%" }, // Right side, top
-    { top: "20%", left: "10%" }, // Left side
+    { top: "26%", left: "15%" }, // Left side, top
+    { top: "30%", left: "75%" }, // Right side, top
+    { top: "34%", left: "10%" }, // Left side
     { top: "35%", left: "80%" }, // Right side
     { top: "45%", left: "20%" }, // Left side
     { top: "55%", left: "75%" }, // Right side
@@ -79,15 +83,15 @@ export default function Portfolio() {
   ]
 
   const projectPagePositions = [
-    { top: "5%", left: "55%" },
-    { top: "15%", left: "70%" },
+    { top: "26%", left: "55%" },
+    { top: "30%", left: "70%" },
     { top: "25%", left: "60%" },
     { top: "35%", left: "75%" },
     { top: "45%", left: "65%" },
     { top: "55%", left: "80%" },
     { top: "65%", left: "58%" },
     { top: "75%", left: "72%" },
-    { top: "10%", left: "85%" },
+    { top: "28%", left: "85%" },
     { top: "50%", left: "68%" },
     { top: "80%", left: "62%" },
   ]
@@ -436,8 +440,8 @@ export default function Portfolio() {
     category: string
   }[] = [
     {
-      src: "/images/img-9010t.jpg",
-      alt: "Branca Lisboa",
+      src: "/images/branca-lisboa-overhead-black.jpg",
+      alt: "Branca Lisboa - Front View of Black Armchair with Silhouette Walking By",
       project: "Branca Lisboa",
       category: "Visual Communication & Media",
     },
@@ -448,14 +452,14 @@ export default function Portfolio() {
       category: "Visual Communication & Media",
     },
     {
-      src: "/images/a-vida-portuguesa.jpg",
-      alt: "A Vida Portuguesa",
+      src: "/images/vida-portuguesa-palette.gif",
+      alt: "A Vida Portuguesa - Grayscale color palette animation",
       project: "A Vida Portuguesa",
       category: "Visual Communication & Media",
     },
     {
-      src: "/images/dsc04217.jpg",
-      alt: "FNAC",
+      src: "/images/fnac-novos-talentos-logo.png",
+      alt: "FNAC Novos Talentos",
       project: "FNAC",
       category: "Visual Communication & Media",
     },
@@ -466,8 +470,8 @@ export default function Portfolio() {
       category: "Visual Communication & Media",
     },
     {
-      src: "/images/accepting-nfts-here.jpg",
-      alt: "Accepting NFTs Here",
+      src: "/images/accepting-nfts-lisbon-map.png",
+      alt: "Accepting NFTs Here - Map of Lisbon Locations",
       project: "Accepting NFTs Here",
       category: "Visual Communication & Media",
     },
@@ -475,6 +479,12 @@ export default function Portfolio() {
       src: "/images/qatalyze-sofa-full.jpg",
       alt: "Qatalyze Interiors",
       project: "Qatalyze Interiors",
+      category: "Visual Communication & Media",
+    },
+    {
+      src: "/images/bitte-protocol-stats-aug-2025.png",
+      alt: "Bitte Protocol - Aug 2025 Peak Growth Month",
+      project: "Bitte Protocol",
       category: "Visual Communication & Media",
     },
   ]
@@ -510,6 +520,54 @@ export default function Portfolio() {
     ],
   }
 
+  const bitteProtocolProject = {
+    name: "Bitte Protocol",
+    year: "2025",
+    description:
+      "As Creative Strategist at Bitte Protocol, I led visual storytelling across social media and product design — from data-driven growth recap graphics to UI mockups and demo videos for the Bitte Wallet's Free Token Drop feature. This work bridged technical product updates with an accessible, on-brand visual language for the community.",
+    images: [
+      {
+        src: "/images/bitte-protocol-stats-jul-2025.png",
+        alt: "Bitte Protocol - Jul 2025 Viral Spike, 43K views",
+        postUrl: "https://x.com/BitteProtocol/status/1943313142492082596?s=20",
+      },
+      {
+        src: "/images/bitte-protocol-stats-feb-2025.png",
+        alt: "Bitte Protocol - Feb 2025 Kite AI Launch, 9K views",
+        postUrl: "https://x.com/BitteProtocol/status/1891480019236733348",
+      },
+      {
+        src: "/images/bitte-protocol-stats-mar-2025.png",
+        alt: "Bitte Protocol - Mar 2025 Hackathon Recap, 8.8K views",
+        postUrl: "https://x.com/BitteProtocol/status/1899934730176344308",
+      },
+      { src: "/images/bitte-protocol-wallet-mockup.png", alt: "Bitte Wallet - Arctic Hippo Free Token Drop mockup" },
+      {
+        src: "/images/bitte-protocol-wallet-demo.mp4",
+        alt: "Bitte Wallet - Product demo video",
+        isVideo: true,
+      },
+      {
+        src: "https://www.youtube.com/embed/MFrP7w1Z9wE?autoplay=1&mute=1&loop=1&playlist=MFrP7w1Z9wE&controls=0",
+        alt: "Bitte Protocol - YouTube video",
+        isYouTube: true,
+        isLarger: true,
+      },
+      {
+        src: "https://www.instagram.com/p/Ci2NbGyrJlb/",
+        alt: "Bitte Protocol Instagram post",
+        isInstagramPost: true,
+        instagramUrl: "https://www.instagram.com/p/Ci2NbGyrJlb/?utm_source=ig_web_copy_link",
+      },
+      {
+        src: "https://www.instagram.com/p/Cizq83EM-2-/",
+        alt: "Bitte Protocol Instagram post",
+        isInstagramPost: true,
+        instagramUrl: "https://www.instagram.com/p/Cizq83EM-2-/?utm_source=ig_web_copy_link",
+      },
+    ],
+  }
+
   const elevenCollectionProject = {
     name: "The Eleven Collection",
     year: "2021",
@@ -519,7 +577,7 @@ export default function Portfolio() {
     images: [
       { src: "/images/fka-twigs-eleven-collection.webp", alt: "FKA twigs - The Eleven Collection" },
       { src: "/images/eleven-collection-interface.jpg", alt: "The Eleven Collection interface and visuals" },
-      { src: "/images/eleven-collection-performance.gif", alt: "FKA twigs performance from The Eleven Collection" },
+      { src: "/images/eleven-collection-performance.webp", alt: "FKA twigs performance from The Eleven Collection" },
     ],
   }
 
@@ -546,12 +604,12 @@ export default function Portfolio() {
         alt: "Branca Lisboa - Single Red Chair Front View",
       },
       {
-        src: "/images/branca-lisboa-overhead-black.jpg",
-        alt: "Branca Lisboa - Overhead View of Black Ergonomic Kneeling Chair",
-      },
-      {
         src: "/images/branca-lisboa-desk.jpg",
         alt: "Branca Lisboa - Walnut Wood Desk with Curved Detail",
+      },
+      {
+        src: "/images/img-9010t.jpg",
+        alt: "Branca Lisboa - Back View of Black Ergonomic Chair with Blurred Figure Walking By",
       },
     ],
   }
@@ -612,8 +670,8 @@ export default function Portfolio() {
         alt: "A Vida Portuguesa - Branding collateral with swallow bird illustrations and NFT redemption materials",
       },
       {
-        src: "/images/vida-portuguesa-palette.gif",
-        alt: "A Vida Portuguesa - Grayscale color palette animation",
+        src: "/images/vida-portuguesa-exhibition-table.jpg",
+        alt: "A Vida Portuguesa - Exhibition table with A Andorinha The Swallow packaging under green lighting",
       },
     ],
     video: {
@@ -814,6 +872,7 @@ export default function Portfolio() {
     { name: "Mintbase Interviews", year: "2022", category: "Visual Communication & Media" },
     { name: "A Vida Portuguesa", year: "2024", category: "Visual Communication & Media" },
     { name: "FNAC", year: "2022", category: "Visual Communication & Media" },
+    { name: "Bitte Protocol", year: "2025", category: "Visual Communication & Media" },
   ]
 
   const projects = [
@@ -1009,6 +1068,12 @@ export default function Portfolio() {
       return [
         originalFNAC,
         {
+          src: "/images/dsc04217.jpg",
+          alt: "FNAC - Mintbase NFT store on phone in front of FNAC store sign",
+          project: "FNAC",
+          category: "Visual Communication & Media",
+        },
+        {
           src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Fnac%20usecase-oo7QBLp55jYyCXmnei9Mt7z2VL2wrZ.mp4",
           alt: "FNAC Use Case Video",
           project: "FNAC",
@@ -1030,7 +1095,7 @@ export default function Portfolio() {
       return [
         originalElevenCollection,
         { src: "/images/eleven-collection-interface.jpg", alt: "The Eleven Collection interface and visuals", project: "The Eleven Collection", category: "Visual Communication & Media" },
-        { src: "/images/eleven-collection-performance.gif", alt: "FKA twigs performance from The Eleven Collection", project: "The Eleven Collection", category: "Visual Communication & Media" },
+        { src: "/images/eleven-collection-performance.webp", alt: "FKA twigs performance from The Eleven Collection", project: "The Eleven Collection", category: "Visual Communication & Media" },
         {
           src: "https://x.com/BitteProtocol/status/1836349828218966327",
           alt: "Bitte Protocol post about The Eleven Collection on X",
@@ -1045,15 +1110,14 @@ export default function Portfolio() {
       const originalAcceptingNfts = visualCommPortfolioImages.find((img) => img.project === "Accepting NFTs Here")
       return [
         originalAcceptingNfts,
+        { src: "/images/accepting-nfts-here.jpg", alt: "Accepting NFTs Here signage at restaurant", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
         { src: "/images/accepting-nfts-table.jpg", alt: "Accepting NFTs Here sign on table", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
         { src: "/images/accepting-nfts-dumplings.jpg", alt: "Accepting NFTs Here at dumplings restaurant", project: "Accepting NFTs Here", category: "Visual Communication & Media" },
         {
-          src: "https://www.openstreetmap.org/export/embed.html?bbox=-9.1700%2C38.7050%2C-9.1200%2C38.7300&layer=mapnik&marker=38.7169%2C-9.1399",
-          alt: "Interactive map of Lisbon NFT locations",
+          src: "/images/accepting-nfts-lisbon-route-guide.png",
+          alt: "Accepting NFTs Here - Lisbon walked route guide with 11 participating locations",
           project: "Accepting NFTs Here",
           category: "Visual Communication & Media",
-          isMap: true,
-          mapLink: "https://medium.com/mintbase/the-future-is-a-thing-of-the-past-tokenising-old-portuguese-products-in-lisbon-a6b365670842",
         },
       ]
     }
@@ -1067,6 +1131,18 @@ export default function Portfolio() {
         { src: "/images/qatalyze-shelving.jpeg", alt: "Qatalyze Interiors - Modular Shelving", project: "Qatalyze Interiors", category: "Visual Communication & Media" },
         { src: "/images/qatalyze-oculos.jpg", alt: "Qatalyze Interiors - Decorative Bowl", project: "Qatalyze Interiors", category: "Visual Communication & Media" },
         { src: "/images/qatalyze-sofa-detail.jpg", alt: "Qatalyze Interiors - Sofa Detail", project: "Qatalyze Interiors", category: "Visual Communication & Media" },
+      ]
+    }
+
+    if (selectedProject === "Bitte Protocol") {
+      const originalBitteProtocol = visualCommPortfolioImages.find((img) => img.project === "Bitte Protocol")
+      return [
+        originalBitteProtocol,
+        ...bitteProtocolProject.images.map((img) => ({
+          ...img,
+          project: "Bitte Protocol",
+          category: "Visual Communication & Media",
+        })),
       ]
     }
 
@@ -1383,7 +1459,12 @@ export default function Portfolio() {
     const swipeable = getCurrentImages()
       .filter(
         (img): img is { src: string; alt: string } =>
-          !!img && !(img as any).isVideo && !(img as any).isYouTube && !(img as any).isMap && !(img as any).isXPost,
+          !!img &&
+          !(img as any).isVideo &&
+          !(img as any).isYouTube &&
+          !(img as any).isMap &&
+          !(img as any).isXPost &&
+          !(img as any).isInstagramPost,
       )
       .map((img) => ({ src: img.src || "", alt: img.alt }))
 
@@ -1580,7 +1661,9 @@ export default function Portfolio() {
                     <div className="relative">
                       <video
                         src={image.src || ""}
-                        className={`w-full h-auto object-contain pointer-events-auto select-none max-w-[8rem] md:max-w-[16rem] transition-all duration-300 ease-out ${
+                        className={`w-full h-auto object-contain pointer-events-auto select-none ${
+                          image.alt === "Bitte Wallet - Product demo video" ? "max-w-[11rem] md:max-w-[20rem]" : "max-w-[8rem] md:max-w-[16rem]"
+                        } transition-all duration-300 ease-out ${
                           isMobile
                             ? ""
                             : draggedImageRef.current === index
@@ -1612,6 +1695,10 @@ export default function Portfolio() {
                           setIsInteractingWithVideo((prev) => ({ ...prev, [index]: false }))
                         }}
                       />
+                      {/* Transparent drag-capture layer so the browser's native video controls
+                          (which live in a separate rendering layer) never swallow the drag
+                          gesture — only the bottom 40px (native scrubber/controls) is left clickable. */}
+                      <div className="absolute inset-x-0 top-0 bottom-10" />
                       {!isVideoPlaying[index] && (
                         <div
                           className="absolute inset-0 flex items-center justify-center pointer-events-none"
@@ -1708,6 +1795,28 @@ export default function Portfolio() {
                     >
                       <TweetEmbedCard />
                     </div>
+                  ) : (image as any).isInstagramPost ? (
+                    <div
+                      className="relative"
+                      style={{
+                        width: isMobile ? "13rem" : "20rem",
+                        transform: `rotateY(${getRotation(imageRefs.current[index], mousePosition.x)}deg)`,
+                        transformStyle: "preserve-3d",
+                        transition: draggedImageRef.current === index ? "none" : "all 0.3s ease-out",
+                      }}
+                    >
+                      {/* Instagram's embed hydrates into a cross-origin iframe, which
+                          swallows pointer events before they reach our drag handler.
+                          This grip sits centered above the card so it stays
+                          draggable while the embed itself remains fully interactive. */}
+                      <div
+                        className="absolute -top-3 left-1/2 -translate-x-1/2 flex items-center justify-center w-10 h-5 bg-white border border-gray-200 rounded-full shadow cursor-grab active:cursor-grabbing"
+                        style={{ touchAction: "none" }}
+                      >
+                        <div className="w-6 h-1 rounded-full bg-gray-300" />
+                      </div>
+                      <InstagramEmbedCard url={(image as any).instagramUrl} />
+                    </div>
                   ) : (
                     <img
                       src={image.src || "/placeholder.svg"}
@@ -1721,13 +1830,23 @@ export default function Portfolio() {
                         }
                       }}
                       className={`w-full h-auto object-contain pointer-events-none select-none ${
-                        clickedButton === "Visual Communication & Media" && !selectedProject
-                          ? "max-w-[10rem] md:max-w-[18rem]"
-                          : selectedProject === "Graf" && index > 0
-                            ? "max-w-[14rem] md:max-w-[26rem]" // Corrected from original code's specific condition
-                            : selectedProject
+                        image.alt === "A Vida Portuguesa - Grayscale color palette animation" ||
+                        image.alt === "Bitte Protocol - Aug 2025 Peak Growth Month" ||
+                        image.alt === "Bitte Protocol - Jul 2025 Viral Spike, 43K views" ||
+                        image.alt === "Bitte Protocol - Feb 2025 Kite AI Launch, 9K views" ||
+                        image.alt === "Bitte Protocol - Mar 2025 Hackathon Recap, 8.8K views"
+                          ? "max-w-[8rem] md:max-w-[14.4rem]"
+                          : image.alt === "Bitte Wallet - Arctic Hippo Free Token Drop mockup"
+                            ? "max-w-[12rem] md:max-w-[22rem]"
+                            : clickedButton === "Visual Communication & Media" && !selectedProject
                               ? "max-w-[10rem] md:max-w-[18rem]"
-                              : "max-w-[10rem] md:max-w-[18rem]"
+                              : selectedProject === "Graf" && index > 0
+                              ? "max-w-[14rem] md:max-w-[26rem]" // Corrected from original code's specific condition
+                              : selectedProject === "The Eleven Collection" && image.alt === "The Eleven Collection interface and visuals"
+                                ? "max-w-[16rem] md:max-w-[32rem]"
+                                : selectedProject
+                                  ? "max-w-[10rem] md:max-w-[18rem]"
+                                  : "max-w-[10rem] md:max-w-[18rem]"
                       } overflow-hidden transition-all duration-300 ease-out perspective-1000 relative shadow-none ${
                         isMobile
                           ? ""
@@ -1814,6 +1933,9 @@ export default function Portfolio() {
                             if (index === 6) {
                               handleProjectClick("Qatalyze Interiors")
                             }
+                            if (index === 7) {
+                              handleProjectClick("Bitte Protocol")
+                            }
                           }
                         }}
                         className={`flex items-center gap-0 bg-white rounded-full transition-all duration-300 ease-out hover:gap-2 hover:pr-4 overflow-hidden shadow-lg border border-gray-200 group/button cursor-pointer ${
@@ -1837,7 +1959,7 @@ export default function Portfolio() {
                       </button>
                     </div>
                   )}
-                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && !(image as any).isXPost && (
+                  {selectedProject && !(image as any).isVideo && !(image as any).isYouTube && !(image as any).isMap && !(image as any).isXPost && !(image as any).isInstagramPost && (
                     <div
                       className={`absolute bottom-4 right-4 transition-opacity duration-300 pointer-events-auto ${
                         isMobile
@@ -1847,18 +1969,38 @@ export default function Portfolio() {
                           : "opacity-0 md:group-hover:opacity-100"
                       }`}
                     >
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          openLightbox(image)
-                        }}
-                        className="w-8 h-8 aspect-square rounded-full bg-white flex items-center justify-center flex-shrink-0 shadow-lg border border-gray-200 cursor-pointer hover:scale-110 transition-transform duration-200"
-                        aria-label="View fullscreen"
-                      >
-                        <svg className="w-4 h-4 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                        </svg>
-                      </button>
+                      {(image as any).postUrl ? (
+                        <a
+                          href={(image as any).postUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex items-center gap-1.5 bg-white rounded-full pl-2 pr-3 py-1.5 shadow-lg border border-gray-200 cursor-pointer hover:scale-105 transition-transform duration-200"
+                        >
+                          <svg className="w-3.5 h-3.5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
+                          </svg>
+                          <span className="text-sm font-medium text-gray-900 whitespace-nowrap">View Post</span>
+                        </a>
+                      ) : (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            openLightbox(image)
+                          }}
+                          className="w-8 h-8 aspect-square rounded-full bg-white flex items-center justify-center flex-shrink-0 shadow-lg border border-gray-200 cursor-pointer hover:scale-110 transition-transform duration-200"
+                          aria-label="View fullscreen"
+                        >
+                          <svg className="w-4 h-4 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                          </svg>
+                        </button>
+                      )}
                     </div>
                   )}
                 </div>
@@ -2083,6 +2225,16 @@ export default function Portfolio() {
           </div>
         )}
 
+        {selectedProject === "Bitte Protocol" && (
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{bitteProtocolProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{bitteProtocolProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{bitteProtocolProject.description}</p>
+            </div>
+          </div>
+        )}
+
         {/* Adding MUDE project display */}
         {selectedProject === "MUDE" && (
           <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
@@ -2265,7 +2417,17 @@ export default function Portfolio() {
               {/* Marco Sousa Santos */}
               <div className="mb-6">
                 <h5 className="text-sm font-bold text-foreground">Marco Sousa Santos</h5>
-                <p className="text-xs text-foreground/70 mb-2">CEO and Creative Director at Branca Lisboa</p>
+                <p className="text-xs text-foreground/70 mb-2">
+                  CEO and Creative Director at{" "}
+                  <a
+                    href="https://www.branca-lisboa.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:text-foreground"
+                  >
+                    Branca Lisboa
+                  </a>
+                </p>
                 <p className="text-xs text-foreground/70 italic leading-relaxed">
                   "Luis embraced each project with remarkable dedication, proving to be a fundamental element in
                   achieving our goals. Beyond his dedication and technical skill, Luis Infante is genuinely creative and
@@ -2372,7 +2534,17 @@ export default function Portfolio() {
                 <div className="flex items-start gap-4 mb-4 md:mb-6">
                   <div className="flex-1">
                     <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-1">Marco Sousa Santos</h3>
-                    <p className="text-xs md:text-sm text-gray-600">CEO and Creative Director at Branca Lisboa</p>
+                    <p className="text-xs md:text-sm text-gray-600">
+                      CEO and Creative Director at{" "}
+                      <a
+                        href="https://www.branca-lisboa.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline hover:text-gray-900"
+                      >
+                        Branca Lisboa
+                      </a>
+                    </p>
                     <p className="text-xs text-gray-500 mt-1">December 11, 2025 · Marco managed Luis directly</p>
                   </div>
                 </div>
@@ -2495,6 +2667,7 @@ export default function Portfolio() {
                   width={1920}
                   height={1080}
                   quality={95}
+                  unoptimized={img.src?.endsWith(".gif")}
                   className="w-auto max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl"
                   onClick={(e) => e.stopPropagation()}
                   sizes="95vw"

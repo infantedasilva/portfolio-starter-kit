@@ -12,6 +12,7 @@ export const projectsData: Record<
       isYouTube?: boolean
       isVideo?: boolean
       isLarger?: boolean
+      postUrl?: string
     }>
     video?: {
       src: string
@@ -153,7 +154,10 @@ export const projectsData: Record<
     description:
       "After finishing the Product Design course, I had my first professional contact in Branca-Lisboa, directed by Marco Sousa Santos. For two years I was related with several departments that compose Branca-Lisboa studio. From the participation in interior projects to the elaboration of new products for the brand. It was also in the range of my responsibilities in the company communication as newsletters development, product campaigns and management of social networks and the brand site.",
     images: [
-      { src: "/images/img-9010t.jpg", alt: "Branca Lisboa - Thumbnail" },
+      {
+        src: "/images/branca-lisboa-overhead-black.jpg",
+        alt: "Branca Lisboa - Front View of Black Armchair with Silhouette Walking By",
+      },
       {
         src: "/images/branca-lisboa-two-chairs.gif",
         alt: "Branca Lisboa - Animated Rotation of Gray and Black Ergonomic Chairs",
@@ -161,11 +165,11 @@ export const projectsData: Record<
       { src: "/images/branca-lisboa-overhead.jpg", alt: "Branca Lisboa - Overhead View of Multiple Chair Backs" },
       { src: "/images/branca-lisboa-white-stool.gif", alt: "Branca Lisboa - Animated Rotation of White Wooden Stool" },
       { src: "/images/branca-lisboa-red-chair.jpg", alt: "Branca Lisboa - Single Red Chair Front View" },
-      {
-        src: "/images/branca-lisboa-overhead-black.jpg",
-        alt: "Branca Lisboa - Overhead View of Black Ergonomic Kneeling Chair",
-      },
       { src: "/images/branca-lisboa-desk.jpg", alt: "Branca Lisboa - Walnut Wood Desk with Curved Detail" },
+      {
+        src: "/images/img-9010t.jpg",
+        alt: "Branca Lisboa - Back View of Black Ergonomic Chair with Blurred Figure Walking By",
+      },
     ],
   },
   "qatalyze-interiors": {
@@ -211,7 +215,13 @@ export const projectsData: Record<
     category: "Visual Communication & Media",
     description:
       'Visual Communication & Media project for <a href="https://www.avidaportuguesa.com/en" target="_blank" rel="noopener noreferrer">A Vida Portuguesa</a>, a Portuguese brand that celebrates Portuguese craftsmanship and heritage.',
-    images: [{ src: "/images/a-vida-portuguesa.jpg", alt: "A Vida Portuguesa" }],
+    images: [
+      { src: "/images/vida-portuguesa-palette.gif", alt: "A Vida Portuguesa - Grayscale color palette animation" },
+      {
+        src: "/images/vida-portuguesa-exhibition-table.jpg",
+        alt: "A Vida Portuguesa - Exhibition table with A Andorinha The Swallow packaging under green lighting",
+      },
+    ],
   },
   fnac: {
     name: "FNAC",
@@ -220,6 +230,14 @@ export const projectsData: Record<
     description:
       'Our team at Mintbase partnered with FNAC Portugal to integrate NEAR-based NFT technology into the "Novos Talentos" program. We enabled contest winners to tokenize their works as redeemable NFTs, ensuring perpetual royalties and promoting digital ownership. This initiative bridges legacy retail with the Web3 creator economy, modernizing cultural patronage.',
     images: [
+      {
+        src: "/images/fnac-novos-talentos-logo.png",
+        alt: "FNAC Novos Talentos",
+      },
+      {
+        src: "/images/dsc04217.jpg",
+        alt: "FNAC - Mintbase NFT store on phone in front of FNAC store sign",
+      },
       {
         src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ssstwitter.com_1768334502446-PLAqNUD1tfjf7TMlmVrTbLZRldt3ze.mp4",
         alt: "FNAC Mintbase Partnership Video",
@@ -241,10 +259,14 @@ export const projectsData: Record<
       "The 'Accepting NFTs Here' project by Mintbase tested how NFTs could be used in real life in Lisbon. Local businesses like cafés, bars, and shops accepted NFTs as a way for customers to redeem real products, such as drinks, food, or other items. Instead of being only digital collectibles, the NFTs worked like vouchers. The project showed how blockchain and NFTs can be used in everyday situations and help connect digital ownership with physical places.",
     blogUrl: "https://medium.com/mintbase/accepting-nfts-here-bringing-nfts-to-real-life-in-the-streets-of-lisbon-2de5e0892062",
     images: [
+      { src: "/images/accepting-nfts-lisbon-map.png", alt: "Accepting NFTs Here - Map of Lisbon Locations" },
       { src: "/images/accepting-nfts-here.jpg", alt: "Accepting NFTs Here signage at restaurant" },
       { src: "/images/accepting-nfts-table.jpg", alt: "Accepting NFTs Here sign on table" },
       { src: "/images/accepting-nfts-dumplings.jpg", alt: "Accepting NFTs Here at dumplings restaurant" },
-      { src: "/images/accepting-nfts-map.jpg", alt: "Accepting NFTs Here map of Lisbon locations" },
+      {
+        src: "/images/accepting-nfts-lisbon-route-guide.png",
+        alt: "Accepting NFTs Here - Lisbon walked route guide with 11 participating locations",
+      },
     ],
   },
   "the-eleven-collection": {
@@ -257,7 +279,44 @@ export const projectsData: Record<
     images: [
       { src: "/images/fka-twigs-eleven-collection.webp", alt: "FKA twigs - The Eleven Collection" },
       { src: "/images/eleven-collection-interface.jpg", alt: "The Eleven Collection interface and visuals" },
-      { src: "/images/eleven-collection-performance.gif", alt: "FKA twigs performance from The Eleven Collection" },
+      { src: "/images/eleven-collection-performance.webp", alt: "FKA twigs performance from The Eleven Collection" },
+    ],
+  },
+  "bitte-protocol": {
+    name: "Bitte Protocol",
+    year: "2025",
+    category: "Visual Communication & Media",
+    description:
+      "As Creative Strategist at Bitte Protocol, I led visual storytelling across social media and product design — from data-driven growth recap graphics to UI mockups and demo videos for the Bitte Wallet's Free Token Drop feature. This work bridged technical product updates with an accessible, on-brand visual language for the community.",
+    images: [
+      { src: "/images/bitte-protocol-stats-aug-2025.png", alt: "Bitte Protocol - Aug 2025 Peak Growth Month" },
+      {
+        src: "/images/bitte-protocol-stats-jul-2025.png",
+        alt: "Bitte Protocol - Jul 2025 Viral Spike, 43K views",
+        postUrl: "https://x.com/BitteProtocol/status/1943313142492082596?s=20",
+      },
+      {
+        src: "/images/bitte-protocol-stats-feb-2025.png",
+        alt: "Bitte Protocol - Feb 2025 Kite AI Launch, 9K views",
+        postUrl: "https://x.com/BitteProtocol/status/1891480019236733348",
+      },
+      {
+        src: "/images/bitte-protocol-stats-mar-2025.png",
+        alt: "Bitte Protocol - Mar 2025 Hackathon Recap, 8.8K views",
+        postUrl: "https://x.com/BitteProtocol/status/1899934730176344308",
+      },
+      { src: "/images/bitte-protocol-wallet-mockup.png", alt: "Bitte Wallet - Arctic Hippo Free Token Drop mockup" },
+      {
+        src: "/images/bitte-protocol-wallet-demo.mp4",
+        alt: "Bitte Wallet - Product demo video",
+        isVideo: true,
+      },
+      {
+        src: "https://www.youtube.com/embed/MFrP7w1Z9wE?autoplay=1&mute=1&loop=1&playlist=MFrP7w1Z9wE&controls=0",
+        alt: "Bitte Protocol - YouTube video",
+        isYouTube: true,
+        isLarger: true,
+      },
     ],
   },
   mude: {
