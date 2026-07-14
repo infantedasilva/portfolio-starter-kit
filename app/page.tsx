@@ -655,14 +655,6 @@ export default function Portfolio() {
         src: "/images/vida-portuguesa-exhibition-table.jpg",
         alt: "A Vida Portuguesa - Exhibition table with A Andorinha The Swallow packaging under green lighting",
       },
-      {
-        src: "/images/vida-portuguesa-palette-2.gif",
-        alt: "A Vida Portuguesa - Color palette animation with pink accent",
-      },
-      {
-        src: "/images/vida-portuguesa-palette-1.gif",
-        alt: "A Vida Portuguesa - Color palette animation with olive accent",
-      },
     ],
     video: {
       src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Avidaportuguesaexplainer-zofCQoM5tEkm5Nhmsx5Cnbk3K9rd27.mp4",
