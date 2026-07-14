@@ -526,14 +526,32 @@ export default function Portfolio() {
     description:
       "As Creative Strategist at Bitte Protocol, I led visual storytelling across social media and product design — from data-driven growth recap graphics to UI mockups and demo videos for the Bitte Wallet's Free Token Drop feature. This work bridged technical product updates with an accessible, on-brand visual language for the community.",
     images: [
-      { src: "/images/bitte-protocol-stats-jul-2025.png", alt: "Bitte Protocol - Jul 2025 Viral Spike, 43K views" },
-      { src: "/images/bitte-protocol-stats-feb-2025.png", alt: "Bitte Protocol - Feb 2025 Kite AI Launch, 9K views" },
-      { src: "/images/bitte-protocol-stats-mar-2025.png", alt: "Bitte Protocol - Mar 2025 Hackathon Recap, 8.8K views" },
+      {
+        src: "/images/bitte-protocol-stats-jul-2025.png",
+        alt: "Bitte Protocol - Jul 2025 Viral Spike, 43K views",
+        postUrl: "https://x.com/BitteProtocol/status/1943313142492082596?s=20",
+      },
+      {
+        src: "/images/bitte-protocol-stats-feb-2025.png",
+        alt: "Bitte Protocol - Feb 2025 Kite AI Launch, 9K views",
+        postUrl: "https://x.com/BitteProtocol/status/1891480019236733348",
+      },
+      {
+        src: "/images/bitte-protocol-stats-mar-2025.png",
+        alt: "Bitte Protocol - Mar 2025 Hackathon Recap, 8.8K views",
+        postUrl: "https://x.com/BitteProtocol/status/1899934730176344308",
+      },
       { src: "/images/bitte-protocol-wallet-mockup.png", alt: "Bitte Wallet - Arctic Hippo Free Token Drop mockup" },
       {
         src: "/images/bitte-protocol-wallet-demo.mp4",
         alt: "Bitte Wallet - Product demo video",
         isVideo: true,
+      },
+      {
+        src: "https://www.youtube.com/embed/MFrP7w1Z9wE",
+        alt: "Bitte Protocol - YouTube video",
+        isYouTube: true,
+        isLarger: true,
       },
       {
         src: "https://www.instagram.com/p/Ci2NbGyrJlb/",
@@ -1950,18 +1968,38 @@ export default function Portfolio() {
                           : "opacity-0 md:group-hover:opacity-100"
                       }`}
                     >
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          openLightbox(image)
-                        }}
-                        className="w-8 h-8 aspect-square rounded-full bg-white flex items-center justify-center flex-shrink-0 shadow-lg border border-gray-200 cursor-pointer hover:scale-110 transition-transform duration-200"
-                        aria-label="View fullscreen"
-                      >
-                        <svg className="w-4 h-4 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                        </svg>
-                      </button>
+                      {(image as any).postUrl ? (
+                        <a
+                          href={(image as any).postUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="flex items-center gap-1.5 bg-white rounded-full pl-2 pr-3 py-1.5 shadow-lg border border-gray-200 cursor-pointer hover:scale-105 transition-transform duration-200"
+                        >
+                          <svg className="w-3.5 h-3.5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                            />
+                          </svg>
+                          <span className="text-sm font-medium text-gray-900 whitespace-nowrap">View Post</span>
+                        </a>
+                      ) : (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            openLightbox(image)
+                          }}
+                          className="w-8 h-8 aspect-square rounded-full bg-white flex items-center justify-center flex-shrink-0 shadow-lg border border-gray-200 cursor-pointer hover:scale-110 transition-transform duration-200"
+                          aria-label="View fullscreen"
+                        >
+                          <svg className="w-4 h-4 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                          </svg>
+                        </button>
+                      )}
                     </div>
                   )}
                 </div>

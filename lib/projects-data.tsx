@@ -12,6 +12,7 @@ export const projectsData: Record<
       isYouTube?: boolean
       isVideo?: boolean
       isLarger?: boolean
+      postUrl?: string
     }>
     video?: {
       src: string
@@ -289,14 +290,32 @@ export const projectsData: Record<
       "As Creative Strategist at Bitte Protocol, I led visual storytelling across social media and product design — from data-driven growth recap graphics to UI mockups and demo videos for the Bitte Wallet's Free Token Drop feature. This work bridged technical product updates with an accessible, on-brand visual language for the community.",
     images: [
       { src: "/images/bitte-protocol-stats-aug-2025.png", alt: "Bitte Protocol - Aug 2025 Peak Growth Month" },
-      { src: "/images/bitte-protocol-stats-jul-2025.png", alt: "Bitte Protocol - Jul 2025 Viral Spike, 43K views" },
-      { src: "/images/bitte-protocol-stats-feb-2025.png", alt: "Bitte Protocol - Feb 2025 Kite AI Launch, 9K views" },
-      { src: "/images/bitte-protocol-stats-mar-2025.png", alt: "Bitte Protocol - Mar 2025 Hackathon Recap, 8.8K views" },
+      {
+        src: "/images/bitte-protocol-stats-jul-2025.png",
+        alt: "Bitte Protocol - Jul 2025 Viral Spike, 43K views",
+        postUrl: "https://x.com/BitteProtocol/status/1943313142492082596?s=20",
+      },
+      {
+        src: "/images/bitte-protocol-stats-feb-2025.png",
+        alt: "Bitte Protocol - Feb 2025 Kite AI Launch, 9K views",
+        postUrl: "https://x.com/BitteProtocol/status/1891480019236733348",
+      },
+      {
+        src: "/images/bitte-protocol-stats-mar-2025.png",
+        alt: "Bitte Protocol - Mar 2025 Hackathon Recap, 8.8K views",
+        postUrl: "https://x.com/BitteProtocol/status/1899934730176344308",
+      },
       { src: "/images/bitte-protocol-wallet-mockup.png", alt: "Bitte Wallet - Arctic Hippo Free Token Drop mockup" },
       {
         src: "/images/bitte-protocol-wallet-demo.mp4",
         alt: "Bitte Wallet - Product demo video",
         isVideo: true,
+      },
+      {
+        src: "https://www.youtube.com/embed/MFrP7w1Z9wE",
+        alt: "Bitte Protocol - YouTube video",
+        isYouTube: true,
+        isLarger: true,
       },
     ],
   },

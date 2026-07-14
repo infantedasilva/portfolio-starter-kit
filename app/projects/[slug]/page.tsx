@@ -138,15 +138,34 @@ export default function ProjectPage() {
           )}
 
           {!currentImage.isYouTube && !currentImage.isVideo && (
-            <button
-              onClick={openLightbox}
-              className="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-background/90 border border-border flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-200"
-              aria-label="Expand image"
-            >
-              <svg className="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
-            </button>
+            currentImage.postUrl ? (
+              <a
+                href={currentImage.postUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-4 right-4 flex items-center gap-1.5 bg-background/90 rounded-full pl-2.5 pr-3.5 py-2 border border-border shadow-lg hover:scale-105 transition-transform duration-200"
+              >
+                <svg className="w-3.5 h-3.5 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+                <span className="text-sm font-medium text-foreground whitespace-nowrap">View Post</span>
+              </a>
+            ) : (
+              <button
+                onClick={openLightbox}
+                className="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-background/90 border border-border flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-200"
+                aria-label="Expand image"
+              >
+                <svg className="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+              </button>
+            )
           )}
         </div>
 
