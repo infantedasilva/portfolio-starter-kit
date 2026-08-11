@@ -23,6 +23,9 @@ export default function Portfolio() {
   const [showAboutMe, setShowAboutMe] = useState(false)
   const [selectedProject, setSelectedProject] = useState<string | null>(null)
 
+  const [showDragHint, setShowDragHint] = useState(false)
+  const dragHintTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null)
   const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([])
   const [lightboxIndex, setLightboxIndex] = useState(0)
@@ -1410,9 +1413,19 @@ export default function Portfolio() {
   }
 
   const handleButtonClick = (buttonName: string) => {
-    setClickedButton(clickedButton === buttonName ? null : buttonName)
+    const isOpening = clickedButton !== buttonName
+    setClickedButton(isOpening ? buttonName : null)
     setMobileFilterCategory("All") // Reset mobile filter when switching desktop categories
     setActiveImageIndex(null)
+
+    // Show a one-time animated pointer over the first image, teaching first-time
+    // visitors the floating images are draggable. Never shown again once seen.
+    if (isOpening && typeof window !== "undefined" && !localStorage.getItem("hasSeenDragHint")) {
+      localStorage.setItem("hasSeenDragHint", "true")
+      if (dragHintTimeoutRef.current) clearTimeout(dragHintTimeoutRef.current)
+      setShowDragHint(true)
+      dragHintTimeoutRef.current = setTimeout(() => setShowDragHint(false), 2600)
+    }
   }
 
   // Unified pointer-down handler for starting a drag on mouse, touch or pen.
@@ -1430,6 +1443,11 @@ export default function Portfolio() {
     try {
       e.currentTarget.setPointerCapture(e.pointerId)
     } catch {}
+
+    if (showDragHint) {
+      if (dragHintTimeoutRef.current) clearTimeout(dragHintTimeoutRef.current)
+      setShowDragHint(false)
+    }
 
     draggedImageRef.current = index
     setDraggedImage(index)
@@ -2028,6 +2046,20 @@ export default function Portfolio() {
                   )}
                 </div>
               ))}
+              {showDragHint && (
+                <div
+                  className="absolute z-[65] pointer-events-none animate-drag-hint"
+                  style={{
+                    top: imagePositions[0]?.top || "50%",
+                    left: imagePositions[0]?.left || "50%",
+                  }}
+                >
+                  <div className="relative w-10 h-10">
+                    <span className="absolute inset-0 rounded-full bg-brand/30 animate-ping" />
+                    <span className="absolute inset-0 m-auto w-4 h-4 rounded-full bg-brand shadow-lg" />
+                  </div>
+                </div>
+              )}
             </>
           )}
         </div>
