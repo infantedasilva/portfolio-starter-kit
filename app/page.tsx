@@ -25,6 +25,8 @@ export default function Portfolio() {
 
   const [showDragHint, setShowDragHint] = useState(false)
   const dragHintTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const dragHintContainerRef = useRef<HTMLDivElement | null>(null)
+  const [dragHintPos, setDragHintPos] = useState<{ top: number; left: number } | null>(null)
 
   const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null)
   const [lightboxImages, setLightboxImages] = useState<{ src: string; alt: string }[]>([])
@@ -1426,9 +1428,34 @@ export default function Portfolio() {
       sessionStorage.setItem("hasSeenDragHint", "true")
       if (dragHintTimeoutRef.current) clearTimeout(dragHintTimeoutRef.current)
       setShowDragHint(true)
-      dragHintTimeoutRef.current = setTimeout(() => setShowDragHint(false), 2600)
     }
   }
+
+  // Measure the first image's actual rendered bottom-right corner (varies by
+  // image type/size and viewport) so the hint can anchor to it precisely
+  // regardless of which category is open. Wait past the images' own 500ms
+  // position transition first, otherwise we'd capture a mid-transition rect.
+  // The 2.6s visible window starts counting from here too, once the hint
+  // actually has a position to render at.
+  useEffect(() => {
+    if (!showDragHint) {
+      setDragHintPos(null)
+      return
+    }
+    const measureTimer = setTimeout(() => {
+      const imgEl = imageRefs.current[0]
+      const containerEl = dragHintContainerRef.current
+      if (!imgEl || !containerEl) return
+      const imgRect = imgEl.getBoundingClientRect()
+      const containerRect = containerEl.getBoundingClientRect()
+      setDragHintPos({
+        top: imgRect.bottom - containerRect.top,
+        left: imgRect.right - containerRect.left,
+      })
+      dragHintTimeoutRef.current = setTimeout(() => setShowDragHint(false), 2600)
+    }, 550)
+    return () => clearTimeout(measureTimer)
+  }, [showDragHint])
 
   // Unified pointer-down handler for starting a drag on mouse, touch or pen.
   const handleImagePointerDown = (e: React.PointerEvent<HTMLDivElement>, index: number) => {
@@ -1674,6 +1701,7 @@ export default function Portfolio() {
         </div>
 
         <div
+          ref={dragHintContainerRef}
           className={`absolute inset-0 pointer-events-none transition-opacity duration-500 ${clickedButton ? "opacity-100" : "opacity-0"} ${draggedImage !== null ? "z-[60]" : "z-20"}`}
         >
           {clickedButton && (
@@ -2048,15 +2076,12 @@ export default function Portfolio() {
                   )}
                 </div>
               ))}
-              {showDragHint && (
+              {showDragHint && dragHintPos && (
                 <div
                   className="absolute z-[65] pointer-events-none animate-drag-hint"
-                  style={{
-                    top: imagePositions[0]?.top || "50%",
-                    left: imagePositions[0]?.left || "50%",
-                  }}
+                  style={{ top: dragHintPos.top, left: dragHintPos.left }}
                 >
-                  <div className="relative w-10 h-10">
+                  <div className="relative w-10 h-10 -translate-x-1/2 -translate-y-1/2">
                     <span className="absolute inset-0 rounded-full bg-brand/30 animate-ping" />
                     <span className="absolute inset-0 m-auto w-4 h-4 rounded-full bg-brand shadow-lg" />
                   </div>
