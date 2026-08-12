@@ -1419,9 +1419,11 @@ export default function Portfolio() {
     setActiveImageIndex(null)
 
     // Show a one-time animated pointer over the first image, teaching first-time
-    // visitors the floating images are draggable. Never shown again once seen.
-    if (isOpening && typeof window !== "undefined" && !localStorage.getItem("hasSeenDragHint")) {
-      localStorage.setItem("hasSeenDragHint", "true")
+    // visitors the floating images are draggable. Uses sessionStorage (not
+    // localStorage) so it reappears on each fresh visit, but only once per visit
+    // even if multiple categories are opened.
+    if (isOpening && typeof window !== "undefined" && !sessionStorage.getItem("hasSeenDragHint")) {
+      sessionStorage.setItem("hasSeenDragHint", "true")
       if (dragHintTimeoutRef.current) clearTimeout(dragHintTimeoutRef.current)
       setShowDragHint(true)
       dragHintTimeoutRef.current = setTimeout(() => setShowDragHint(false), 2600)
