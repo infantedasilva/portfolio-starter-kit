@@ -266,3 +266,32 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+@keyframes drag-hint-move {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.8);
+  }
+  12% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  38% {
+    transform: translate(0, 0) scale(1);
+  }
+  68% {
+    transform: translate(-42px, -26px) scale(1);
+  }
+  88% {
+    opacity: 1;
+    transform: translate(-42px, -26px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-42px, -26px) scale(0.8);
+  }
+}
+
+.animate-drag-hint {
+  animation: drag-hint-move 2.6s ease-in-out forwards;
+}
