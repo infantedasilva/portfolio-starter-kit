@@ -1428,7 +1428,7 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
     // Development" button) just don't navigate.
     const slug = categoryLabelToSlug(buttonName)
     if (slug) {
-      router.push(isOpening ? `/categories/${slug}` : "/", { scroll: false })
+      router.push(isOpening ? `/${slug}` : "/", { scroll: false })
     }
 
     // Show a one-time animated pointer over the first image, teaching first-time

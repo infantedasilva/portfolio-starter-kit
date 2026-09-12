@@ -7,7 +7,7 @@ import { categorySlugToLabel } from "@/lib/categories"
 
 export default function CategoryPage() {
   const params = useParams()
-  const slug = params.slug as string
+  const slug = params.category as string
   const category = categorySlugToLabel(slug)
 
   if (!category) {
