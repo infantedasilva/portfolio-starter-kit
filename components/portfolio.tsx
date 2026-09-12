@@ -8,7 +8,8 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import TweetEmbedCard from "@/components/tweet-embed-card"
 import InstagramEmbedCard from "@/components/instagram-embed-card"
-import { categoryLabelToSlug } from "@/lib/categories"
+import { categoryLabelToSlug, projectDataCategoryToSlug } from "@/lib/categories"
+import { projectsData } from "@/lib/projects-data"
 
 const projectNameToSlug = (name: string) => {
   return name
@@ -1510,6 +1511,8 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
   const handleBackClick = () => {
     if (selectedProject) {
       setSelectedProject(null)
+      const categorySlug = clickedButton ? categoryLabelToSlug(clickedButton) : null
+      router.push(categorySlug ? `/${categorySlug}` : "/", { scroll: false })
     } else if (clickedButton) {
       setClickedButton(null)
       router.push("/", { scroll: false })
@@ -1530,6 +1533,15 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
     setSelectedProject(projectName)
     setMobileFilterCategory("All") // Reset mobile filter when selecting a project
     setActiveImageIndex(null)
+
+    // Give this specific project its own shareable link, same as the
+    // category it lives in.
+    const projectSlug = projectNameToSlug(projectName)
+    const project = projectsData[projectSlug as keyof typeof projectsData]
+    const categorySlug = project ? projectDataCategoryToSlug(project.category) : null
+    if (categorySlug) {
+      router.push(`/${categorySlug}/${projectSlug}`, { scroll: false })
+    }
   }
 
   // Function to handle mobile filter changes
