@@ -55,7 +55,6 @@ export const projectsData: Record<
     description:
       "Graphic ceramic table designed for outdoor use. The tabletop was developed using four distinct clay bodies (terracotta, yellow, white, and black stoneware) each with unique shrinkage and texture qualities. Created in collaboration with Qatalyse.",
     images: [
-      { src: "/images/tilestablethu.jpg", alt: "Tiles Table - Thumbnail" },
       { src: "/images/editada-201.jpg", alt: "Tiles Table - Overhead Pattern View" },
       { src: "/images/editada-202.jpg", alt: "Tiles Table - Outdoor Context" },
       { src: "/images/img-8296.jpeg", alt: "Tiles Table - Assembly Process" },
@@ -83,7 +82,6 @@ export const projectsData: Record<
     description:
       "My first design for the glass blowing industry that responds in a fun way through overlapping colors and shapes dictated by the technique itself. Projected to several bathrooms in a Qatalyse project. The luminaires can be suspended from the ceiling or installed on walls. Materials: Colored Glass, Lacquered Iron",
     images: [
-      { src: "/images/asset-201-402x-100.jpg", alt: "Glass Plates - Thumbnail" },
       { src: "/images/33.jpg", alt: "Glass Plates - Ceiling Installation Orange" },
       { src: "/images/11.jpg", alt: "Glass Plates - Ceiling Installation Yellow" },
       {
@@ -340,14 +338,13 @@ export const projectsData: Record<
     description:
       "In this interior project, designed entirely by Qatalyse, where most of the elements were designed by measure. A demanding project in terms of detail, where we designed lighting, handles, wine cabinet, sofas, shelving systems, tables, beds, mirrors, showers, among other details.",
     images: [
-      { src: "/images/birre-kitchen.jpg", alt: "Birre Kitchen - Thumbnail" },
-      {
-        src: "/images/birre-kitchen-handle-detail.jpg",
-        alt: "Birre Kitchen - Custom burgundy red elongated handle detail",
-      },
       {
         src: "/images/birre-kitchen-full-view.jpg",
         alt: "Birre Kitchen - Full view with beige cabinets and burgundy accents",
+      },
+      {
+        src: "/images/birre-kitchen-handle-detail.jpg",
+        alt: "Birre Kitchen - Custom burgundy red elongated handle detail",
       },
       {
         src: "/images/birre-kitchen-concept.jpg",
@@ -405,7 +402,6 @@ export const projectsData: Record<
     description:
       "Designed for a room in a Qatalyse project with an organic lifestyle we created this sofa where the user can decide the position of the back, these large pillows with the right weight to remain static when sitting but light enough to be lifted. It is a sofa that can seat 4 or more people, depending on the arrangement of the pillows. Materials: Oak, foams and fabric.",
     images: [
-      { src: "/images/rocksofa.jpg", alt: "Rock Sofa - Thumbnail" },
       { src: "/images/rock-sofa-side-view.jpg", alt: "Rock Sofa - Side View with Rounded Pillows" },
       { src: "/images/rock-sofa-front-view.jpg", alt: "Rock Sofa - Front View with Four Grey Cushion Elements" },
       { src: "/images/rock-sofa-seated.jpg", alt: "Rock Sofa - Seating View Demonstrating Modular Arrangement" },
@@ -429,7 +425,6 @@ export const projectsData: Record<
     description:
       "It's the dish dryer inspired by the most practical choices of the users, made to think about the visual respect that the objects have with the space and the ease of use. This object wants to provide a more organic organization at the moment the dishes need to dry before being tidied up, so NONU can take various forms to receive different types of dishes and even to be tidy. Materials: RuberCork, Acrilic",
     images: [
-      { src: "/images/nonu.jpg", alt: "Nonu - Thumbnail" },
       { src: "/images/nonu-with-plate.jpg", alt: "NONU cork dish drainer holding white ceramic plate" },
       { src: "/images/nonu-empty.jpg", alt: "NONU cork dish drainer empty view" },
       { src: "/images/nonu-collapsed.jpg", alt: "NONU cork dish drainer in collapsed folded state" },
