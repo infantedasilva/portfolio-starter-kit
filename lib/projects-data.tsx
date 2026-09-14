@@ -140,6 +140,9 @@ export const projectsData: Record<
       "Project for a series of children's rooms and play areas, each designed with a focus on softness, functionality, and imaginative expression with custom-built elements, such as: beds, shelving systems, desks, integrated lighting, giving each space its own character while maintaining a cohesive aesthetic throughout the home. Playful architectural gestures, including curved walls, interior circular windows (oculi), and sculptural lighting features, create moments of discovery and connection between spaces.",
     images: [
       { src: "/images/qatalyse-20portfolio.jpeg", alt: "Santos Play Room - Overview" },
+      { src: "/images/santos-styled-bed-with-linens.jpg", alt: "Santos Play Room - Styled Bed with Pink Headboard and Straw Pendant Light" },
+      { src: "/images/santos-pink-corridor-hallway.png", alt: "Santos Play Room - Curved Pink Wardrobe Corridor" },
+      { src: "/images/santos-wardrobe-handle-detail.jpg", alt: "Santos Play Room - Wardrobe Handle Detail" },
       { src: "/images/cama-201.jpg", alt: "Santos Play Room - Bedroom Overview with Pink Headboard" },
       { src: "/images/secretaria-20detail-202.jpg", alt: "Santos Play Room - Mobile Desk Detail" },
       { src: "/images/detalhe-20cama.jpg", alt: "Santos Play Room - Platform Bed Construction Detail" },
