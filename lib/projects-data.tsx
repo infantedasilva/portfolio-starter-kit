@@ -353,6 +353,18 @@ export const projectsData: Record<
         src: "/images/birre-kitchen-concept.jpg",
         alt: "Birre Kitchen - Conceptual rendering with white minimalist design",
       },
+      {
+        src: "/images/birre-kitchen-fridge-wall-detail.jpg",
+        alt: "Birre Kitchen - Cabinet Wall with Built-in Fridge and Oven",
+      },
+      {
+        src: "/images/birre-kitchen-handle-hand-detail.jpg",
+        alt: "Birre Kitchen - Hand Gripping the Burgundy Handle Detail",
+      },
+      {
+        src: "/images/birre-kitchen-shelf-nook.jpg",
+        alt: "Birre Kitchen - Lit Shelving Nook with Bottles and Plants",
+      },
     ],
   },
   "pool-guard": {
