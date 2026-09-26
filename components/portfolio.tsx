@@ -338,7 +338,7 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
         alt: "Santos Play Room - Styled Bed with Pink Headboard and Straw Pendant Light",
       },
       {
-        src: "/images/santos-pink-corridor-hallway.png",
+        src: "/images/santos-pink-corridor-hallway.jpg",
         alt: "Santos Play Room - Curved Pink Wardrobe Corridor",
       },
       {
