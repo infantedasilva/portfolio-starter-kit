@@ -337,6 +337,14 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
         src: "/images/apartamento-20tvshel-20es.jpg",
         alt: "Santos Play Room - Semi-Circular Wall Shelves",
       },
+      {
+        src: "/images/santos-glass-plate-sunburst.jpg",
+        alt: "Santos Play Room - Glass Plate with Sunburst Pattern",
+      },
+      {
+        src: "/images/santos-wood-wall-shelf.jpg",
+        alt: "Santos Play Room - Brass Wall Shelf on Wood Veneer",
+      },
     ],
   }
 
