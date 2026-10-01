@@ -334,8 +334,8 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
       "Project for a series of children's rooms and play areas, each designed with a focus on softness, functionality, and imaginative expression with custom-built elements, such as: beds, shelving systems, desks, integrated lighting, giving each space its own character while maintaining a cohesive aesthetic throughout the home. Playful architectural gestures, including curved walls, interior circular windows (oculi), and sculptural lighting features, create moments of discovery and connection between spaces.",
     images: [
       {
-        src: "/images/apartamento-20tvshel-20es.jpg",
-        alt: "Santos Play Room - Semi-Circular Wall Shelves",
+        src: "/images/qatalyse-20portfolio.jpeg",
+        alt: "Santos Play Room - Overview",
       },
       {
         src: "/images/santos-glass-plate-sunburst.jpg",
@@ -460,7 +460,7 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
 
   const interiorPortfolioImages = [
     {
-      src: "/images/qatalyse-20portfolio.jpeg",
+      src: "/images/apartamento-20tvshel-20es.jpg",
       alt: "Santos Play Room",
       project: "Santos Play Room",
       category: "Interior Architecture",
