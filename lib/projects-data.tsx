@@ -355,7 +355,7 @@ export const projectsData: Record<
     year: "2024",
     category: "Interior Architecture",
     description:
-      "A bedroom and ensuite bathroom designed with Qatalyse as part of the wider Birre project. A dark, moody headboard wall in a bold botanical print is balanced by a calmer suite next door, where glossy emerald tiles, brass fittings, and a freestanding tub set the tone. Materials: ceramic tile, brass, oak veneer, upholstered fabric.",
+      "A bedroom suite and ensuite bathroom designed by measure as part of the wider Birre project — the beds, headboards, lighting and bathroom furniture were all made specifically for this house. My focus was developing the headboard light system: each of the house's four bedrooms was given its own headboard fabric, with the lamps' fabric cables changing to match the mood of each room. In the bathroom we designed the vanity console, the mirrored wall panels, and the shower cabins.",
     images: [
       {
         src: "/images/birre-suite-pendant-light-detail.jpg",
