@@ -190,28 +190,6 @@ export const projectsData: Record<
       { src: "/images/qatalyze-sofa-detail.jpg", alt: "Qatalyze Interiors - Sofa Fabric and Construction Detail" },
     ],
   },
-  "mintbase-interviews": {
-    name: "Mintbase Interviews",
-    year: "2022",
-    category: "Visual Communication & Media",
-    description:
-      "During NEARcon 2022, I conducted a series of interviews to showcase the Mintbase ecosystem. More than an NFT marketplace, Mintbase provides toolkits for developers to build NFT products and explore utility NFTs across ticketing, fan engagement, and Web 3.0 platforms.",
-    images: [
-      {
-        src: "/images/copy-20of-20nearcon-20interview-20plans-20-20-20-289-29.jpg",
-        alt: "Mintbase Interviews - Thumbnail",
-      },
-      { src: "https://www.youtube.com/embed/S7JwKm8u1qY", alt: "Mintbase Interviews - Video 1", isYouTube: true },
-      { src: "https://www.youtube.com/embed/ybzxiLHOHgQ", alt: "Mintbase Interviews - Video 2", isYouTube: true },
-      { src: "https://www.youtube.com/embed/rQALGqiXiLk", alt: "Mintbase Interviews - Video 3", isYouTube: true },
-      {
-        src: "https://www.youtube.com/embed/ulG7-d5M02o",
-        alt: "Mintbase Interviews - Featured Video",
-        isYouTube: true,
-        isLarger: true,
-      },
-    ],
-  },
   "a-vida-portuguesa": {
     name: "A Vida Portuguesa",
     year: "2024",
@@ -367,6 +345,56 @@ export const projectsData: Record<
       {
         src: "/images/birre-kitchen-shelf-nook.jpg",
         alt: "Birre Kitchen - Lit Shelving Nook with Bottles and Plants",
+      },
+    ],
+  },
+  "birre-suite": {
+    name: "Birre Suite",
+    year: "2024",
+    category: "Interior Architecture",
+    description:
+      "A bedroom and ensuite bathroom designed with Qatalyse as part of the wider Birre project. A dark, moody headboard wall in a bold botanical print is balanced by a calmer suite next door, where glossy emerald tiles, brass fittings, and a freestanding tub set the tone. Materials: ceramic tile, brass, oak veneer, upholstered fabric.",
+    images: [
+      {
+        src: "/images/birre-suite-bedroom-pendant-lights.jpg",
+        alt: "Birre Suite - Headboard Wall with Twin Brass Pendant Lights on Red Cord",
+      },
+      {
+        src: "/images/birre-suite-pendant-light-detail.jpg",
+        alt: "Birre Suite - Brass Pendant Light Detail",
+      },
+      {
+        src: "/images/birre-suite-bathroom-full.jpg",
+        alt: "Birre Suite - Bathroom with Emerald Tile, Brass Fittings, and Freestanding Tub",
+      },
+      {
+        src: "/images/birre-suite-bathroom-vanity.jpg",
+        alt: "Birre Suite - Double Vanity with Oval Mirrors and Emerald Tile",
+      },
+    ],
+  },
+  taipas: {
+    name: "Taipas Project",
+    year: "2024",
+    category: "Interior Architecture",
+    description:
+      "An outdoor deck built to extend life around the pool, done with Qatalyse Studio — a comfortable place with a playful layout and a mix of outdoor fabrics and timber. A sunken, cushioned seating area wraps around the deck, dressed in a mix of floral and geometric fabrics and framed by a timber fence.",
+    images: [
+      {
+        src: "/images/taipas-deck-pool-seating.jpg",
+        alt: "Taipas Project - Sunken Timber Deck Seating Area by the Pool",
+      },
+      {
+        src: "/images/taipas-fabrics-overhead.jpg",
+        alt: "Taipas Project - Overhead View of Mixed Floral and Geometric Outdoor Fabrics",
+      },
+      {
+        src: "/images/taipas-cushions-detail-1.jpg",
+        alt: "Taipas Project - Cushion Arrangement Detail",
+      },
+      {
+        src: "/images/taipas-cushions-detail-2.jpg",
+        alt: "Taipas Project - Close-up of Patterned Outdoor Cushions",
       },
     ],
   },

@@ -34,12 +34,6 @@ export default function ProjectsIndex() {
 
     // Visual Communication & Media
     { name: "Branca Lisboa", year: "2019", category: "Visual Communication & Media", slug: "Branca Lisboa" },
-    {
-      name: "Mintbase Interviews",
-      year: "2022",
-      category: "Visual Communication & Media",
-      slug: "Mintbase Interviews",
-    },
     { name: "A Vida Portuguesa", year: "2024", category: "Visual Communication & Media", slug: "A Vida Portuguesa" },
   ]
 

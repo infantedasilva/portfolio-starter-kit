@@ -468,6 +468,18 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
       project: "Birre Kitchen",
       category: "Interior Architecture",
     },
+    {
+      src: "/images/birre-suite-bedroom-pendant-lights.jpg",
+      alt: "Birre Suite",
+      project: "Birre Suite",
+      category: "Interior Architecture",
+    },
+    {
+      src: "/images/taipas-deck-pool-seating.jpg",
+      alt: "Taipas Project",
+      project: "Taipas Project",
+      category: "Interior Architecture",
+    },
   ]
 
   const productDesignPortfolioImages: {
@@ -487,12 +499,6 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
       src: "/images/branca-lisboa-overhead-black.jpg",
       alt: "Branca Lisboa - Front View of Black Armchair with Silhouette Walking By",
       project: "Branca Lisboa",
-      category: "Visual Communication & Media",
-    },
-    {
-      src: "/images/copy-20of-20nearcon-20interview-20plans-20-20-20-289-29.jpg",
-      alt: "Mintbase Interviews",
-      project: "Mintbase Interviews",
       category: "Visual Communication & Media",
     },
     {
@@ -658,36 +664,6 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
     ],
   }
 
-  const mintbaseProject = {
-    name: "Mintbase Interviews",
-    year: "2022",
-    description:
-      "During NEARcon 2022, I conducted a series of interviews to showcase the Mintbase ecosystem. More than an NFT marketplace, Mintbase provides toolkits for developers to build NFT products and explore utility NFTs across ticketing, fan engagement, and Web 3.0 platforms.",
-    images: [
-      {
-        src: "https://www.youtube.com/embed/S7JwKm8u1qY",
-        alt: "Mintbase Interviews - Video 1",
-        isYouTube: true,
-      },
-      {
-        src: "https://www.youtube.com/embed/ybzxiLHOHgQ",
-        alt: "Mintbase Interviews - Video 2",
-        isYouTube: true,
-      },
-      {
-        src: "https://www.youtube.com/embed/rQALGqiXiLk",
-        alt: "Mintbase Interviews - Video 3",
-        isYouTube: true,
-      },
-      {
-        src: "https://www.youtube.com/embed/ulG7-d5M02o?autoplay=1&mute=1&loop=1&playlist=ulG7-d5M02o",
-        alt: "Mintbase Interviews - Featured Video",
-        isYouTube: true,
-        isLarger: true,
-      },
-    ],
-  }
-
   const aVidaPortuguesaProject = {
     name: "A Vida Portuguesa",
     year: "2024",
@@ -770,6 +746,48 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
       {
         src: "/images/birre-kitchen-shelf-nook.jpg",
         alt: "Birre Kitchen - Lit Shelving Nook with Bottles and Plants",
+      },
+    ],
+  }
+
+  const birreSuiteProject = {
+    name: "Birre Suite",
+    year: "2024",
+    description:
+      "A bedroom and ensuite bathroom designed with Qatalyse as part of the wider Birre project. A dark, moody headboard wall in a bold botanical print is balanced by a calmer suite next door, where glossy emerald tiles, brass fittings, and a freestanding tub set the tone. Materials: ceramic tile, brass, oak veneer, upholstered fabric.",
+    images: [
+      {
+        src: "/images/birre-suite-pendant-light-detail.jpg",
+        alt: "Birre Suite - Brass Pendant Light Detail",
+      },
+      {
+        src: "/images/birre-suite-bathroom-full.jpg",
+        alt: "Birre Suite - Bathroom with Emerald Tile, Brass Fittings, and Freestanding Tub",
+      },
+      {
+        src: "/images/birre-suite-bathroom-vanity.jpg",
+        alt: "Birre Suite - Double Vanity with Oval Mirrors and Emerald Tile",
+      },
+    ],
+  }
+
+  const taipasProject = {
+    name: "Taipas Project",
+    year: "2024",
+    description:
+      "An outdoor deck built to extend life around the pool, done with Qatalyse Studio — a comfortable place with a playful layout and a mix of outdoor fabrics and timber. A sunken, cushioned seating area wraps around the deck, dressed in a mix of floral and geometric fabrics and framed by a timber fence.",
+    images: [
+      {
+        src: "/images/taipas-fabrics-overhead.jpg",
+        alt: "Taipas Project - Overhead View of Mixed Floral and Geometric Outdoor Fabrics",
+      },
+      {
+        src: "/images/taipas-cushions-detail-1.jpg",
+        alt: "Taipas Project - Cushion Arrangement Detail",
+      },
+      {
+        src: "/images/taipas-cushions-detail-2.jpg",
+        alt: "Taipas Project - Close-up of Patterned Outdoor Cushions",
       },
     ],
   }
@@ -921,11 +939,12 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
     { name: "Santos Play Room", year: "2023", category: "Interior Architecture" },
     { name: "MUDE", year: "2017", category: "Interior Architecture" },
     { name: "Birre Kitchen", year: "2024", category: "Interior Architecture" },
+    { name: "Birre Suite", year: "2024", category: "Interior Architecture" },
+    { name: "Taipas Project", year: "2024", category: "Interior Architecture" },
 
     // Visual Communication & Media projects (from visualCommunicationPortfolioImages)
     { name: "Branca Lisboa", year: "2019", category: "Visual Communication & Media" },
     { name: "Qatalyze Interiors", year: "2020", category: "Visual Communication & Media" },
-    { name: "Mintbase Interviews", year: "2022", category: "Visual Communication & Media" },
     { name: "A Vida Portuguesa", year: "2024", category: "Visual Communication & Media" },
     { name: "FNAC", year: "2022", category: "Visual Communication & Media" },
     { name: "Bitte Protocol", year: "2025", category: "Visual Communication & Media" },
@@ -1070,6 +1089,32 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
       ]
     }
 
+    if (selectedProject === "Birre Suite") {
+      const originalBirreSuite = interiorPortfolioImages.find((img) => img.project === "Birre Suite")
+      return [
+        originalBirreSuite,
+        ...birreSuiteProject.images.map((img) => ({
+          src: img.src,
+          alt: img.alt,
+          project: "Birre Suite",
+          category: "Interior Architecture",
+        })),
+      ]
+    }
+
+    if (selectedProject === "Taipas Project") {
+      const originalTaipas = interiorPortfolioImages.find((img) => img.project === "Taipas Project")
+      return [
+        originalTaipas,
+        ...taipasProject.images.map((img) => ({
+          src: img.src,
+          alt: img.alt,
+          project: "Taipas Project",
+          category: "Interior Architecture",
+        })),
+      ]
+    }
+
     if (selectedProject === "Branca Lisboa") {
       const originalBrancaLisboa = visualCommPortfolioImages.find((img) => img.project === "Branca Lisboa")
       return [
@@ -1078,18 +1123,6 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
           src: img.src,
           alt: img.alt,
           project: "Branca Lisboa",
-          category: "Visual Communication & Media",
-        })),
-      ]
-    }
-
-    if (selectedProject === "Mintbase Interviews") {
-      const originalMintbase = visualCommPortfolioImages.find((img) => img.project === "Mintbase Interviews")
-      return [
-        originalMintbase,
-        ...mintbaseProject.images.map((img) => ({
-          ...img,
-          project: "Mintbase Interviews",
           category: "Visual Communication & Media",
         })),
       ]
@@ -2018,30 +2051,33 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
                             if (index === 2) {
                               handleProjectClick("Birre Kitchen")
                             }
+                            if (index === 3) {
+                              handleProjectClick("Birre Suite")
+                            }
+                            if (index === 4) {
+                              handleProjectClick("Taipas Project")
+                            }
                           }
                           if (clickedButton === "Visual Communication & Media") {
                             if (index === 0) {
                               handleProjectClick("Branca Lisboa")
                             }
                             if (index === 1) {
-                              handleProjectClick("Mintbase Interviews")
-                            }
-                            if (index === 2) {
                               handleProjectClick("A Vida Portuguesa")
                             }
-                            if (index === 3) {
+                            if (index === 2) {
                               handleProjectClick("FNAC")
                             }
-                            if (index === 4) {
+                            if (index === 3) {
                               handleProjectClick("The Eleven Collection")
                             }
-                            if (index === 5) {
+                            if (index === 4) {
                               handleProjectClick("Accepting NFTs Here")
                             }
-                            if (index === 6) {
+                            if (index === 5) {
                               handleProjectClick("Qatalyze Interiors")
                             }
-                            if (index === 7) {
+                            if (index === 6) {
                               handleProjectClick("Bitte Protocol")
                             }
                           }
@@ -2218,16 +2254,6 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
           </div>
         )}
 
-        {selectedProject === "Mintbase Interviews" && (
-          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
-            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
-              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{mintbaseProject.name}</h2>
-              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{mintbaseProject.year}</p>
-              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{mintbaseProject.description}</p>
-            </div>
-          </div>
-        )}
-
         {selectedProject === "A Vida Portuguesa" && (
           <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
             <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
@@ -2371,6 +2397,26 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
               <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{birreKitchenProject.name}</h2>
               <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{birreKitchenProject.year}</p>
               <p className="text-xs md:text-base text-gray-700 leading-relaxed">{birreKitchenProject.description}</p>
+            </div>
+          </div>
+        )}
+
+        {selectedProject === "Birre Suite" && (
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{birreSuiteProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{birreSuiteProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{birreSuiteProject.description}</p>
+            </div>
+          </div>
+        )}
+
+        {selectedProject === "Taipas Project" && (
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{taipasProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{taipasProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{taipasProject.description}</p>
             </div>
           </div>
         )}
