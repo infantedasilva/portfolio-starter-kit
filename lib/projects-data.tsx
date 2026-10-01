@@ -152,11 +152,11 @@ export const projectsData: Record<
     description:
       "Two children's rooms, briefed with the children themselves. We designed two beds, two desks, two shelving systems and two dressing tables, completed with a small number of pieces sourced off the shelf. Every object shares the same timber, fittings and finishes; organic shapes and softly rounded corners keep solid wood feeling light and playful.",
     images: [
+      { src: "/images/santos-wardrobe-handle-detail.jpg", alt: "Children Suite - Wardrobe Handle Detail" },
       { src: "/images/desk.jpg", alt: "Children Suite - Mobile Desk Full View" },
       { src: "/images/secretaria-20detail-202.jpg", alt: "Children Suite - Mobile Desk Detail" },
       { src: "/images/santos-pink-corridor-hallway.jpg", alt: "Children Suite - Curved Pink Wardrobe Corridor" },
       { src: "/images/santos-styled-bed-with-linens.jpg", alt: "Children Suite - Styled Bed with Pink Headboard and Straw Pendant Light" },
-      { src: "/images/santos-wardrobe-handle-detail.jpg", alt: "Children Suite - Wardrobe Handle Detail" },
     ],
   },
   "branca-lisboa": {
@@ -330,6 +330,10 @@ export const projectsData: Record<
     description:
       "In this interior project, designed entirely by Qatalyse, where most of the elements were designed by measure. A demanding project in terms of detail, where we designed lighting, handles, wine cabinet, sofas, shelving systems, tables, beds, mirrors, showers, among other details.",
     images: [
+      {
+        src: "/images/birre-kitchen-handle-hand-detail.jpg",
+        alt: "Birre Kitchen - Hand Gripping the Burgundy Handle Detail",
+      },
       { src: "/images/birre-kitchen.jpg", alt: "Birre Kitchen - Thumbnail" },
       {
         src: "/images/birre-kitchen-full-view.jpg",
@@ -338,10 +342,6 @@ export const projectsData: Record<
       {
         src: "/images/birre-kitchen-fridge-wall-detail.jpg",
         alt: "Birre Kitchen - Cabinet Wall with Built-in Fridge and Oven",
-      },
-      {
-        src: "/images/birre-kitchen-handle-hand-detail.jpg",
-        alt: "Birre Kitchen - Hand Gripping the Burgundy Handle Detail",
       },
       {
         src: "/images/birre-kitchen-shelf-nook.jpg",
