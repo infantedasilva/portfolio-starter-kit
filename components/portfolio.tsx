@@ -368,6 +368,31 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
     ],
   }
 
+  const childrenSuiteProject = {
+    name: "Children Suite",
+    year: "2023",
+    description:
+      "Two children's rooms, briefed with the children themselves. We designed two beds, two desks, two shelving systems and two dressing tables, completed with a small number of pieces sourced off the shelf. Every object shares the same timber, fittings and finishes; organic shapes and softly rounded corners keep solid wood feeling light and playful.",
+    images: [
+      {
+        src: "/images/secretaria-20detail-202.jpg",
+        alt: "Children Suite - Mobile Desk Detail",
+      },
+      {
+        src: "/images/santos-pink-corridor-hallway.jpg",
+        alt: "Children Suite - Curved Pink Wardrobe Corridor",
+      },
+      {
+        src: "/images/santos-styled-bed-with-linens.jpg",
+        alt: "Children Suite - Styled Bed with Pink Headboard and Straw Pendant Light",
+      },
+      {
+        src: "/images/santos-wardrobe-handle-detail.jpg",
+        alt: "Children Suite - Wardrobe Handle Detail",
+      },
+    ],
+  }
+
   const furniturePortfolioImages = [
     {
       src: "/images/mars-2.jpg",
@@ -478,6 +503,12 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
       src: "/images/taipas-cushions-detail-2.jpg",
       alt: "Taipas Project",
       project: "Taipas Project",
+      category: "Interior Architecture",
+    },
+    {
+      src: "/images/desk.jpg",
+      alt: "Children Suite",
+      project: "Children Suite",
       category: "Interior Architecture",
     },
   ]
@@ -933,6 +964,7 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
     { name: "Birre Kitchen", year: "2024", category: "Interior Architecture" },
     { name: "Birre Suite", year: "2024", category: "Interior Architecture" },
     { name: "Taipas Project", year: "2024", category: "Interior Architecture" },
+    { name: "Children Suite", year: "2023", category: "Interior Architecture" },
 
     // Visual Communication & Media projects (from visualCommunicationPortfolioImages)
     { name: "Branca Lisboa", year: "2019", category: "Visual Communication & Media" },
@@ -1102,6 +1134,19 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
           src: img.src,
           alt: img.alt,
           project: "Taipas Project",
+          category: "Interior Architecture",
+        })),
+      ]
+    }
+
+    if (selectedProject === "Children Suite") {
+      const originalChildrenSuite = interiorPortfolioImages.find((img) => img.project === "Children Suite")
+      return [
+        originalChildrenSuite,
+        ...childrenSuiteProject.images.map((img) => ({
+          src: img.src,
+          alt: img.alt,
+          project: "Children Suite",
           category: "Interior Architecture",
         })),
       ]
@@ -2049,6 +2094,9 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
                             if (index === 4) {
                               handleProjectClick("Taipas Project")
                             }
+                            if (index === 5) {
+                              handleProjectClick("Children Suite")
+                            }
                           }
                           if (clickedButton === "Visual Communication & Media") {
                             if (index === 0) {
@@ -2409,6 +2457,16 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
               <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{taipasProject.name}</h2>
               <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{taipasProject.year}</p>
               <p className="text-xs md:text-base text-gray-700 leading-relaxed">{taipasProject.description}</p>
+            </div>
+          </div>
+        )}
+
+        {selectedProject === "Children Suite" && (
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{childrenSuiteProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{childrenSuiteProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{childrenSuiteProject.description}</p>
             </div>
           </div>
         )}

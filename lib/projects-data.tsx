@@ -150,6 +150,20 @@ export const projectsData: Record<
       { src: "/images/desk.jpg", alt: "Santos Play Room - Mobile Desk Full View" },
     ],
   },
+  "children-suite": {
+    name: "Children Suite",
+    year: "2023",
+    category: "Interior Architecture",
+    description:
+      "Two children's rooms, briefed with the children themselves. We designed two beds, two desks, two shelving systems and two dressing tables, completed with a small number of pieces sourced off the shelf. Every object shares the same timber, fittings and finishes; organic shapes and softly rounded corners keep solid wood feeling light and playful.",
+    images: [
+      { src: "/images/desk.jpg", alt: "Children Suite - Mobile Desk Full View" },
+      { src: "/images/secretaria-20detail-202.jpg", alt: "Children Suite - Mobile Desk Detail" },
+      { src: "/images/santos-pink-corridor-hallway.jpg", alt: "Children Suite - Curved Pink Wardrobe Corridor" },
+      { src: "/images/santos-styled-bed-with-linens.jpg", alt: "Children Suite - Styled Bed with Pink Headboard and Straw Pendant Light" },
+      { src: "/images/santos-wardrobe-handle-detail.jpg", alt: "Children Suite - Wardrobe Handle Detail" },
+    ],
+  },
   "branca-lisboa": {
     name: "Branca Lisboa",
     year: "2019",
