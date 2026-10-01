@@ -323,16 +323,8 @@ export const projectsData: Record<
     images: [
       { src: "/images/birre-kitchen.jpg", alt: "Birre Kitchen - Thumbnail" },
       {
-        src: "/images/birre-kitchen-handle-detail.jpg",
-        alt: "Birre Kitchen - Custom burgundy red elongated handle detail",
-      },
-      {
         src: "/images/birre-kitchen-full-view.jpg",
         alt: "Birre Kitchen - Full view with beige cabinets and burgundy accents",
-      },
-      {
-        src: "/images/birre-kitchen-concept.jpg",
-        alt: "Birre Kitchen - Conceptual rendering with white minimalist design",
       },
       {
         src: "/images/birre-kitchen-fridge-wall-detail.jpg",

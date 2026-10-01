@@ -724,16 +724,8 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
       "In this interior project, designed entirely by Qatalyse, where most of the elements were designed by measure. A demanding project in terms of detail, where we designed lighting, handles, wine cabinet, sofas, shelving systems, tables, beds, mirrors, showers, among other details.",
     images: [
       {
-        src: "/images/birre-kitchen-handle-detail.jpg",
-        alt: "Birre Kitchen - Custom burgundy red elongated handle detail on wood grain cabinet",
-      },
-      {
         src: "/images/birre-kitchen-full-view.jpg",
         alt: "Birre Kitchen - Full view with beige cabinets, burgundy accents, curved island, and geometric lighting",
-      },
-      {
-        src: "/images/birre-kitchen-concept.jpg",
-        alt: "Birre Kitchen - Conceptual rendering with white minimalist design and sculptural lighting",
       },
       {
         src: "/images/birre-kitchen-fridge-wall-detail.jpg",
