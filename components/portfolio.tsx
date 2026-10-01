@@ -355,12 +355,12 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
       "Two children's rooms, briefed with the children themselves. We designed two beds, two desks, two shelving systems and two dressing tables, completed with a small number of pieces sourced off the shelf. Every object shares the same timber, fittings and finishes; organic shapes and softly rounded corners keep solid wood feeling light and playful.",
     images: [
       {
-        src: "/images/desk.jpg",
-        alt: "Children Suite - Mobile Desk Full View",
+        src: "/images/children-suite-desk-with-chair.jpg",
+        alt: "Children Suite - Mobile Desk with Chair",
       },
       {
-        src: "/images/secretaria-20detail-202.jpg",
-        alt: "Children Suite - Mobile Desk Detail",
+        src: "/images/children-suite-desk-joint-detail.jpg",
+        alt: "Children Suite - Mobile Desk Joint Detail",
       },
       {
         src: "/images/santos-pink-corridor-hallway.jpg",
@@ -369,6 +369,10 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
       {
         src: "/images/santos-styled-bed-with-linens.jpg",
         alt: "Children Suite - Styled Bed with Pink Headboard and Straw Pendant Light",
+      },
+      {
+        src: "/images/children-suite-bed-frame-detail.jpg",
+        alt: "Children Suite - Bed Frame Detail",
       },
     ],
   }
