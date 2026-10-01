@@ -356,12 +356,12 @@ export const projectsData: Record<
       "A bedroom and ensuite bathroom designed with Qatalyse as part of the wider Birre project. A dark, moody headboard wall in a bold botanical print is balanced by a calmer suite next door, where glossy emerald tiles, brass fittings, and a freestanding tub set the tone. Materials: ceramic tile, brass, oak veneer, upholstered fabric.",
     images: [
       {
-        src: "/images/birre-suite-bedroom-pendant-lights.jpg",
-        alt: "Birre Suite - Headboard Wall with Twin Brass Pendant Lights on Red Cord",
-      },
-      {
         src: "/images/birre-suite-pendant-light-detail.jpg",
         alt: "Birre Suite - Brass Pendant Light Detail",
+      },
+      {
+        src: "/images/birre-suite-bedroom-pendant-lights.jpg",
+        alt: "Birre Suite - Headboard Wall with Twin Brass Pendant Lights on Red Cord",
       },
       {
         src: "/images/birre-suite-bathroom-full.jpg",
@@ -381,6 +381,10 @@ export const projectsData: Record<
       "An outdoor deck built to extend life around the pool, done with Qatalyse Studio — a comfortable place with a playful layout and a mix of outdoor fabrics and timber. A sunken, cushioned seating area wraps around the deck, dressed in a mix of floral and geometric fabrics and framed by a timber fence.",
     images: [
       {
+        src: "/images/taipas-cushions-detail-2.jpg",
+        alt: "Taipas Project - Close-up of Patterned Outdoor Cushions",
+      },
+      {
         src: "/images/taipas-deck-pool-seating.jpg",
         alt: "Taipas Project - Sunken Timber Deck Seating Area by the Pool",
       },
@@ -391,10 +395,6 @@ export const projectsData: Record<
       {
         src: "/images/taipas-cushions-detail-1.jpg",
         alt: "Taipas Project - Cushion Arrangement Detail",
-      },
-      {
-        src: "/images/taipas-cushions-detail-2.jpg",
-        alt: "Taipas Project - Close-up of Patterned Outdoor Cushions",
       },
     ],
   },
