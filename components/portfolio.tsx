@@ -911,7 +911,7 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
     name: "Rattan Table",
     year: "2025",
     description:
-      "A low coffee table with a soft, pebble-shaped top in woven cane, divided by fine timber inlays that echo the geometry of the frame. The top rests on two sculpted timber legs, giving the table a grounded, sculptural presence. Materials: solid timber, woven rattan cane.",
+      "A low table designed for the Santos project, made with Qatalyse, to bring the family together at floor level. Conceived as a versatile piece, it works as a center table yet is generous enough to share a meal seated on the floor. The tabletop is woven cane mesh and the structure is oak, with the inlaid lines intended to evoke the intersecting plates of a desert rose. Materials: oak, woven cane mesh.",
     images: [
       {
         src: "/images/rattan-table-top-view.jpg",
