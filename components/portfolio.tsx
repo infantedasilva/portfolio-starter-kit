@@ -456,6 +456,12 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
       project: "Nonu",
       category: "Objects & Systems",
     },
+    {
+      src: "/images/rattan-table.jpg",
+      alt: "Rattan Table",
+      project: "Rattan Table",
+      category: "Furniture Design",
+    },
   ]
 
   const interiorPortfolioImages = [
@@ -901,6 +907,23 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
     ],
   }
 
+  const rattanTableProject = {
+    name: "Rattan Table",
+    year: "2025",
+    description:
+      "A low coffee table with a soft, pebble-shaped top in woven cane, divided by fine timber inlays that echo the geometry of the frame. The top rests on two sculpted timber legs, giving the table a grounded, sculptural presence. Materials: solid timber, woven rattan cane.",
+    images: [
+      {
+        src: "/images/rattan-table-top-view.jpg",
+        alt: "Rattan Table - Top View Styled with Lemon Ceramics",
+      },
+      {
+        src: "/images/rattan-table-weave-detail.jpg",
+        alt: "Rattan Table - Cane Weave and Frame Detail",
+      },
+    ],
+  }
+
   const nonuProject = {
     name: "Nonu",
     year: "2024",
@@ -930,6 +953,7 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
     { name: "Pala Shelves", year: "2023", category: "Furniture Design" },
     { name: "Rock Sofa", year: "2024", category: "Furniture Design" },
     { name: "Disk Shelves", year: "2024", category: "Furniture Design" },
+    { name: "Rattan Table", year: "2025", category: "Furniture Design" },
 
     // Lighting projects (from furniturePortfolioImages)
     { name: "Glass Plates", year: "2020", category: "Lighting" },
@@ -1333,6 +1357,19 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
       ]
     }
 
+    if (selectedProject === "Rattan Table") {
+      const originalRattanTable = furniturePortfolioImages.find((img) => img.project === "Rattan Table")
+      return [
+        originalRattanTable,
+        ...rattanTableProject.images.map((img) => ({
+          src: img.src,
+          alt: img.alt,
+          project: "Rattan Table",
+          category: "Furniture Design",
+        })),
+      ]
+    }
+
     if (selectedProject === "Nonu") {
       const originalNonu = furniturePortfolioImages.find((img) => img.project === "Nonu")
       return [
@@ -1356,6 +1393,7 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
           furniturePortfolioImages[8], // Pala Shelves
           furniturePortfolioImages[10], // Rock Sofa
           furniturePortfolioImages[11], // Disk Shelves
+          furniturePortfolioImages[13], // Rattan Table
         ]
       case "Lighting":
         // Glass Plates (2020), Calabashes (2021), Occulo (2024)
@@ -2050,6 +2088,7 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
                             else if (index === 3) handleProjectClick("Pala Shelves")
                             else if (index === 4) handleProjectClick("Rock Sofa")
                             else if (index === 5) handleProjectClick("Disk Shelves")
+                            else if (index === 6) handleProjectClick("Rattan Table")
                           }
                           if (clickedButton === "Lighting") {
                             if (index === 0) handleProjectClick("Glass Plates")
@@ -2501,6 +2540,16 @@ export default function Portfolio({ initialCategory }: { initialCategory?: strin
               <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{diskShelvesProject.name}</h2>
               <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{diskShelvesProject.year}</p>
               <p className="text-xs md:text-base text-gray-700 leading-relaxed">{diskShelvesProject.description}</p>
+            </div>
+          </div>
+        )}
+
+        {selectedProject === "Rattan Table" && (
+          <div className="fixed z-40 inset-x-0 bottom-0 max-w-full px-3 pb-3 transform md:inset-x-auto md:bottom-auto md:px-0 md:pb-0 md:top-1/2 md:left-8 md:-translate-y-1/2 md:max-w-sm">
+            <div className="bg-white rounded-2xl md:rounded-lg shadow-2xl p-5 md:p-8 border border-gray-200 shadow-none max-h-[46dvh] md:max-h-none overflow-y-auto">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-1 md:mb-2 text-balance">{rattanTableProject.name}</h2>
+              <p className="text-sm md:text-lg text-gray-600 mb-3 md:mb-6">{rattanTableProject.year}</p>
+              <p className="text-xs md:text-base text-gray-700 leading-relaxed">{rattanTableProject.description}</p>
             </div>
           </div>
         )}

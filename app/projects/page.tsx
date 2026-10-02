@@ -25,6 +25,7 @@ export default function ProjectsIndex() {
     { name: "Occulo", year: "2022", category: "Furniture Design", slug: "Occulo" },
     { name: "Rock Sofa", year: "2022", category: "Furniture Design", slug: "Rock Sofa" },
     { name: "Disk Shelves", year: "2023", category: "Furniture Design", slug: "Disk Shelves" },
+    { name: "Rattan Table", year: "2025", category: "Furniture Design", slug: "Rattan Table" },
     { name: "Nonu", year: "2021", category: "Furniture Design", slug: "Nonu" },
 
     // Interior Architecture

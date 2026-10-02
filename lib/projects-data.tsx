@@ -467,6 +467,18 @@ export const projectsData: Record<
       { src: "/images/disk-shelves-full-system.jpg", alt: "Disk Shelves - Complete Modular Shelving System" },
     ],
   },
+  "rattan-table": {
+    name: "Rattan Table",
+    year: "2025",
+    category: "Furniture Design",
+    description:
+      "A low coffee table with a soft, pebble-shaped top in woven cane, divided by fine timber inlays that echo the geometry of the frame. The top rests on two sculpted timber legs, giving the table a grounded, sculptural presence. Materials: solid timber, woven rattan cane.",
+    images: [
+      { src: "/images/rattan-table.jpg", alt: "Rattan Table - Front View" },
+      { src: "/images/rattan-table-top-view.jpg", alt: "Rattan Table - Top View Styled with Lemon Ceramics" },
+      { src: "/images/rattan-table-weave-detail.jpg", alt: "Rattan Table - Cane Weave and Frame Detail" },
+    ],
+  },
   nonu: {
     name: "Nonu",
     year: "2024",
